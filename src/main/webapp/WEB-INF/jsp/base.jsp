@@ -19,7 +19,7 @@
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <rapid:block name="head">
-        <title>base head</title>
+        <title>海海商城</title>
     </rapid:block>
 
 </head>
