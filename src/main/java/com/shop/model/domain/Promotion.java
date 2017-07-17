@@ -1,4 +1,5 @@
-package com.my.db;
+package com.shop.model.domain;
+
 
 public class Promotion {
   private Long promotion_id;

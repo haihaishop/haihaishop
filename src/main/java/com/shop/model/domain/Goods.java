@@ -1,4 +1,4 @@
-package com.my.db;
+package com.shop.model.domain;
 
 public class Goods {
   private Long goods_id;
