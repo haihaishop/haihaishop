@@ -1,5 +1,4 @@
-package com.shop.model.domain;
-
+package com.my.db;
 
 public class User {
   private Long user_id;
@@ -11,6 +10,7 @@ public class User {
   private String name;
   private String id_card;
   private Long role_id;
+  private String sex;
   private String is_authentication;
 
   public Long getUser_id() {
@@ -83,6 +83,14 @@ public class User {
 
   public void setRole_id(Long role_id) {
     this.role_id = role_id;
+  }
+
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
   }
 
   public String getIs_authentication() {

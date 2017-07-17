@@ -1,5 +1,4 @@
-package com.shop.model.domain;
-
+package com.my.db;
 
 public class Promotion {
   private Long promotion_id;
@@ -10,8 +9,8 @@ public class Promotion {
   private Double cut;
   private Long buy;
   private Long give;
-  private java.sql.Timestamp from_time;
-  private java.sql.Timestamp to_time;
+  private java.sql.Date from_time;
+  private java.sql.Date to_time;
 
   public Long getPromotion_id() {
     return promotion_id;
@@ -77,19 +76,19 @@ public class Promotion {
     this.give = give;
   }
 
-  public java.sql.Timestamp getFrom_time() {
+  public java.sql.Date getFrom_time() {
     return from_time;
   }
 
-  public void setFrom_time(java.sql.Timestamp from_time) {
+  public void setFrom_time(java.sql.Date from_time) {
     this.from_time = from_time;
   }
 
-  public java.sql.Timestamp getTo_time() {
+  public java.sql.Date getTo_time() {
     return to_time;
   }
 
-  public void setTo_time(java.sql.Timestamp to_time) {
+  public void setTo_time(java.sql.Date to_time) {
     this.to_time = to_time;
   }
 }

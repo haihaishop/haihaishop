@@ -1,5 +1,4 @@
-package com.shop.model.domain;
-
+package com.my.db;
 
 public class Order_form {
   private Long order_form_id;
@@ -10,8 +9,9 @@ public class Order_form {
   private Long buy_number;
   private Long address_id;
   private String phone;
-  private java.sql.Timestamp date;
+  private java.sql.Date date;
   private String pay_state;
+  private String shipping_status;
 
   public Long getOrder_form_id() {
     return order_form_id;
@@ -77,11 +77,11 @@ public class Order_form {
     this.phone = phone;
   }
 
-  public java.sql.Timestamp getDate() {
+  public java.sql.Date getDate() {
     return date;
   }
 
-  public void setDate(java.sql.Timestamp date) {
+  public void setDate(java.sql.Date date) {
     this.date = date;
   }
 
@@ -91,5 +91,13 @@ public class Order_form {
 
   public void setPay_state(String pay_state) {
     this.pay_state = pay_state;
+  }
+
+  public String getShipping_status() {
+    return shipping_status;
+  }
+
+  public void setShipping_status(String shipping_status) {
+    this.shipping_status = shipping_status;
   }
 }

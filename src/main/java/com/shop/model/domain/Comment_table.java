@@ -1,4 +1,4 @@
-package com.shop.model.domain;
+package com.my.db;
 
 public class Comment_table {
   private Long comment_table_id;
