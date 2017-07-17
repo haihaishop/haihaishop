@@ -12,7 +12,13 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/views.xml</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/shop/config/ModuleConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/shop/config/MvcConfig.java</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">

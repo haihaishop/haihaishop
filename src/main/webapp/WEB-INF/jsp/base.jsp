@@ -24,6 +24,13 @@
 
 </head>
 <body>
+<div claas="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">海海商城</a>
+        </div>
+    </div>
+</div>
 <rapid:block name="content">
 </rapid:block>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
