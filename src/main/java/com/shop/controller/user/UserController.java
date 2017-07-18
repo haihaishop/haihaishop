@@ -52,7 +52,6 @@ public class UserController {
         Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
         user.setRole_id(tempRoleId);
         user.setPassword(SHAUtil.SHA256(user.getPassword()));
-
         userManagerInterface.addUser(user);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("user/login");

@@ -33,6 +33,11 @@ public class UserManager implements UserManagerInterface {
     public boolean hasUser(String loginName) {
         User user = userMapper.getUserByLoginName(loginName);
         return user != null;
+    }
 
+    @Cacheable(key = "#root.methodName")
+    public List<User> getAllUser() {
+        List<User> userList=userMapper.getAllUser();
+        return userList;
     }
 }
