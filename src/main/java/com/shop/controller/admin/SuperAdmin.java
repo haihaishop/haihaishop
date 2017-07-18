@@ -46,7 +46,7 @@ public class SuperAdmin {
             userManager.addUser(user);
             modelAndView.addObject("regSuccess", "恭喜，添加管理员成功！");
         }
-        modelAndView.setViewName("redirect:/super_admin/add_admin");
+        modelAndView.setViewName("admin/add_admin");
         return modelAndView;
     }
 }
