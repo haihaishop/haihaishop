@@ -69,7 +69,7 @@ public class ModuleConfig {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setBasePackage("com.shop.mapper");
+        mapperScannerConfigurer.setBasePackage("com.shop.model.mapper");
         return mapperScannerConfigurer;
     }
 
