@@ -25,13 +25,12 @@ public class SuperAdmin {
 
     @RequestMapping("/add_admin")
     public ModelAndView add_admin(){
-        LoggingUtil.log(SuperAdmin.class, roleManagerInterface.getRoleIdFromName("admin"));
         return new ModelAndView("admin/add_admin");
     }
 
     @RequestMapping("/add_user_post")
     public ModelAndView add_user_post(User user){
-        LoggingUtil.log(SuperAdmin.class, "666666");
+        user.setRole_id(roleManagerInterface.getRoleIdFromName("admin"));
         return new ModelAndView("redirect:/super_admin/add_admin");
     }
 }
