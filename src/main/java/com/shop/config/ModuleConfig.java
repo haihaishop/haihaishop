@@ -126,6 +126,7 @@ public class ModuleConfig {
         connectionFactory.setPort(port);
         connectionFactory.setPassword(password);
         connectionFactory.setPoolConfig(redisPoolConfig);
+        connectionFactory.afterPropertiesSet();
         return connectionFactory;
     }
 
