@@ -9,7 +9,7 @@ public class User {
   private String phone;
   private String name;
   private String id_card;
-  private Long role_id;
+  private Integer role_id;
   private String sex;
   private String is_authentication;
 
@@ -77,11 +77,11 @@ public class User {
     this.id_card = id_card;
   }
 
-  public Long getRole_id() {
+  public Integer getRole_id() {
     return role_id;
   }
 
-  public void setRole_id(Long role_id) {
+  public void setRole_id(Integer role_id) {
     this.role_id = role_id;
   }
 

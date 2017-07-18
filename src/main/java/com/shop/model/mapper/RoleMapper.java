@@ -2,13 +2,13 @@ package com.shop.model.mapper;
 
 import com.shop.model.domain.Role;
 import com.shop.model.domain.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 /**
  * Created by 18240 on 2017/7/17.
  */
 public interface RoleMapper {
-    //使用@Select注解指明getRoleID方法要执行的SQL
-    @Select("select role_id from role where name=#{role}")
-    public int getRoleID(Role role);
+    @Select("select role_id from role where name=#{roleName}")
+    int getRoleIdFromName(@Param("roleName") String roleName);
 }
