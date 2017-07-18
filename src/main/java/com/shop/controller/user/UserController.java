@@ -31,7 +31,9 @@ public class UserController {
     }
 
     @RequestMapping("user_login.do")
-    public ModelAndView user_login(User user) {
+    public ModelAndView user_login(User user,
+                                   @RequestParam("login_name")String login_name,
+                                   @RequestParam("password")String password) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/index");
         return mav;
@@ -40,7 +42,6 @@ public class UserController {
     @RequestMapping("user_register")
     public ModelAndView user_register(User user, @RequestParam("role")String roleName) {
         user.setRole_id(roleManagerInterface.getRoleIdFromName("roleName"));
-
         ModelAndView mav = new ModelAndView();
         mav.setViewName("user/login");
         return mav;

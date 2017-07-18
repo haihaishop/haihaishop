@@ -23,5 +23,5 @@ public interface UserMapper {
     public List<User> getAll();
 
     @Select("select * from user where login_name=#{login_name}")
-    public User getUserFromLoginName(@Param("loginName")String loginName);
+    public User getUserByLoginName(@Param("loginName")String loginName);
 }
