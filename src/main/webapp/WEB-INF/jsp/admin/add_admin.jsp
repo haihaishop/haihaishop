@@ -21,6 +21,7 @@
         <div id="myAlert" class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <strong>恭喜！</strong>${regSuccess}。
+
         </div>
     </c:if>
     <div class="center-block">
