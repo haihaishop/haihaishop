@@ -1,8 +1,12 @@
 package com.shop.controller.user;
 
+import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
+import com.shop.model.service.RoleManagerInterface;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -10,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class UserController {
-
+    @Value("#{roleManager}")
+    private RoleManagerInterface roleManagerInterface;
     @RequestMapping("register.do")
     public ModelAndView register() {
         ModelAndView mav = new ModelAndView();
@@ -33,7 +38,9 @@ public class UserController {
     }
 
     @RequestMapping("user_register")
-    public ModelAndView user_register(User user) {
+    public ModelAndView user_register(User user, @RequestParam("role")String roleName) {
+        user.setRole_id(roleManagerInterface.getRoleIdFromName("roleName"));
+
         ModelAndView mav = new ModelAndView();
         mav.setViewName("user/login");
         return mav;
