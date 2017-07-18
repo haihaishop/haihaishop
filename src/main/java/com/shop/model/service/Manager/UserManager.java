@@ -7,6 +7,7 @@ import com.shop.model.service.UserManagerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,5 +24,11 @@ public class UserManager implements UserManagerInterface{
     @CacheEvict(allEntries=true)
     public void addUser(User user) {
         userMapper.addUser(user);
+    }
+
+    @Cacheable(key="#root.methodName+#root.args[0]")
+    public User getUserByLoginName(String login_name){
+        User user=userMapper.getUserByLoginName(login_name);
+        return user;
     }
 }

@@ -8,4 +8,5 @@ import com.shop.model.domain.User;
 public interface UserManagerInterface {
     public static final String cacheName="userCache";
     public void addUser(User user);
+    public User getUserByLoginName(String login_name);
 }
