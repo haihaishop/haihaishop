@@ -8,6 +8,7 @@
     <h1>你好，世界！</h1>
     <a href="/register.do"><h3>Click Me to Register</h3></a>
     <a href="/login.do"><h3>Click Me to Login</h3></a>
+    <a href="/information.do"><h3>Click Me to See Information</h3></a>
 </rapid:override>
 <%@include file="base.jsp" %>
 

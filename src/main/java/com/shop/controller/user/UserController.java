@@ -50,12 +50,9 @@ public class UserController {
     public ModelAndView user_register(User user,
                                       @RequestParam("role")String roleName) {
         Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
-        List<User> userList = userManagerInterface.getAllUser();
         user.setRole_id(tempRoleId);
         user.setPassword(SHAUtil.SHA256(user.getPassword()));
-        if(userList.contains(user.getLogin_name())){
 
-        }
         userManagerInterface.addUser(user);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("user/login");
