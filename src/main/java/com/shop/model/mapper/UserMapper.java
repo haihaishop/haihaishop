@@ -16,7 +16,6 @@ public interface UserMapper {
     //使用@Select注解指明getById方法要执行的SQL
     @Insert("insert into user(login_name,password,email,phone,role) " +
             "values (#{login_name},#{password},#{email},#{phone},#{role})")
-
     public void addUser(User user);
 
     //使用@Select注解指明getAll方法要执行的SQL
