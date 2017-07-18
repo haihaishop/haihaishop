@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface RoleMapper {
     @Select("select role_id from role where name=#{roleName}")
-    int getRoleIdFromName(@Param("roleName") String roleName);
+    Long getRoleIdFromName(@Param("roleName") String roleName);
 }

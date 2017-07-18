@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
  */
 public class LoggingUtil {
     static private Logger logger ;
-    static public void log(Class _class,Object info ){
-        logger = LoggerFactory.getLogger(_class);
+    static public void log(Object info ){
+        logger = LoggerFactory.getLogger(LoggingUtil.class);
         logger.info(info.toString());
     }
 }

@@ -7,6 +7,7 @@ import com.shop.model.service.RoleManagerInterface;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -25,6 +26,7 @@ public class SuperAdmin {
 
     @RequestMapping("/add_admin")
     public ModelAndView add_admin(){
+        LoggingUtil.log(roleManagerInterface.getRoleIdFromName("seller"));
         return new ModelAndView("admin/add_admin");
     }
 

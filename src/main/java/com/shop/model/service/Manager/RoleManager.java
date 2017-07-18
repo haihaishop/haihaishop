@@ -17,7 +17,7 @@ public class RoleManager implements RoleManagerInterface{
     @Autowired
     RoleMapper roleMapper;
 
-    public int getRoleIdFromName(String roleName) {
+    public Long getRoleIdFromName(String roleName) {
         return roleMapper.getRoleIdFromName(roleName);
     }
 }

@@ -5,5 +5,5 @@ package com.shop.model.service;
  */
 public interface RoleManagerInterface {
     public static String cacheName = "roleCache";
-    public int getRoleIdFromName(String roleName);
+    public Long getRoleIdFromName(String roleName);
 }
