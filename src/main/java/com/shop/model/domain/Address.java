@@ -1,4 +1,5 @@
-package com.shop.model;
+package com.shop.model.domain;
+
 
 public class Address {
   private Long address_id;

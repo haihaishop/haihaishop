@@ -1,4 +1,4 @@
-package com.shop.model;
+package com.shop.model.domain;
 
 public class Goods {
   private Long goods_id;
@@ -7,7 +7,7 @@ public class Goods {
   private Double price;
   private String info;
   private Long views_time;
-  private java.sql.Timestamp date;
+  private java.sql.Date date;
   private Long sold_number;
   private Long count;
   private String picture;
@@ -61,11 +61,11 @@ public class Goods {
     this.views_time = views_time;
   }
 
-  public java.sql.Timestamp getDate() {
+  public java.sql.Date getDate() {
     return date;
   }
 
-  public void setDate(java.sql.Timestamp date) {
+  public void setDate(java.sql.Date date) {
     this.date = date;
   }
 

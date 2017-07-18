@@ -2,9 +2,6 @@ package com.shop.config;
 
 import com.github.pagehelper.PageInterceptor;
 import com.zaxxer.hikari.HikariDataSource;
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.command.ActiveMQQueue;
-import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -40,7 +37,7 @@ import java.util.Properties;
 //启动缓存
 @EnableCaching()
 //@EnableJms()
-@ComponentScan(basePackages = { "com.shop.service" })
+@ComponentScan(basePackages = {"com.shop.model.service"})
 public class ModuleConfig {
     // 引入配置文件
     @Bean
@@ -72,7 +69,7 @@ public class ModuleConfig {
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setBasePackage("com.shop.mapper");
+        mapperScannerConfigurer.setBasePackage("com.shop.model.mapper");
         return mapperScannerConfigurer;
     }
 
