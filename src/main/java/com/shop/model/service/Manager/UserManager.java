@@ -5,6 +5,7 @@ import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
 import com.shop.model.mapper.UserMapper;
 import com.shop.model.service.UserManagerInterface;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -32,6 +33,11 @@ public class UserManager implements UserManagerInterface {
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public boolean hasUser(String loginName) {
         User user = userMapper.getUserByLoginName(loginName);
+        return user != null;
+    }
+
+    public boolean loginUser(String loginName, String password) {
+        User user = userMapper.loginUser(loginName,password);
         return user != null;
     }
 

@@ -3,6 +3,7 @@ package com.shop.controller.user;
 import com.shop.Utils.LoggingUtil;
 import com.shop.Utils.SHAUtil;
 import com.shop.model.domain.User;
+import com.shop.model.service.Manager.UserManager;
 import com.shop.model.service.RoleManagerInterface;
 import com.shop.model.service.UserManagerInterface;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,10 +39,14 @@ public class UserController {
     }
 
     @RequestMapping("user_login.do")
-    public ModelAndView user_login(User user) {
+    public ModelAndView user_login(@RequestParam("login_name") String loginName,
+                                   @RequestParam("password") String password) {
         ModelAndView mav = new ModelAndView();
-        if(userManagerInterface.hasUser(user.getLogin_name())){
-
+        if(userManagerInterface.loginUser(loginName,password)){
+            mav.addObject("login","true");
+        }
+        else{
+            mav.addObject("login","false");
         }
         mav.setViewName("/index");
         return mav;
@@ -51,14 +56,13 @@ public class UserController {
     public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
         ModelAndView mav = new ModelAndView();
         if (userManagerInterface.hasUser(user.getLogin_name())) {
-            mav.addObject("hasUser","用户名已存在！");
-        }
-        else{
+            mav.addObject("hasUser", "用户名已存在！");
+        } else {
             Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
             user.setRole_id(tempRoleId);
             user.setPassword(SHAUtil.SHA256(user.getPassword()));
             userManagerInterface.addUser(user);
-            mav.addObject("registerSuccessful","注册成功！");
+            mav.addObject("registerSuccessful", "注册成功！");
         }
         mav.setViewName("user/login");
         return mav;
