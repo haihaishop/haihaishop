@@ -1,11 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
+<%@taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
+
 <rapid:override name="head">
     <link href="/css/bootstrapValidator.min.css" rel="stylesheet">
     <title>增加管理员</title>
 </rapid:override>
 <rapid:override name="detail">
+    <c:if test="${!empty hasUser}">
+        <div id="myAlert" class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>警告！</strong>${hasUser}。
+        </div>
+    </c:if>
+    <c:if test="${!empty regSuccess}">
+        <div id="myAlert" class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>警告！</strong>${regSuccess}。
+        </div>
+    </c:if>
     <div class="center-block">
         <h3>请编辑信息</h3>
     </div>

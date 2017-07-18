@@ -12,4 +12,6 @@ public interface UserManagerInterface {
     public void addUser(User user);
     public User getUserByLoginName(String login_name);
     public List<User> getAllUser();
+    public boolean hasUser(String loginName);
+
 }

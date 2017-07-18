@@ -3,10 +3,13 @@ package com.shop.model.mapper;
 import com.shop.model.domain.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
+
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Select;
+
 
 /**
  * Created by 18240 on 2017/7/17.

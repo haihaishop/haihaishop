@@ -19,19 +19,21 @@ import java.util.List;
 @Service("userManager")
 @Transactional
 @CacheConfig(cacheNames = {UserManagerInterface.cacheName})
-public class UserManager implements UserManagerInterface{
+public class UserManager implements UserManagerInterface {
     @Autowired
     private UserMapper userMapper;
 
-    @CacheEvict(allEntries=true)
+    @CacheEvict(allEntries = true)
     public void addUser(User user) {
         userMapper.addUser(user);
     }
 
-    @Cacheable(key="#root.methodName+#root.args[0]")
-    public User getUserByLoginName(String login_name){
-        User user=userMapper.getUserByLoginName(login_name);
-        return user;
+    @Cacheable(key = "#root.methodName+#root.args[0]")
+    public boolean hasUser(String loginName) {
+        if (userMapper.getUserByLoginName(loginName) == null)
+            return true;
+        else
+            return false;
     }
 
     @Cacheable(key="#root.methodName+#root.args[0]+#root.args[1]")
