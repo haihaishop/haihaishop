@@ -26,6 +26,7 @@ public class SuperAdmin {
 
     @RequestMapping("/add_admin")
     public ModelAndView add_admin(){
+        LoggingUtil.log(roleManagerInterface.getRoleIdFromName("seller"));
         return new ModelAndView("admin/add_admin");
     }
 
