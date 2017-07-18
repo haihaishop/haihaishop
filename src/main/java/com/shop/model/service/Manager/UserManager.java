@@ -12,6 +12,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by 18240 on 2017/7/18.
  */
@@ -27,9 +29,10 @@ public class UserManager implements UserManagerInterface {
         userMapper.addUser(user);
     }
 
-//    @Cacheable(key = "#root.methodName+#root.args[0]")
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public boolean hasUser(String loginName) {
         User user = userMapper.getUserByLoginName(loginName);
         return user != null;
+
     }
 }

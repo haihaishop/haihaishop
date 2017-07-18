@@ -16,14 +16,15 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface UserMapper {
     //使用@Select注解指明getById方法要执行的SQL
+
     @Insert("insert into user(login_name,password,email,phone,role_id) " +
             "values (#{login_name},#{password},#{email},#{phone},#{role_id})")
-    public void addUser(User user);
+   public void addUser(User user);
 
     //使用@Select注解指明getAll方法要执行的SQL
     @Select("select * from user")
-    public List<User> getAll();
+    public List<User> getAllUser();
 
     @Select("select * from user where login_name=#{login_name}")
     public User getUserByLoginName(@Param("login_name")String loginName);
-}
+
