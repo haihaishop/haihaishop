@@ -1,6 +1,7 @@
 package com.shop.model.service.Manager;
 
 
+import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
 import com.shop.model.mapper.UserMapper;
 import com.shop.model.service.UserManagerInterface;
@@ -30,19 +31,8 @@ public class UserManager implements UserManagerInterface {
 
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public boolean hasUser(String loginName) {
-        if (userMapper.getUserByLoginName(loginName) == null)
-            return true;
-        else
-            return false;
-    }
+        User user = userMapper.getUserByLoginName(loginName);
+        return user != null;
 
-    public User getUserByLoginName(String login_name) {
-        return userMapper.getUserByLoginName(login_name);
-    }
-
-    @Cacheable(key="#root.methodName+#root.args[0]+#root.args[1]")
-    public List<User> getAllUser() {
-        List<User> userList=userMapper.getAllUser();
-        return userList;
     }
 }
