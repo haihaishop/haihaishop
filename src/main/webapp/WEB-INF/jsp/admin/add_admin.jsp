@@ -9,8 +9,6 @@
     <title>增加管理员</title>
 </rapid:override>
 <rapid:override name="detail">
-    <c:out value="66666">
-    </c:out>
     <c:if test="${!empty hasUser}">
         <div id="myAlert" class="alert alert-warning">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
