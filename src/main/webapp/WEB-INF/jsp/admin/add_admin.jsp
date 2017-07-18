@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
-<%@taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
@@ -16,9 +16,9 @@
         </div>
     </c:if>
     <c:if test="${!empty regSuccess}">
-        <div id="myAlert" class="alert alert-warning">
+        <div id="myAlert" class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>警告！</strong>${regSuccess}。
+            <strong>恭喜！</strong>${regSuccess}。
         </div>
     </c:if>
     <div class="center-block">
