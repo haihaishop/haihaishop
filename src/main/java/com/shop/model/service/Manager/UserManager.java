@@ -11,10 +11,12 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by 18240 on 2017/7/18.
  */
-@Service
+@Service("userManager")
 @Transactional
 @CacheConfig(cacheNames = {UserManagerInterface.cacheName})
 public class UserManager implements UserManagerInterface{
@@ -30,5 +32,11 @@ public class UserManager implements UserManagerInterface{
     public User getUserByLoginName(String login_name){
         User user=userMapper.getUserByLoginName(login_name);
         return user;
+    }
+
+    @Cacheable(key="#root.methodName+#root.args[0]+#root.args[1]")
+    public List<User> getAllUser() {
+        List<User> userList=userMapper.getAllUser();
+        return userList;
     }
 }
