@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <rapid:override name="head">
+    <link href="/css/bootstrapValidator.min.css" rel="stylesheet">
     <title>增加管理员</title>
 </rapid:override>
 <rapid:override name="detail">
@@ -25,9 +26,9 @@
     </form>
 </rapid:override>
 <rapid:override name="scripts">
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            console.log("6666");
             $('#add_form').bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {
