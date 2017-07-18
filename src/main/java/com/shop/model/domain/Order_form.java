@@ -1,4 +1,5 @@
-package com.my.db;
+package com.shop.model.domain;
+
 
 public class Order_form {
   private Long order_form_id;

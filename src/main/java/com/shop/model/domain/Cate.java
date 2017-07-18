@@ -1,4 +1,5 @@
-package com.my.db;
+package com.shop.model.domain;
+
 
 public class Cate {
   private Long cate_id;

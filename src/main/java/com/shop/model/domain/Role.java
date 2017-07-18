@@ -1,4 +1,5 @@
-package com.my.db;
+package com.shop.model.domain;
+
 
 public class Role {
   private Long role_id;
