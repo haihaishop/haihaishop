@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
  * Created by 18240 on 2017/7/17.
  */
 public interface RoleMapper {
+    //使用@Select注解指明getRoleID方法要执行的SQL
     @Select("select role_id from role where name=#{role}")
-    public int select(Role role);
+    public int getRoleID(Role role);
 }
