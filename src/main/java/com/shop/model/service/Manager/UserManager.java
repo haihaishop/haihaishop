@@ -14,21 +14,21 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by 18240 on 2017/7/18.
  */
-@Service
+@Service("userManager")
 @Transactional
 @CacheConfig(cacheNames = {UserManagerInterface.cacheName})
-public class UserManager implements UserManagerInterface{
+public class UserManager implements UserManagerInterface {
     @Autowired
     private UserMapper userMapper;
 
-    @CacheEvict(allEntries=true)
+    @CacheEvict(allEntries = true)
     public void addUser(User user) {
         userMapper.addUser(user);
     }
 
-    @Cacheable(key="#root.methodName+#root.args[0]")
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public boolean hasUser(String loginName) {
-        if (userMapper.getUserFromLoginName(loginName) == null)
+        if (userMapper.getUserByLoginName(loginName) == null)
             return true;
         else
             return false;
