@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <rapid:override name="head">
+    <link href="/css/bootstrapValidator.min.css" rel="stylesheet">
     <title>增加管理员</title>
 </rapid:override>
 <rapid:override name="detail">
@@ -21,13 +22,14 @@
             <label class="sr-only" for="password">请再次输入密码</label>
             <input type="password" class="form-control" id="password1" name="password1" required>
         </div>
-            <button type="submit" class="btn btn-default">提交</button>
+            <button type="submit" class="btn btn-default" id="submit_button">提交</button>
     </form>
 </rapid:override>
 <rapid:override name="scripts">
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('add_form').bootstrapValidator({
+            $('#add_form').bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {
                     valid: 'glyphicon glyphicon-ok',
@@ -44,7 +46,7 @@
                             stringLength: {
                                 min: 6,
                                 max: 20,
-                                message: 'The username must be more than 6 and less than 30 characters long'
+                                message: '用户名长度在6-20之间。请检查'
                             },
                             regexp: {
                                 regexp: /^[a-zA-Z0-9_]+$/,
@@ -66,7 +68,7 @@
                     password1: {
                         validators: {
                             notEmpty: {
-                                message: 'The confirm password is required and cannot be empty'
+                                message: '请再次输入密码'
                             },
                             identical: {
                                 field: 'password',
@@ -75,7 +77,7 @@
                         }
                     }
                 }
-            })
+            });
         });
     </script>
 </rapid:override>>
