@@ -38,22 +38,28 @@ public class UserController {
     }
 
     @RequestMapping("user_login.do")
-    public ModelAndView user_login(User user,
-                                   @RequestParam("login_name")String login_name,
-                                   @RequestParam("password")String password) {
+    public ModelAndView user_login(User user) {
         ModelAndView mav = new ModelAndView();
+        if(userManagerInterface.hasUser(user.getLogin_name())){
+
+        }
         mav.setViewName("/index");
         return mav;
     }
 
     @RequestMapping("user_register")
-    public ModelAndView user_register(User user,
-                                      @RequestParam("role")String roleName) {
-        Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
-        user.setRole_id(tempRoleId);
-        user.setPassword(SHAUtil.SHA256(user.getPassword()));
-        userManagerInterface.addUser(user);
+    public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
         ModelAndView mav = new ModelAndView();
+        if (userManagerInterface.hasUser(user.getLogin_name())) {
+            mav.addObject("hasUser","用户名已存在！");
+        }
+        else{
+            Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
+            user.setRole_id(tempRoleId);
+            user.setPassword(SHAUtil.SHA256(user.getPassword()));
+            userManagerInterface.addUser(user);
+            mav.addObject("registerSuccessful","注册成功！");
+        }
         mav.setViewName("user/login");
         return mav;
     }
