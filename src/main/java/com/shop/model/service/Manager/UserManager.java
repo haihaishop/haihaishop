@@ -29,19 +29,10 @@ public class UserManager implements UserManagerInterface {
         userMapper.addUser(user);
     }
 
-//    @Cacheable(key = "#root.methodName+#root.args[0]")
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public boolean hasUser(String loginName) {
         User user = userMapper.getUserByLoginName(loginName);
         return user != null;
-    }
 
-    public User getUserByLoginName(String login_name) {
-        return userMapper.getUserByLoginName(login_name);
-    }
-
-    @Cacheable(key="#root.methodName+#root.args[0]+#root.args[1]")
-    public List<User> getAllUser() {
-        List<User> userList=userMapper.getAllUser();
-        return userList;
     }
 }
