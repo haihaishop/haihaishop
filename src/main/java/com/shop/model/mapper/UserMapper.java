@@ -20,8 +20,7 @@ public interface UserMapper {
     //使用@Select注解指明getAll方法要执行的SQL
     @Select("select * from user")
     public List<User> getAll();
-    public void add(User user);
 
     @Select("select * from user where login_name=#{login_name}")
-    public User getUserFromLoginName(@Param("loginName")String loginName);
+    public User getUserByLoginName(@Param("loginName")String loginName);
 }
