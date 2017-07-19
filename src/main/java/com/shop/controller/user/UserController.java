@@ -30,8 +30,6 @@ public class UserController {
     private RoleManagerInterface roleManagerInterface;
     @Value("#{userManager}")
     private UserManagerInterface userManagerInterface;
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
     @RequestMapping("register.do")
     public ModelAndView register() {
@@ -57,7 +55,7 @@ public class UserController {
     @RequestMapping("user_register")
     public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
         ModelAndView mav = new ModelAndView();
-        if (userManagerInterface.hasUser(user.getLogin_name())) {
+        if (userManagerInterface.hasUser(user.getUsername())) {
             mav.addObject("hasUser", "用户名已存在！");
         } else {
             Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
@@ -67,6 +65,19 @@ public class UserController {
             mav.addObject("registerSuccessful", "注册成功！");
         }
         mav.setViewName("user/login");
+        return mav;
+    }
+
+    @RequestMapping("loginSuccess.do")
+    public ModelAndView loginSuccess() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("user/loginSuccess");
+        return mav;
+    }
+    @RequestMapping("loginFailed.do")
+    public ModelAndView loginFailed() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("user/loginFailed");
         return mav;
     }
 }

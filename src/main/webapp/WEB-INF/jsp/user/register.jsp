@@ -12,10 +12,10 @@
     <form id="add_user_form" class="form-horizontal" role="form" action="/user_register.do" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <div class="form-group">
-            <label for="login_name" class="col-sm-4 control-label">用户名</label>
+            <label for="username" class="col-sm-4 control-label">用户名</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="login_name"
-                       placeholder="请输入用户名" name="login_name">
+                <input type="text" class="form-control" id="username"
+                       placeholder="请输入用户名" name="username">
             </div>
         </div>
         <div class="form-group">
@@ -81,7 +81,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields:{
-                    login_name:{
+                    username:{
                         group: '.col-lg-4',
                         validators: {
                             notEmpty: {

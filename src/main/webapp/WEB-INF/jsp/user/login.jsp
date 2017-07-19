@@ -22,6 +22,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="password" class="col-sm-4 control-label">密码</label>
+            <div class="col-sm-4">
+                <input type="checkbox" class="form-control" name="rememberMe">记住我
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-4 control-label"></label>
             <div class="col-sm-4">
                 <a href="/register.do"><p>没有账号，点此注册</p></a>
@@ -46,7 +52,7 @@
                     validating: 'glyphicon glyphicon-refresh'
                 },
                 fields:{
-                    login_name:{
+                    username:{
                         group: '.col-lg-4',
                         validators: {
                             notEmpty: {

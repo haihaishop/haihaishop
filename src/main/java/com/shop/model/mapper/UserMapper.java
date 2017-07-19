@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserMapper {
     //使用@Select注解指明getById方法要执行的SQL
 
-    @Insert("insert into user(login_name,password,email,phone,role_id) " +
-            "values (#{login_name},#{password},#{email},#{phone},#{role_id})")
+    @Insert("insert into user(username,password,email,phone,role_id) " +
+            "values (#{username},#{password},#{email},#{phone},#{role_id})")
     public void addUser(User user);
 
     //使用@Select注解指明getAll方法要执行的SQL
@@ -32,6 +32,6 @@ public interface UserMapper {
 
     @Delete("delete from user where username=#{username}")
     void deleteUserByLoginName(@Param("username")String username);
-    @Select("select * from user where username=#{username} and password=#{password}")
-    public User loginUser(@Param("username")String username,@Param("password")String password);
+    @Select("select * from user where username=#{username}")
+    public User loginUser(@Param("username")String username);
 }

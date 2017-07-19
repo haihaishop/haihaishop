@@ -39,8 +39,8 @@ public class UserManager implements UserManagerInterface {
         return user != null;
     }
 
-    public User loginUser(String loginName) {
-        User user = userMapper.loginUser(loginName);
+    public User loginUser(String username) {
+        User user = userMapper.loginUser(username);
         return user;
     }
 

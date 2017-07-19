@@ -1,5 +1,6 @@
 package com.shop.config;
 
+import com.shop.model.service.Manager.MyUserDetailsService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,7 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     public PasswordEncoder passwordEncoder;
 
-
+    @Bean
+    public MyUserDetailsService userDetailsService(){
+        return new MyUserDetailsService();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,11 +43,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/index").permitAll()
                 .antMatchers("/register.do").permitAll()
                 .antMatchers("/login.do").permitAll()
+                .antMatchers("/user/**").access("hasRole('ROLE_SELL') and hasRole('ROLE_BUYER')" )
                 .and()
                 .rememberMe()
                 .and()
                 .formLogin()
                 .loginPage("/user_login.do").permitAll()
+                .defaultSuccessUrl("/loginSuccess.do")
+                .failureUrl("/loginFailed.do")
                 .and()
                 .csrf().disable();
     }
@@ -53,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select login_name, password from user where login_name=username and password=pwd");
+                .and()
+                .userDetailsService(userDetailsService());
     }
 
     @Bean
