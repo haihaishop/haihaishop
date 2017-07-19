@@ -13,4 +13,6 @@ public interface UserManagerInterface {
     public List<User> getAllUser();
     public boolean hasUser(String loginName);
     public User loginUser(String loginName,String password);
+    List<User> getAllAdmins();
+    void deleteUserByLoginName(String loginName);
 }
