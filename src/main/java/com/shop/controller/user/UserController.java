@@ -45,13 +45,6 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping("user_login.do")
-    public ModelAndView user_login() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/index");
-        return mav;
-    }
-
     @RequestMapping("user_register")
     public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
         ModelAndView mav = new ModelAndView();
@@ -67,7 +60,7 @@ public class UserController {
             userManagerInterface.addUser(user);
             mav.addObject("registerSuccessful", "注册成功！");
         }
-        mav.setViewName("user/login");
+        mav.setViewName("redirect:666");
         return mav;
     }
 
