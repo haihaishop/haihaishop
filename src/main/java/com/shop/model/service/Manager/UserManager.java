@@ -36,9 +36,9 @@ public class UserManager implements UserManagerInterface {
         return user != null;
     }
 
-    public boolean loginUser(String loginName, String password) {
+    public User loginUser(String loginName, String password) {
         User user = userMapper.loginUser(loginName,password);
-        return user != null;
+        return user;
     }
 
     @Cacheable(key = "#root.methodName")
@@ -46,4 +46,5 @@ public class UserManager implements UserManagerInterface {
         List<User> userList=userMapper.getAllUser();
         return userList;
     }
+
 }
