@@ -34,13 +34,13 @@ public class UserManager implements UserManagerInterface {
     }
 
     @Cacheable(key = "#root.methodName+#root.args[0]")
-    public boolean hasUser(String loginName) {
-        User user = userMapper.getUserByLoginName(loginName);
+    public boolean hasUser(String username) {
+        User user = userMapper.getUserByLoginName(username);
         return user != null;
     }
 
-    public boolean loginUser(String loginName, String password) {
-        User user = userMapper.loginUser(loginName,password);
+    public boolean loginUser(String username, String password) {
+        User user = userMapper.loginUser(username,password);
         return user != null;
     }
 
@@ -57,7 +57,7 @@ public class UserManager implements UserManagerInterface {
     }
 
     @CacheEvict(allEntries = true)
-    public void deleteUserByLoginName(String loginName) {
-        userMapper.deleteUserByLoginName(loginName);
+    public void deleteUserByLoginName(String username) {
+        userMapper.deleteUserByLoginName(username);
     }
 }

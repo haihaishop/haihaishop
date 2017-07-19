@@ -26,8 +26,8 @@
     </div>
     <form id="add_form" method="post" action="/super_admin/add_user_post" role="form">
             <div class="form-group">
-                <label class="sr-only" for="login_name">请输入用户名</label>
-                <input type="text" class="form-control" id="login_name" name="login_name" placeholder="请输入名称" required>
+                <label class="sr-only" for="username">请输入用户名</label>
+                <input type="text" class="form-control" id="username" name="login_name" placeholder="请输入名称" required>
             </div>
             <div class="form-group">
                 <label class="sr-only" for="password">请输入密码</label>
@@ -37,6 +37,7 @@
             <label class="sr-only" for="password">请再次输入密码</label>
             <input type="password" class="form-control" id="password1" name="password1" required>
         </div>
+
             <button type="submit" class="btn btn-default" id="submit_button">提交</button>
     </form>
 </rapid:override>
