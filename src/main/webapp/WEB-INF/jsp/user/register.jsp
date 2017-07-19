@@ -10,6 +10,7 @@
 </rapid:override>
 <rapid:override name="content">
     <form id="add_user_form" class="form-horizontal" role="form" action="/user_register.do" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <div class="form-group">
             <label for="login_name" class="col-sm-4 control-label">用户名</label>
             <div class="col-sm-4">

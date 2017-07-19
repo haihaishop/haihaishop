@@ -32,6 +32,7 @@ public interface UserMapper {
 
     @Delete("delete from user where login_name=#{login_name}")
     void deleteUserByLoginName(@Param("login_name")String loginName);
-    @Select("select * from user where login_name=#{login_name} and password=#{password}")
-    public User loginUser(@Param("login_name")String loginName,@Param("password")String password);
+
+    @Select("select * from user where login_name=#{login_name}")
+    public User loginUser(@Param("login_name")String loginName);
 }
