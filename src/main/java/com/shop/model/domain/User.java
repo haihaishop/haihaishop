@@ -1,6 +1,8 @@
 package com.shop.model.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
   private Long user_id;
   private String login_name;
   private String nick_name;
