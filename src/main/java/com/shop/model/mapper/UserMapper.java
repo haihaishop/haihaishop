@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -31,4 +32,6 @@ public interface UserMapper {
 
     @Delete("delete from user where login_name=#{login_name}")
     void deleteUserByLoginName(@Param("login_name")String loginName);
+    @Select("select * from user where login_name=#{login_name} and password=#{password}")
+    public User loginUser(@Param("login_name")String loginName,@Param("password")String password);
 }

@@ -33,5 +33,46 @@
         </div>
     </form>
 </rapid:override>
+<rapid:override name="scripts">
+    <script type="text/javascript" src="/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#add_form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    login_name:{
+                        group: '.col-lg-4',
+                        validators: {
+                            notEmpty: {
+                                message: '请填写用户名'
+                            },
+                            stringLength: {
+                                min: 6,
+                                max: 20,
+                                message: '用户名长度在6-20之间。请检查'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z0-9_]+$/,
+                                message: '用户名由字母和数字组成，请检查'
+                            }
+                        }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: '请输入密码'
+                            }
+                        }
+                    },
+                }
+            });
+        });
+    </script>
+</rapid:override>>
 <%@include file="../base.jsp" %>
 
