@@ -40,7 +40,7 @@ public class SuperAdmin {
 
     @RequestMapping("/add_user_post")
     public String add_user_post(User user, RedirectAttributes model){
-        if (userManager.hasUser(user.getLogin_name())){
+        if (userManager.hasUser(user.getUsername())){
             model.addFlashAttribute("hasUser", "用户已存在！");
         }
         else {

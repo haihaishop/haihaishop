@@ -39,10 +39,10 @@ public class UserController {
     }
 
     @RequestMapping("user_login.do")
-    public ModelAndView user_login(@RequestParam("login_name") String loginName,
+    public ModelAndView user_login(@RequestParam("username") String username,
                                    @RequestParam("password") String password) {
         ModelAndView mav = new ModelAndView();
-        if(userManagerInterface.loginUser(loginName,password)){
+        if(userManagerInterface.loginUser(username,password)){
             mav.addObject("login","true");
         }
         else{
@@ -55,7 +55,7 @@ public class UserController {
     @RequestMapping("user_register")
     public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
         ModelAndView mav = new ModelAndView();
-        if (userManagerInterface.hasUser(user.getLogin_name())) {
+        if (userManagerInterface.hasUser(user.getUsername())) {
             mav.addObject("hasUser", "用户名已存在！");
         } else {
             Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
