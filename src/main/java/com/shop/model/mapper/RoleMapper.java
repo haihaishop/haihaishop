@@ -18,4 +18,7 @@ public interface RoleMapper {
     @Select("select role_id from role where name=#{role}")
     public int select(Role role);
 
+    @Select("select name from role where role_id=#{roleID}")
+    String getNameFromRoleID(@Param("roleID")long roleID);
+
 }
