@@ -57,7 +57,7 @@ public class UserManager implements UserManagerInterface {
     }
 
     @CacheEvict(allEntries = true)
-    public void deleteUserByLoginName(String loginName) {
-        userMapper.deleteUserByLoginName(loginName);
+    public void deleteUserByLoginName(String username) {
+        userMapper.deleteUserByLoginName(username);
     }
 }

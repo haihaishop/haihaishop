@@ -11,8 +11,9 @@ public interface UserManagerInterface {
     public static final String cacheName="userCache";
     public void addUser(User user);
     public List<User> getAllUser();
-    public boolean hasUser(String loginName);
-    public User loginUser(String loginName);
+    public boolean hasUser(String username);
     List<User> getAllAdmins();
-    void deleteUserByLoginName(String loginName);
+    void deleteUserByLoginName(String username);
+
+    public boolean loginUser(String username,String password);
 }

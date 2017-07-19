@@ -24,15 +24,14 @@ public interface UserMapper {
     @Select("select * from user")
     public List<User> getAllUser();
 
-    @Select("select * from user where login_name=#{login_name}")
-    public User getUserByLoginName(@Param("login_name") String loginName);
+    @Select("select * from user where username=#{username}")
+    public User getUserByLoginName(@Param("username") String username);
 
     @Select("select * from user where role_id=#{role_id}")
     List<User> getUsersByRoleId(@Param("role_id")Long role_id);
 
-    @Delete("delete from user where login_name=#{login_name}")
-    void deleteUserByLoginName(@Param("login_name")String loginName);
-
-    @Select("select * from user where login_name=#{login_name}")
-    public User loginUser(@Param("login_name")String loginName);
+    @Delete("delete from user where username=#{username}")
+    void deleteUserByLoginName(@Param("username")String username);
+    @Select("select * from user where username=#{username} and password=#{password}")
+    public User loginUser(@Param("username")String username,@Param("password")String password);
 }
