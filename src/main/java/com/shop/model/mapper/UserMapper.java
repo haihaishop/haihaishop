@@ -1,10 +1,8 @@
 package com.shop.model.mapper;
 
 import com.shop.model.domain.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
-import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -27,4 +25,10 @@ public interface UserMapper {
 
     @Select("select * from user where login_name=#{login_name}")
     public User getUserByLoginName(@Param("login_name") String loginName);
+
+    @Select("select * from user where role_id=#{role_id}")
+    List<User> getUsersByRoleId(@Param("role_id")Long role_id);
+
+    @Delete("delete from user where login_name=#{login_name}")
+    void deleteUserByLoginName(@Param("login_name")String loginName);
 }

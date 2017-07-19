@@ -3,6 +3,7 @@ package com.shop.model.service.Manager;
 
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
+import com.shop.model.mapper.RoleMapper;
 import com.shop.model.mapper.UserMapper;
 import com.shop.model.service.UserManagerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ import java.util.List;
 public class UserManager implements UserManagerInterface {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleMapper roleMapper;
 
     @CacheEvict(allEntries = true)
     public void addUser(User user) {
@@ -39,5 +42,16 @@ public class UserManager implements UserManagerInterface {
     public List<User> getAllUser() {
         List<User> userList=userMapper.getAllUser();
         return userList;
+    }
+
+    @Cacheable(key = "#root.methodName")
+    public List<User> getAllAdmins() {
+        Long role_id = roleMapper.getRoleIdFromName("admin");
+        return userMapper.getUsersByRoleId(role_id);
+    }
+
+    @CacheEvict(allEntries = true)
+    public void deleteUserByLoginName(String loginName) {
+        userMapper.deleteUserByLoginName(loginName);
     }
 }
