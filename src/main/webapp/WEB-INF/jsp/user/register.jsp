@@ -50,7 +50,7 @@
             <div class="col-sm-offset-4 col-sm-4">
                 <div class="checkbox">
                     <label>
-                        <input type="radio" name="role" value="seller">卖家
+                        <input type="radio" name="role" value="ROLE_SELL">卖家
                         <input type="radio" name="role" value="buyer">买家
                     </label>
                 </div>

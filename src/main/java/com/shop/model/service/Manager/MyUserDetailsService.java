@@ -30,6 +30,7 @@ public class MyUserDetailsService implements org.springframework.security.core.u
     private RoleMapper roleMapper;
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LoggingUtil.log(username);
         User user = userMapper.getUserByLoginName(username);
         if(user==null){
             throw new UsernameNotFoundException(username + "not found");
@@ -40,6 +41,7 @@ public class MyUserDetailsService implements org.springframework.security.core.u
 
     private org.springframework.security.core.userdetails.User buildUserDetail(User user){
         List<GrantedAuthority> authorities=buildUserAuthorities(user);
+        LoggingUtil.log(authorities);
         return new org.springframework.security.core.userdetails
                 .User(user.getUsername(),
                 user.getPassword(),

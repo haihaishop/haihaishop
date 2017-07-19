@@ -45,26 +45,22 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping("user_login.do")
-    public ModelAndView user_login() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("/index");
-        return mav;
-    }
-
     @RequestMapping("user_register")
     public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
         ModelAndView mav = new ModelAndView();
+        LoggingUtil.log(roleName);
         if (userManagerInterface.hasUser(user.getUsername())) {
+            LoggingUtil.log("hasUser");
             mav.addObject("hasUser", "用户名已存在！");
         } else {
-            Long tempRoleId = roleManagerInterface.getRoleIdFromName("roleName");
+            Long tempRoleId = roleManagerInterface.getRoleIdFromName(roleName);
+            LoggingUtil.log(tempRoleId);
             user.setRole_id(tempRoleId);
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManagerInterface.addUser(user);
             mav.addObject("registerSuccessful", "注册成功！");
         }
-        mav.setViewName("user/login");
+        mav.setViewName("redirect:666");
         return mav;
     }
 

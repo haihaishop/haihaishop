@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 import org.springframework.security.config.annotation.web.servlet.configuration.WebMvcSecurityConfiguration;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -23,10 +25,11 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
-    @Autowired
-    DataSource dataSource;
+
     @Autowired
     public PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Bean
     public MyUserDetailsService userDetailsService(){
@@ -35,33 +38,48 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/js/**").permitAll()
-                .antMatchers("/css/**").permitAll()
-                .antMatchers("/fonts/**").permitAll()
-                .antMatchers("/images/**").permitAll()
-                .antMatchers("/index").permitAll()
-                .antMatchers("/register.do").permitAll()
-                .antMatchers("/login.do").permitAll()
-                .antMatchers("/user/**").access("hasRole('ROLE_SELL') and hasRole('ROLE_BUYER')" )
-                .and()
-                .rememberMe()
+        http
+                .authorizeRequests()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/user_login.do").permitAll()
-                .defaultSuccessUrl("/loginSuccess.do")
-                .failureUrl("/loginFailed.do")
-                .and()
-                .csrf().disable();
+                .loginPage("/login.do")
+                .permitAll()
+        .and()
+        .csrf().disable();
+//        http.authorizeRequests()
+//                .antMatchers("/js/**").permitAll()
+//                .antMatchers("/css/**").permitAll()
+//                .antMatchers("/fonts/**").permitAll()
+//                .antMatchers("/images/**").permitAll()
+//                .antMatchers("/index").permitAll()
+//                .antMatchers("/register.do").permitAll()
+//                .antMatchers("/login.do").permitAll()
+//                .antMatchers("/user/**").access("hasRole('SELL') and hasRole('BUYER')" )
+//                .and()
+//                .rememberMe()
+//                .and()
+//                .formLogin()
+//                .loginPage("/user_login.do").permitAll()
+//                .defaultSuccessUrl("/loginSuccess.do")
+//                .failureUrl("/loginFailed.do")
+//                .and()
+//                .csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .passwordEncoder(passwordEncoder())
-                .and()
-                .userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
+
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().
+                antMatchers("/js/**", "/css/**", "/images/**", "/**/favicon.ico");
+
     }
 
     @Bean

@@ -5,8 +5,7 @@
     <title>海海商城首页</title>
 </rapid:override>
 <rapid:override name="content">
-    <form class="form-horizontal" role="form" action="/user_login.do" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    <form class="form-horizontal" role="form" action="/login.do" method="post">
         <div class="form-group">
             <label for="username" class="col-sm-4 control-label">用户名</label>
             <div class="col-sm-4">
@@ -18,7 +17,7 @@
             <label for="password" class="col-sm-4 control-label">密码</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" id="password"
-                       placeholder="请输入密码" name="pwd">
+                       placeholder="请输入密码" name="password">
             </div>
         </div>
         <div class="form-group">
