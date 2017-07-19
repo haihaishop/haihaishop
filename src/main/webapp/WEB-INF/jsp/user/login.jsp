@@ -6,18 +6,19 @@
 </rapid:override>
 <rapid:override name="content">
     <form class="form-horizontal" role="form" action="/user_login.do" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <div class="form-group">
             <label for="username" class="col-sm-4 control-label">用户名</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="username"
-                       placeholder="请输入用户名" name="login_name">
+                       placeholder="请输入用户名" name="username">
             </div>
         </div>
         <div class="form-group">
             <label for="password" class="col-sm-4 control-label">密码</label>
             <div class="col-sm-4">
                 <input type="password" class="form-control" id="password"
-                       placeholder="请输入密码" name="password">
+                       placeholder="请输入密码" name="pwd">
             </div>
         </div>
         <div class="form-group">
