@@ -2,12 +2,9 @@ package com.shop.controller.user;
 
 import com.shop.Utils.BCryptUtil;
 import com.shop.Utils.LoggingUtil;
-import com.shop.Utils.SHAUtil;
 import com.shop.model.domain.User;
-import com.shop.model.service.Manager.UserManager;
 import com.shop.model.service.RoleManagerInterface;
 import com.shop.model.service.UserManagerInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,9 +27,9 @@ import java.util.Date;
  */
 @Controller
 public class UserController {
-    @Value("#{roleManager}")
+    @Value("#{roleService}")
     private RoleManagerInterface roleManagerInterface;
-    @Value("#{userManager}")
+    @Value("#{userService}")
     private UserManagerInterface userManagerInterface;
 
     @RequestMapping("register.do")
@@ -70,12 +67,10 @@ public class UserController {
 
     @RequestMapping("/loginSuccess.do")
     public ModelAndView loginSuccess(HttpServletRequest request) {
-        LoggingUtil.log("666");
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
         String username = securityContext.getAuthentication().getName();
-        LoggingUtil.log(username);
         int roleId = userManagerInterface.getRoleIdByUsername(username);
         String roleName = roleManagerInterface.getNameFromRoleId(roleId);
         if (roleName.equals("ROLE_SUPER")) {

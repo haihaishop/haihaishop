@@ -11,4 +11,8 @@ public class BCryptUtil {
         String hashPass = encode.encode(password);
         return hashPass;
     }
+    public static boolean match(String bCryptPassword, String password1){
+        BCryptPasswordEncoder encode = new BCryptPasswordEncoder();
+        return encode.matches(password1, bCryptPassword);
+    }
 }

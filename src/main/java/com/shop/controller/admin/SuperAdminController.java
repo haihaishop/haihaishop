@@ -1,9 +1,7 @@
 package com.shop.controller.admin;
 
-import com.shop.Utils.LoggingUtil;
-import com.shop.Utils.SHAUtil;
+import com.shop.Utils.BCryptUtil;
 import com.shop.model.domain.User;
-import com.shop.model.service.Manager.RoleManager;
 import com.shop.model.service.RoleManagerInterface;
 import com.shop.model.service.UserManagerInterface;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,21 +19,20 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/super_admin")
-public class SuperAdmin {
-    @Value("#{roleManager}")
+public class SuperAdminController {
+    @Value("#{roleService}")
     private RoleManagerInterface roleManagerInterface;
-    @Value("#{userManager}")
+    @Value("#{userService}")
     private UserManagerInterface userManager;
 
     @RequestMapping({"/", ""})
     public ModelAndView homePage(){
-        return new ModelAndView("admin/homepage");
+        return new ModelAndView("super_admin/homepage");
     }
 
     @RequestMapping("/add_admin")
     public ModelAndView add_admin(){
-        LoggingUtil.log(roleManagerInterface.getRoleIdFromName("seller"));
-        return new ModelAndView("admin/add_admin");
+        return new ModelAndView("super_admin/add_admin");
     }
 
     @RequestMapping("/add_user_post")
@@ -44,10 +41,10 @@ public class SuperAdmin {
             model.addFlashAttribute("hasUser", "用户已存在！");
         }
         else {
-            user.setRole_id(roleManagerInterface.getRoleIdFromName("admin"));
-            user.setPassword(SHAUtil.SHA256(user.getPassword()));
+            user.setRole_id(roleManagerInterface.getRoleIdFromName("ROLE_ADMIN"));
+            user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManager.addUser(user);
-            model.addFlashAttribute("regSuccess", "恭喜，添加管理员成功！");
+            model.addFlashAttribute("regSuccess", "添加管理员成功！");
         }
         return "redirect:/super_admin/add_admin";
     }
@@ -55,7 +52,7 @@ public class SuperAdmin {
     @RequestMapping("/get_admins")
     public ModelAndView get_admins(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/get_admins");
+        modelAndView.setViewName("super_admin/get_admins");
         List<User> admins;
         admins = userManager.getAllAdmins();
         modelAndView.addObject("admins",admins);
@@ -65,7 +62,7 @@ public class SuperAdmin {
     @RequestMapping("/delete_admin")
     public ModelAndView delete_admin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/delete_admin");
+        modelAndView.setViewName("super_admin/delete_admin");
         List<User> admins;
         admins = userManager.getAllAdmins();
         modelAndView.addObject("admins",admins);
@@ -77,11 +74,30 @@ public class SuperAdmin {
         if (userManager.hasUser(admin_name)){
             userManager.deleteUserByLoginName(admin_name);
             model.addFlashAttribute("success", "删除成功！");
-            return "redirect:/super_admin/delete_admin";
         }else {
             model.addFlashAttribute("warning", "用户不存在！");
-            return "redirect:/super_admin/delete_admin";
         }
+        return "redirect:/super_admin/delete_admin";
+    }
+
+    @RequestMapping("/change_password_post")
+    public String changePasswordPost(@RequestParam("oldPassword")String oldPassword,
+                                       @RequestParam("password")String newPassword,
+                                     RedirectAttributes model){
+        ModelAndView modelAndView = new ModelAndView();
+        if (userManager.authUser("admin", oldPassword)){
+            userManager.changePasswordByUsername("admin", newPassword);
+            model.addFlashAttribute("success", "修改成功！");
+        }
+        else {
+            model.addFlashAttribute("warning", "原密码不正确！");
+        }
+        return "redirect:/super_admin/change_password";
+    }
+
+    @RequestMapping("/change_password")
+    public String changePassword(){
+        return "super_admin/change_password";
     }
 
 }

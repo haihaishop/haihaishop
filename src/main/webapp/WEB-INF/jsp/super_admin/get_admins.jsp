@@ -11,7 +11,7 @@
     <div class="center-block">
         <h2>管理员信息：</h2>
         <c:forEach items="${admins}" var="admin">
-            <h3>管理员：${admin.login_name}</h3>
+            <h3>管理员：${admin.username}</h3>
         </c:forEach>
     </div>
 </rapid:override>

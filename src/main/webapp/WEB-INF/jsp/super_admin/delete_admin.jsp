@@ -26,10 +26,10 @@
             <h2>管理员信息：</h2>
             <c:forEach items="${admins}" var="admin">
                 <div class="col-lg-8">
-                    <h3>管理员：${admin.login_name}</h3>
+                    <h3>管理员：${admin.username}</h3>
                 </div>
                 <div class="col-lg-4">
-                    <h3><a href="/super_admin/delete_admin/${admin.login_name}">删除</a></h3>
+                    <h3><a href="/super_admin/delete_admin/${admin.username}">删除</a></h3>
                 </div>
             </c:forEach>
         </div>

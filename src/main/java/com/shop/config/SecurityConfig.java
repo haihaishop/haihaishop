@@ -40,8 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/user/**").access("hasRole('SELL') and hasRole('BUYER') and hasRole('SUPER') and hasRole('ADMIN')")
-                .antMatchers("/super_admin/**").access("hasRole('SUPER')")
+                .antMatchers("/user/**").access("hasRole('ROLE_SELL') or hasRole('ROLE_BUYER') or hasRole('ROLE_SUPER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/super_admin/**").access("hasRole('ROLE_SUPER')")
+                .antMatchers("/admin/**").access("hasRole('ROLE_SUPER') or hasRole('ROLE_ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .rememberMe()

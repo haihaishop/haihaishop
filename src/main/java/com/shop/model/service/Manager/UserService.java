@@ -1,6 +1,7 @@
 package com.shop.model.service.Manager;
 
 
+import com.shop.Utils.BCryptUtil;
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
 import com.shop.model.mapper.RoleMapper;
@@ -19,10 +20,10 @@ import java.util.List;
 /**
  * Created by 18240 on 2017/7/18.
  */
-@Service("userManager")
+@Service("userService")
 @Transactional
 @CacheConfig(cacheNames = {UserManagerInterface.cacheName})
-public class UserManager implements UserManagerInterface {
+public class UserService implements UserManagerInterface {
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -52,7 +53,8 @@ public class UserManager implements UserManagerInterface {
 
     @Cacheable(key = "#root.methodName")
     public List<User> getAllAdmins() {
-        Long role_id = roleMapper.getRoleIdFromName("admin");
+        Long role_id = roleMapper.getRoleIdFromName("ROLE_ADMIN");
+        LoggingUtil.log(role_id);
         return userMapper.getUsersByRoleId(role_id);
     }
 
@@ -61,6 +63,21 @@ public class UserManager implements UserManagerInterface {
         userMapper.deleteUserByLoginName(username);
     }
 
+    @Cacheable(key = "#root.methodName+#root.args[0]+#root.args[1]")
+    public boolean authUser(String username, String password) {
+        String oldPassword = userMapper.getPasswordByUsername(username);
+
+        return BCryptUtil.match(oldPassword, password);
+
+    }
+
+    @CacheEvict(allEntries = true)
+    public void changePasswordByUsername(String username, String password) {
+        String passwordBCrypt = BCryptUtil.encode(password);
+        userMapper.changePasswordByUsername(username, passwordBCrypt);
+    }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public int getRoleIdByUsername(String username) {
         return userMapper.getRoleIdByUsername(username);
     }
