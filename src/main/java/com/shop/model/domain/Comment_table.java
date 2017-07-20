@@ -1,12 +1,23 @@
 package com.shop.model.domain;
 
 
+import java.util.Date;
+
 public class Comment_table {
   private Long comment_table_id;
   private Long goods_id;
   private Long user_id;
   private String comment;
   private Long rate;
+  private Date comment_date;
+
+  public Date getComment_date() {
+    return comment_date;
+  }
+
+  public void setComment_date(Date comment_date) {
+    this.comment_date = comment_date;
+  }
 
   public Long getComment_table_id() {
     return comment_table_id;
