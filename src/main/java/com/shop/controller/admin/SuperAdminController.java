@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,6 +44,7 @@ public class SuperAdminController {
         else {
             user.setRole_id(roleManagerInterface.getRoleIdFromName("ROLE_ADMIN"));
             user.setPassword(BCryptUtil.encode(user.getPassword()));
+            user.setCreate_date(new Date());
             userManager.addUser(user);
             model.addFlashAttribute("regSuccess", "添加管理员成功！");
         }

@@ -10,8 +10,23 @@
 <rapid:override name="detail">
     <div class="center-block">
         <h2>管理员信息：</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <h3>管理员账号</h3>
+            </div>
+            <div class="col-lg-8">
+                <h3>注册时间</h3>
+            </div>
+        </div>
         <c:forEach items="${admins}" var="admin">
-            <h3>管理员：${admin.username}</h3>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>${admin.username}</h3>
+                </div>
+                <div class="col-lg-8">
+                    <h3>${admin.create_date}</h3>
+                </div>
+            </div>
         </c:forEach>
     </div>
 </rapid:override>
