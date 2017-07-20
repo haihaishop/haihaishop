@@ -61,7 +61,7 @@ public class UserController {
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManagerInterface.addUser(user);
             model.addFlashAttribute("registerSuccess", "注册成功");
-            return new ModelAndView("redirect:user/login");
+            return new ModelAndView("redirect:/login.do");
         }
     }
 
@@ -78,9 +78,9 @@ public class UserController {
         } else if (roleName.equals("ROLE_ADMIN")) {
             return new ModelAndView("redirect:/admin");
         } else if (roleName.equals("ROLE_SELL")) {
-            return new ModelAndView("redirect:/seller_home_page");
+            return new ModelAndView("redirect:/seller_home_page.do");
         } else if (roleName.equals("ROLE_BUYER")) {
-            return new ModelAndView("redirect:/buyer_home_page");
+            return new ModelAndView("redirect:/buyer_home_page.do");
         } else {
             return new ModelAndView("redirect:/index");
         }
