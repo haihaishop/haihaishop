@@ -1,6 +1,8 @@
 package com.shop.model.domain;
 
 
+import java.util.Date;
+
 public class Order_form {
   private Long order_form_id;
   private Long goods_id;
@@ -10,7 +12,7 @@ public class Order_form {
   private Long buy_number;
   private Long address_id;
   private String phone;
-  private java.sql.Date date;
+  private Date date;
   private String pay_state;
   private String shipping_status;
 
@@ -78,11 +80,11 @@ public class Order_form {
     this.phone = phone;
   }
 
-  public java.sql.Date getDate() {
+  public Date getDate() {
     return date;
   }
 
-  public void setDate(java.sql.Date date) {
+  public void setDate(Date date) {
     this.date = date;
   }
 
