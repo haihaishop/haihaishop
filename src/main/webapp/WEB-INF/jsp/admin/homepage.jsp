@@ -13,19 +13,24 @@
     </div>
     <div class="container-fluid">
         <div class="row " >
-            <rapid:block name="detail">
+                <div class="col-lg-2">
             <h3>
-                    <a href="/super_admin/add_admin" style="text-shadow: blue 2px 2px 5px; width:100%">分类管理</a>
+                    <a href="/super_admin/cate_manage" style="text-shadow: blue 2px 2px 5px; width:100%">分类管理</a>
                 </h3>
 
                 <h3>
-                    <a href="/super_admin/delete_admin" style="text-shadow: blue 2px 2px 5px; width:100%">活动管理</a>
+                    <a href="/admin/promote_manage" style="text-shadow: blue 2px 2px 5px; width:100%">活动管理</a>
                 </h3>
 
                 <h3>
-                    <a href="/super_admin/change_password" style="text-shadow: blue 2px 2px 5px; width:100%">修改密码</a>
+                    <a href="/admin/change_password" style="text-shadow: blue 2px 2px 5px; width:100%">修改密码</a>
                 </h3>
-                </rapid:block>
+                </div>
+                <div class="col-lg-10">
+                    <rapid:block name="detail">
+                    </rapid:block>
+                </div>
+
         </div>
     </div>
 

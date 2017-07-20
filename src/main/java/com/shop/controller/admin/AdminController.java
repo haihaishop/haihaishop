@@ -13,4 +13,9 @@ public class AdminController {
         return new ModelAndView("admin/homepage");
     }
 
+    @RequestMapping("/cate_manage")
+    public String cateManage(){
+        return "admin/cate_manage";
+    }
+
 }
