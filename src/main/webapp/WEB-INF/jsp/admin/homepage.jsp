@@ -15,7 +15,7 @@
         <div class="row " >
                 <div class="col-lg-2">
             <h3>
-                    <a href="/super_admin/cate_manage" style="text-shadow: blue 2px 2px 5px; width:100%">分类管理</a>
+                    <a href="/admin/cate_manage" style="text-shadow: blue 2px 2px 5px; width:100%">分类管理</a>
                 </h3>
 
                 <h3>

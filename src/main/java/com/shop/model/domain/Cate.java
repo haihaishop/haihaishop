@@ -1,7 +1,9 @@
 package com.shop.model.domain;
 
 
-public class Cate {
+import java.io.Serializable;
+
+public class Cate implements Serializable{
   private Long cate_id;
   private String cate_name;
 
