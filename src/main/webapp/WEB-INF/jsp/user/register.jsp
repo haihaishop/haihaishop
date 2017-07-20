@@ -51,7 +51,7 @@
                 <div class="checkbox">
                     <label>
                         <input type="radio" name="role" value="ROLE_SELL">卖家
-                        <input type="radio" name="role" value="buyer">买家
+                        <input type="radio" name="role" value="ROLE_BUYER">买家
                     </label>
                 </div>
             </div>

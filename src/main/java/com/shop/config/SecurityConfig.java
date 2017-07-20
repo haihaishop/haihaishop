@@ -40,31 +40,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/user/**").access("hasRole('SELL') and hasRole('BUYER') and hasRole('SUPER') and hasRole('ADMIN')")
+                .antMatchers("/super_admin/**").access("hasRole('SUPER')")
                 .anyRequest().authenticated()
                 .and()
+                .rememberMe()
+                .and()
                 .formLogin()
-                .loginPage("/login.do")
-                .permitAll()
-        .and()
-        .csrf().disable();
-//        http.authorizeRequests()
-//                .antMatchers("/js/**").permitAll()
-//                .antMatchers("/css/**").permitAll()
-//                .antMatchers("/fonts/**").permitAll()
-//                .antMatchers("/images/**").permitAll()
-//                .antMatchers("/index").permitAll()
-//                .antMatchers("/register.do").permitAll()
-//                .antMatchers("/login.do").permitAll()
-//                .antMatchers("/user/**").access("hasRole('SELL') and hasRole('BUYER')" )
-//                .and()
-//                .rememberMe()
-//                .and()
-//                .formLogin()
-//                .loginPage("/user_login.do").permitAll()
-//                .defaultSuccessUrl("/loginSuccess.do")
-//                .failureUrl("/loginFailed.do")
-//                .and()
-//                .csrf().disable();
+                .loginPage("/login_form.do").permitAll()
+                .defaultSuccessUrl("/loginSuccess.do")
+                .failureUrl("/loginFailed.do")
+                .and()
+                .csrf().disable();
     }
 
     @Override
@@ -78,7 +65,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().
-                antMatchers("/js/**", "/css/**", "/images/**", "/**/favicon.ico");
+                antMatchers(
+                        "/register.do",
+                        "/js/**",
+                        "/fonts/**",
+                        "/css/**",
+                        "/images/**",
+                        "/**/favicon.ico",
+                        "/index",
+                        "/login.do",
+                        "/");
 
     }
 

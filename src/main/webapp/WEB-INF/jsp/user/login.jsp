@@ -5,7 +5,7 @@
     <title>海海商城首页</title>
 </rapid:override>
 <rapid:override name="content">
-    <form class="form-horizontal" role="form" action="/login.do" method="post">
+    <form class="form-horizontal" role="form" action="/login_form.do" method="post">
         <div class="form-group">
             <label for="username" class="col-sm-4 control-label">用户名</label>
             <div class="col-sm-4">

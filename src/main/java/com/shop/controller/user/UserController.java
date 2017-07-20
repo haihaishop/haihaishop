@@ -13,12 +13,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -46,34 +49,51 @@ public class UserController {
     }
 
     @RequestMapping("user_register")
-    public ModelAndView user_register(User user, @RequestParam("role") String roleName) {
-        ModelAndView mav = new ModelAndView();
+    public ModelAndView user_register(User user, RedirectAttributes model, @RequestParam("role") String roleName) {
         LoggingUtil.log(roleName);
         if (userManagerInterface.hasUser(user.getUsername())) {
             LoggingUtil.log("hasUser");
-            mav.addObject("hasUser", "用户名已存在！");
+            model.addFlashAttribute("hasUser", "用户已存在！");
+            return new ModelAndView("user/register");
         } else {
             Long tempRoleId = roleManagerInterface.getRoleIdFromName(roleName);
             LoggingUtil.log(tempRoleId);
             user.setRole_id(tempRoleId);
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManagerInterface.addUser(user);
-            mav.addObject("registerSuccessful", "注册成功！");
+            model.addFlashAttribute("registerSuccess", "注册成功");
+            return new ModelAndView("redirect:user/login");
         }
-        mav.setViewName("redirect:666");
-        return mav;
     }
 
-    @RequestMapping("loginSuccess.do")
-    public ModelAndView loginSuccess() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("user/loginSuccess");
-        return mav;
+    @RequestMapping("/loginSuccess.do")
+    public ModelAndView loginSuccess(HttpServletRequest request) {
+        LoggingUtil.log("666");
+        SecurityContextImpl securityContext = (SecurityContextImpl) request
+                .getSession()
+                .getAttribute("SPRING_SECURITY_CONTEXT");
+        String username = securityContext.getAuthentication().getName();
+        LoggingUtil.log(username);
+        int roleId = userManagerInterface.getRoleIdByUsername(username);
+        String roleName = roleManagerInterface.getNameFromRoleId(roleId);
+        if (roleName.equals("ROLE_SUPER")) {
+            return new ModelAndView("redirect:/super_admin");
+        } else if (roleName.equals("ROLE_ADMIN")) {
+            return new ModelAndView("redirect:/admin");
+        } else if (roleName.equals("ROLE_SELL")) {
+            return new ModelAndView("redirect:/seller_home_page");
+        } else if (roleName.equals("ROLE_BUYER")) {
+            return new ModelAndView("redirect:/buyer_home_page");
+        } else {
+            return new ModelAndView("redirect:/index");
+        }
     }
+
     @RequestMapping("loginFailed.do")
     public ModelAndView loginFailed() {
+        LoggingUtil.log("fff");
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("user/loginFailed");
+        mav.setViewName("redirect:/login.do");
         return mav;
     }
 }
