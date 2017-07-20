@@ -18,14 +18,14 @@ public interface UserMapper {
 
     @Insert("insert into user(username,password,email,phone,role_id,create_date) " +
             "values (#{username},#{password},#{email},#{phone},#{role_id},#{create_date})")
-    public void addUser(User user);
+    void addUser(User user);
 
     //使用@Select注解指明getAll方法要执行的SQL
     @Select("select * from user")
-    public List<User> getAllUser();
+    List<User> getAllUser();
 
     @Select("select * from user where username=#{username}")
-    public User getUserByLoginName(@Param("username") String username);
+    User getUserByLoginName(@Param("username") String username);
 
     @Select("select * from user where role_id=#{role_id}")
     List<User> getUsersByRoleId(@Param("role_id")Long role_id);
@@ -34,7 +34,7 @@ public interface UserMapper {
     void deleteUserByLoginName(@Param("username")String username);
 
     @Select("select * from user where username=#{username}")
-    public User loginUser(@Param("username")String username);
+    User loginUser(@Param("username")String username);
 
     @Update("update user set password=#{password} where username=#{username}")
     void changePasswordByUsername(@Param("username")String username,
@@ -44,5 +44,5 @@ public interface UserMapper {
     String getPasswordByUsername(@Param("username")String username);
 
     @Select("select role_id from user where username = #{username}")
-    public  int getRoleIdByUsername(@Param("username")String username);
+    int getRoleIdByUsername(@Param("username")String username);
 }

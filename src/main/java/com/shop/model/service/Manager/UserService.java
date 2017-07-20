@@ -66,9 +66,7 @@ public class UserService implements UserManagerInterface {
     @Cacheable(key = "#root.methodName+#root.args[0]+#root.args[1]")
     public boolean authUser(String username, String password) {
         String oldPassword = userMapper.getPasswordByUsername(username);
-
         return BCryptUtil.match(oldPassword, password);
-
     }
 
     @CacheEvict(allEntries = true)
@@ -80,5 +78,9 @@ public class UserService implements UserManagerInterface {
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public int getRoleIdByUsername(String username) {
         return userMapper.getRoleIdByUsername(username);
+    }
+
+    public User getUserByLoginName(String username) {
+        return userMapper.getUserByLoginName(username);
     }
 }

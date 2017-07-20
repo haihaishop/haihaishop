@@ -17,6 +17,6 @@ public interface UserManagerInterface {
     public User loginUser(String username);
     boolean authUser(String username, String password);
     void changePasswordByUsername(String username, String password);
-
+    User getUserByLoginName(String username);
     public int getRoleIdByUsername(String username);
 }
