@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
@@ -24,7 +25,7 @@
                     <h3>${admin.username}</h3>
                 </div>
                 <div class="col-lg-8">
-                    <h3>${admin.create_date}</h3>
+                    <h3><fmt:formatDate value="${admin.create_date}" pattern="yyyy-MM-dd HH:mm:ss" /> </h3>
                 </div>
             </div>
         </c:forEach>
