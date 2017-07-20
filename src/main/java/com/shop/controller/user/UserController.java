@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Date;
 
 /**
  * Created by 18240 on 2017/7/17.
@@ -48,7 +49,7 @@ public class UserController {
         return mav;
     }
 
-    @RequestMapping("user_register")
+    @RequestMapping("/user_register.do")
     public ModelAndView user_register(User user, RedirectAttributes model, @RequestParam("role") String roleName) {
         LoggingUtil.log(roleName);
         if (userManagerInterface.hasUser(user.getUsername())) {
@@ -59,6 +60,7 @@ public class UserController {
             Long tempRoleId = roleManagerInterface.getRoleIdFromName(roleName);
             LoggingUtil.log(tempRoleId);
             user.setRole_id(tempRoleId);
+            user.setCreate_date(new Date());
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManagerInterface.addUser(user);
             model.addFlashAttribute("registerSuccess", "注册成功");

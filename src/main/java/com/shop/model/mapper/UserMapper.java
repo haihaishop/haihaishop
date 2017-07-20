@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UserMapper {
     //使用@Select注解指明getById方法要执行的SQL
 
-    @Insert("insert into user(username,password,email,phone,role_id) " +
-            "values (#{username},#{password},#{email},#{phone},#{role_id})")
+    @Insert("insert into user(username,password,email,phone,role_id,create_date) " +
+            "values (#{username},#{password},#{email},#{phone},#{role_id},#{create_date})")
     public void addUser(User user);
 
     //使用@Select注解指明getAll方法要执行的SQL
