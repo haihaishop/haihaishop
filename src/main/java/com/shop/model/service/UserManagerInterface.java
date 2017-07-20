@@ -15,4 +15,5 @@ public interface UserManagerInterface {
     List<User> getAllAdmins();
     void deleteUserByLoginName(String username);
     public User loginUser(String username);
+    public int getRoleIdByUsername(String username);
 }

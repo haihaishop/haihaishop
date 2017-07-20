@@ -60,4 +60,8 @@ public class UserManager implements UserManagerInterface {
     public void deleteUserByLoginName(String username) {
         userMapper.deleteUserByLoginName(username);
     }
+
+    public int getRoleIdByUsername(String username) {
+        return userMapper.getRoleIdByUsername(username);
+    }
 }
