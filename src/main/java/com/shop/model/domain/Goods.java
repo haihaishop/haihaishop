@@ -7,7 +7,7 @@ public class Goods {
   private Double price;
   private String info;
   private Long views_time;
-  private java.sql.Date date;
+  private java.util.Date date;
   private Long sold_number;
   private Long count;
   private String picture;
@@ -61,7 +61,7 @@ public class Goods {
     this.views_time = views_time;
   }
 
-  public java.sql.Date getDate() {
+  public java.util.Date getDate() {
     return date;
   }
 

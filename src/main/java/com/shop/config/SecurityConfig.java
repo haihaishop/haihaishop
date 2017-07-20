@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .rememberMe()
                 .and()
                 .formLogin()
-                .loginPage("/login_form.do").permitAll()
+                .loginPage("/login.do").permitAll()
                 .defaultSuccessUrl("/loginSuccess.do")
                 .failureUrl("/loginFailed.do")
                 .and()
@@ -74,7 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         "/**/favicon.ico",
                         "/index",
                         "/login.do",
-                        "/");
+                        "/",
+                        "/user_register.do");
 
     }
 

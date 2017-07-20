@@ -1,6 +1,7 @@
 package com.shop.model.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable{
   private Long user_id;
@@ -14,6 +15,7 @@ public class User implements Serializable{
   private Long role_id;
   private String sex;
   private String is_authentication;
+  private Date create_date;
 
   public Long getUser_id() {
     return user_id;
@@ -29,6 +31,14 @@ public class User implements Serializable{
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public void setCreate_date(Date date){
+    this.create_date = date;
+  }
+
+  public Date getCreate_date(){
+    return create_date;
   }
 
   public String getNick_name() {
