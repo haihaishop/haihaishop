@@ -27,12 +27,12 @@ public class SuperAdminController {
 
     @RequestMapping({"/", ""})
     public ModelAndView homePage(){
-        return new ModelAndView("admin/homepage");
+        return new ModelAndView("super_admin/homepage");
     }
 
     @RequestMapping("/add_admin")
     public ModelAndView add_admin(){
-        return new ModelAndView("admin/add_admin");
+        return new ModelAndView("super_admin/add_admin");
     }
 
     @RequestMapping("/add_user_post")
@@ -44,7 +44,7 @@ public class SuperAdminController {
             user.setRole_id(roleManagerInterface.getRoleIdFromName("ROLE_ADMIN"));
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManager.addUser(user);
-            model.addFlashAttribute("regSuccess", "恭喜，添加管理员成功！");
+            model.addFlashAttribute("regSuccess", "添加管理员成功！");
         }
         return "redirect:/super_admin/add_admin";
     }
@@ -52,7 +52,7 @@ public class SuperAdminController {
     @RequestMapping("/get_admins")
     public ModelAndView get_admins(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/get_admins");
+        modelAndView.setViewName("super_admin/get_admins");
         List<User> admins;
         admins = userManager.getAllAdmins();
         modelAndView.addObject("admins",admins);
@@ -62,7 +62,7 @@ public class SuperAdminController {
     @RequestMapping("/delete_admin")
     public ModelAndView delete_admin(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/delete_admin");
+        modelAndView.setViewName("super_admin/delete_admin");
         List<User> admins;
         admins = userManager.getAllAdmins();
         modelAndView.addObject("admins",admins);
@@ -82,7 +82,7 @@ public class SuperAdminController {
 
     @RequestMapping("/change_password_post")
     public String changePasswordPost(@RequestParam("oldPassword")String oldPassword,
-                                       @RequestParam("newPassword")String newPassword,
+                                       @RequestParam("password")String newPassword,
                                      RedirectAttributes model){
         ModelAndView modelAndView = new ModelAndView();
         if (userManager.authUser("admin", oldPassword)){
@@ -97,7 +97,7 @@ public class SuperAdminController {
 
     @RequestMapping("/change_password")
     public String changePassword(){
-        return "admin/change_password";
+        return "super_admin/change_password";
     }
 
 }

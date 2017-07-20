@@ -18,4 +18,5 @@ public interface UserManagerInterface {
     boolean authUser(String username, String password);
     void changePasswordByUsername(String username, String password);
 
+    public int getRoleIdByUsername(String username);
 }

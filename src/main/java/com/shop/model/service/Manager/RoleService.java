@@ -20,4 +20,8 @@ public class RoleService implements RoleManagerInterface{
     public Long getRoleIdFromName(String roleName) {
         return roleMapper.getRoleIdFromName(roleName);
     }
+
+    public String getNameFromRoleId(long roleId) {
+        return roleMapper.getNameFromRoleID(roleId);
+    }
 }

@@ -22,19 +22,19 @@
         </div>
     </c:if>
     <div class="center-block">
-        <h3>请编辑信息</h3>
+        <h3>请编辑</h3>
     </div>
-    <form id="add_form" method="post" action="/super_admin/add_user_post" role="form">
+    <form id="add_form" method="post" action="/super_admin/change_password_post" role="form">
         <div class="form-group">
-            <label class="sr-only" for="oldPassword">请输入旧密码</label>
-            <input type="password" class="form-control" id="oldPassword" name="oldPassword" placeholder="请输入名称" required>
+            <label class="col-sm-4 control-label" for="oldPassword">请输入旧密码</label>
+            <input type="password" class="form-control" id="oldPassword" name="oldPassword"  required>
         </div>
         <div class="form-group">
-            <label class="sr-only" for="password">请输入新密码</label>
+            <label class="col-sm-4 control-label" for="password">请输入新密码</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <div class="form-group">
-            <label class="sr-only" for="password">请再次输入新密码</label>
+            <label class="col-sm-4 control-label" for="password">请再次输入新密码</label>
             <input type="password" class="form-control" id="password1" name="password1" required>
         </div>
 

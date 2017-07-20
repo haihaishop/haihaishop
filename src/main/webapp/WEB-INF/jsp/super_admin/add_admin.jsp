@@ -26,15 +26,15 @@
     </div>
     <form id="add_form" method="post" action="/super_admin/add_user_post" role="form">
             <div class="form-group">
-                <label class="sr-only" for="username">请输入用户名</label>
+                <label class="col-sm-4 control-label" for="username">请输入用户名</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="请输入名称" required>
             </div>
             <div class="form-group">
-                <label class="sr-only" for="password">请输入密码</label>
+                <label class="col-sm-4 control-label" for="password">请输入密码</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
         <div class="form-group">
-            <label class="sr-only" for="password">请再次输入密码</label>
+            <label class="col-sm-4 control-label" for="password">请再次输入密码</label>
             <input type="password" class="form-control" id="password1" name="password1" required>
         </div>
 

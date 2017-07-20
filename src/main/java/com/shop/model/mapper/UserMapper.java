@@ -42,4 +42,7 @@ public interface UserMapper {
 
     @Select("select password from user where username=#{username}")
     String getPasswordByUsername(@Param("username")String username);
+
+    @Select("select role_id from user where username = #{username}")
+    public  int getRoleIdByUsername(@Param("username")String username);
 }

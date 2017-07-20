@@ -53,7 +53,8 @@ public class UserService implements UserManagerInterface {
 
     @Cacheable(key = "#root.methodName")
     public List<User> getAllAdmins() {
-        Long role_id = roleMapper.getRoleIdFromName("admin");
+        Long role_id = roleMapper.getRoleIdFromName("ROLE_ADMIN");
+        LoggingUtil.log(role_id);
         return userMapper.getUsersByRoleId(role_id);
     }
 
@@ -62,16 +63,22 @@ public class UserService implements UserManagerInterface {
         userMapper.deleteUserByLoginName(username);
     }
 
-
+    @Cacheable(key = "#root.methodName+#root.args[0]+#root.args[1]")
     public boolean authUser(String username, String password) {
         String oldPassword = userMapper.getPasswordByUsername(username);
-        String passwordBCrypt = BCryptUtil.encode(password);
-        return passwordBCrypt.equals(oldPassword);
+
+        return BCryptUtil.match(oldPassword, password);
 
     }
 
+    @CacheEvict(allEntries = true)
     public void changePasswordByUsername(String username, String password) {
         String passwordBCrypt = BCryptUtil.encode(password);
         userMapper.changePasswordByUsername(username, passwordBCrypt);
+    }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
+    public int getRoleIdByUsername(String username) {
+        return userMapper.getRoleIdByUsername(username);
     }
 }
