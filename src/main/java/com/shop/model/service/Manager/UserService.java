@@ -1,6 +1,7 @@
 package com.shop.model.service.Manager;
 
 
+import com.shop.Utils.BCryptUtil;
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
 import com.shop.model.mapper.RoleMapper;
@@ -19,10 +20,10 @@ import java.util.List;
 /**
  * Created by 18240 on 2017/7/18.
  */
-@Service("userManager")
+@Service("userService")
 @Transactional
 @CacheConfig(cacheNames = {UserManagerInterface.cacheName})
-public class UserManager implements UserManagerInterface {
+public class UserService implements UserManagerInterface {
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -59,5 +60,18 @@ public class UserManager implements UserManagerInterface {
     @CacheEvict(allEntries = true)
     public void deleteUserByLoginName(String username) {
         userMapper.deleteUserByLoginName(username);
+    }
+
+
+    public boolean authUser(String username, String password) {
+        String oldPassword = userMapper.getPasswordByUsername(username);
+        String passwordBCrypt = BCryptUtil.encode(password);
+        return passwordBCrypt.equals(oldPassword);
+
+    }
+
+    public void changePasswordByUsername(String username, String password) {
+        String passwordBCrypt = BCryptUtil.encode(password);
+        userMapper.changePasswordByUsername(username, passwordBCrypt);
     }
 }

@@ -2,33 +2,23 @@ package com.shop.controller.user;
 
 import com.shop.Utils.BCryptUtil;
 import com.shop.Utils.LoggingUtil;
-import com.shop.Utils.SHAUtil;
 import com.shop.model.domain.User;
-import com.shop.model.service.Manager.UserManager;
 import com.shop.model.service.RoleManagerInterface;
 import com.shop.model.service.UserManagerInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 /**
  * Created by 18240 on 2017/7/17.
  */
 @Controller
 public class UserController {
-    @Value("#{roleManager}")
+    @Value("#{roleService}")
     private RoleManagerInterface roleManagerInterface;
-    @Value("#{userManager}")
+    @Value("#{userService}")
     private UserManagerInterface userManagerInterface;
 
     @RequestMapping("register.do")

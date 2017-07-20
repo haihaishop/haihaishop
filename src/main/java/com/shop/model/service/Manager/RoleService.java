@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by 15764 on 2017-07-18.
  */
-@Service("roleManager")
+@Service("roleService")
 @Transactional
 @CacheConfig(cacheNames = {RoleManagerInterface.cacheName})
-public class RoleManager implements RoleManagerInterface{
+public class RoleService implements RoleManagerInterface{
     @Autowired
     RoleMapper roleMapper;
 
