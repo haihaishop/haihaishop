@@ -21,9 +21,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="password" class="col-sm-4 control-label">密码</label>
-            <div class="col-sm-4">
-                <input type="checkbox" class="form-control" name="rememberMe">记住我
+            <label for="password" class="col-sm-4 control-label"></label>
+            <div >
+                <input type="checkbox" name="rememberMe" value="rememberMe"> 记住我
             </div>
         </div>
         <div class="form-group">
