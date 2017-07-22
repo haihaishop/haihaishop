@@ -190,6 +190,12 @@
             <version>${spring.security.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.0.0.RELEASE</version>
+        </dependency>
+
     <!-- 上传组件包 -->
     <dependency>
       <groupId>commons-fileupload</groupId>

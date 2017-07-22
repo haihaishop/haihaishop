@@ -29,7 +29,7 @@
     <div class="container">
         <div class="navbar-header">
             <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
-            <a class="navbar-brand" href="/index">海海商城</a>
+            <a class="navbar-brand" href="/">海海商城</a>
         </div>
         <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
         <div id="navbar">
@@ -43,12 +43,12 @@
                 <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${empty user}">
+                <c:if test="${empty SPRING_SECURITY_CONTEXT}">
                     <li><a href="/register.do">注册</a></li>
                     <li><a href="/login.do">登陆</a></li>
                 </c:if>
-                <c:if test="${!empty user}">
-                    <li><a href="/information.do">${user.username}</a></li>
+                <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
+                    <li><a href="/information.do">${}</a></li>
                     <li><a href="/logout.do">注销</a></li>
                 </c:if>
                 <li><a href="#">联系客服</a></li>
@@ -57,6 +57,7 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+<div ></div>
 <div class="page-header">
 </div>
 <rapid:block name="content">
