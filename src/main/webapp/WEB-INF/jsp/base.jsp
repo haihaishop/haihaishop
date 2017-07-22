@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -47,7 +48,7 @@
                     <li><a href="/login.do">登陆</a></li>
                 </c:if>
                 <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
-                    <li><a href="/information.do">${}</a></li>
+                    <li><a href="/information.do">${SPRING_SECURITY_CONTEXT.authentication.name}</a></li>
                     <li><a href="/logout.do">注销</a></li>
                 </c:if>
                 <li><a href="#">联系客服</a></li>
