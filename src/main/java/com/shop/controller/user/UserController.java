@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -98,6 +99,23 @@ public class UserController {
         } else {
             return "redirect:/error";
         }
+    }
+
+    @RequestMapping("change_information.do")
+    public ModelAndView change_information(User user){
+        LoggingUtil.log(user.getSex());
+        userManagerInterface.changeInformationByUsername(user);
+        return new ModelAndView("redirect:/information.do");
+    }
+
+    @RequestMapping("authentication.do")
+    public ModelAndView authentication(User user,
+                                       @RequestParam("user_name")String user_name,
+                                       @RequestParam("image")String image){
+        user.setUsername(user_name);
+        LoggingUtil.log(image);
+        userManagerInterface.authentication(user);
+        return new ModelAndView("redirect:/information.do");
     }
 
     @RequestMapping("loginFailed.do")
