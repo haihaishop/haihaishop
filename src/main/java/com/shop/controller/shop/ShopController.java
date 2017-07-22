@@ -17,7 +17,9 @@ public class ShopController {
 
     @RequestMapping("/create")
     public ModelAndView createShop(){
-        return null;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("shop/shop_create");
+        return modelAndView;
     }
 
     private String getUserName(HttpServletRequest request){

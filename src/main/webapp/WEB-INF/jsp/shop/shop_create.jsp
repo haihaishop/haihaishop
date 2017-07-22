@@ -6,8 +6,8 @@
     <title>创建商铺</title>
 </rapid:override>
 <rapid:override name="content">
-    <form id="create_shop_form" class="form-horizontal" role="form" action="/create_shop_post.do" method="post">
-
+    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/create_shop_post.do" method="post">
+        <input id="input-id" type="file" class="file" data-preview-file-type="text">
     </form>
 </rapid:override>
 <rapid:override name="scripts">
@@ -26,10 +26,23 @@
     in a larger detailed modal dialog -->
     <!-- optionally if you need a theme like font awesome theme you can include
     it as mentioned below -->
-    <script src="path/to/themes/fa/theme.js"></script>
+    <script src="/themes/fa/theme.js"></script>
     <!-- optionally if you need translation for your language then include
     locale file as mentioned below -->
-    <script src="path/to/js/locales/<lang>.js"></script>
+    <script src="/js/locales/zh.js"></script>
+    <script type="text/javascript">
+        // initialize with defaults
+        $("#input-id").fileinput();
+
+        // with plugin options
+        $("#input-id").fileinput({showUpload:false,
+            language: 'zh', //设置语言
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            previewFileType:['jpg','png','gif','bmp','jpeg'],
+            allowedFileTypes:['jpg','png','gif','bmp','jpeg']});
+    </script>
+
 </rapid:override>>
 <%@include file="../base.jsp" %>
 
