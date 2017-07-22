@@ -46,6 +46,19 @@ public class UserController {
         return mav;
     }
 
+    @RequestMapping("information.do")
+    public ModelAndView information(HttpServletRequest request) {
+        SecurityContextImpl securityContext = (SecurityContextImpl) request
+                .getSession()
+                .getAttribute("SPRING_SECURITY_CONTEXT");
+        String username = securityContext.getAuthentication().getName();
+        User user = userManagerInterface.getUserByLoginName(username);
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("user",user);
+        mav.setViewName("user/information");
+        return mav;
+    }
+
     @RequestMapping("/user_register.do")
     public ModelAndView user_register(User user, RedirectAttributes model, @RequestParam("role") String roleName) {
         LoggingUtil.log(roleName);

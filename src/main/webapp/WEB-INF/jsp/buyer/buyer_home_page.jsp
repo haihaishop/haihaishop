@@ -5,12 +5,22 @@
   Time: 11:14
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ page isELIgnored="false" %>
 
-</body>
-</html>
+<rapid:block name="head">
+    <title>海海商城</title>
+</rapid:block>
+
+<rapid:block name="content">
+
+</rapid:block>
+
+
+<rapid:block name="scripts">
+</rapid:block>
+
+<%@include file="../base.jsp" %>
+

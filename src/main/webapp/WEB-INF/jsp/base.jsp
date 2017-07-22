@@ -24,12 +24,34 @@
 
 </head>
 <body>
-<div claas="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">海海商城</a>
+            <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
+            <a class="navbar-brand" href="/index">海海商城</a>
         </div>
+        <!-- Note that the .navbar-collapse and .collapse classes have been removed from the #navbar -->
+        <div id="navbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">主页</a></li>
+            </ul>
+            <form class="navbar-form navbar-left " action="/search">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="search" placeholder="零食">
+                </div>
+                <button type="submit" class="btn btn-default" action="/search">搜索</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login.do">登陆</a></li>
+                <li><a href="/register.do">注册</a></li>
+                <li><a href="/information.do">个人信息</a></li>
+                <li><a href="#">联系客服</a></li>
+                <li><a href="#">反馈建议</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
+</nav>
+<div class="page-header">
 </div>
 <rapid:block name="content">
 </rapid:block>
