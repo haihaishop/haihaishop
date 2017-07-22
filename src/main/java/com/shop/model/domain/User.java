@@ -13,7 +13,7 @@ public class User implements Serializable{
   private String name;
   private String id_card;
   private Long role_id;
-  private String sex;
+  private boolean sex;
   private String is_authentication;
   private Date create_date;
   private boolean has_store;
@@ -115,11 +115,11 @@ public class User implements Serializable{
     this.role_id = role_id;
   }
 
-  public String getSex() {
+  public boolean getSex() {
     return sex;
   }
 
-  public void setSex(String sex) {
+  public void setSex(boolean sex) {
     this.sex = sex;
   }
 
