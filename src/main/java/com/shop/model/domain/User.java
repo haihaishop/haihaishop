@@ -17,6 +17,15 @@ public class User implements Serializable{
   private String is_authentication;
   private Date create_date;
   private boolean has_store;
+  private String image;
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
 
   public boolean isHas_store() {
     return has_store;

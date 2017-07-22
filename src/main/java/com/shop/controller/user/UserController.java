@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Date;
 
@@ -82,6 +83,7 @@ public class UserController {
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
+        HttpSession session = request.getSession();
         String username = securityContext.getAuthentication().getName();
         int roleId = userManagerInterface.getRoleIdByUsername(username);
         String roleName = roleManagerInterface.getNameFromRoleId(roleId);
