@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
-
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ page isELIgnored="false" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,9 +43,14 @@
                 <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login.do">登陆</a></li>
-                <li><a href="/register.do">注册</a></li>
-                <li><a href="/information.do">个人信息</a></li>
+                <c:if test="${empty user}">
+                    <li><a href="/register.do">注册</a></li>
+                    <li><a href="/login.do">登陆</a></li>
+                </c:if>
+                <c:if test="${!empty user}">
+                    <li><a href="/information.do">${user.username}</a></li>
+                    <li><a href="/logout.do">注销</a></li>
+                </c:if>
                 <li><a href="#">联系客服</a></li>
                 <li><a href="#">反馈建议</a></li>
             </ul>
