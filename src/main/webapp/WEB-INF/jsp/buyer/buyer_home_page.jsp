@@ -15,7 +15,7 @@
 </rapid:block>
 
 <rapid:block name="content">
-
+<h3>买家，欢迎您</h3>
 </rapid:block>
 
 

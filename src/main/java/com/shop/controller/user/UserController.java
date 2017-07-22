@@ -54,22 +54,19 @@ public class UserController {
         String username = securityContext.getAuthentication().getName();
         User user = userManagerInterface.getUserByLoginName(username);
         ModelAndView mav = new ModelAndView();
-        mav.addObject("user",user);
+        mav.addObject("user", user);
         mav.setViewName("user/information");
         return mav;
     }
 
     @RequestMapping("/user_register.do")
-    public ModelAndView user_register(User user, RedirectAttributes model, @RequestParam("role") String roleName) {
-        LoggingUtil.log(roleName);
+    public ModelAndView user_register(User user, RedirectAttributes model) {
         if (userManagerInterface.hasUser(user.getUsername())) {
             LoggingUtil.log("hasUser");
             model.addFlashAttribute("hasUser", "用户已存在！");
             return new ModelAndView("user/register");
         } else {
-            Long tempRoleId = roleManagerInterface.getRoleIdFromName(roleName);
-            LoggingUtil.log(tempRoleId);
-            user.setRole_id(tempRoleId);
+            user.setRole_id((long) 5);
             user.setCreate_date(new Date());
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManagerInterface.addUser(user);
@@ -90,13 +87,12 @@ public class UserController {
             return new ModelAndView("redirect:/super_admin");
         } else if (roleName.equals("ROLE_ADMIN")) {
             return new ModelAndView("redirect:/admin");
-        } else if (roleName.equals("ROLE_SELL")) {
-            return new ModelAndView("redirect:/seller_home_page.do");
-        } else if (roleName.equals("ROLE_BUYER")) {
-            return new ModelAndView("redirect:/buyer_home_page.do");
+        } else if (roleName.equals("ROLE_USER")) {
+            return new ModelAndView("redirect:/");
         } else {
-            return new ModelAndView("redirect:/index");
+            return new ModelAndView("redirect:/error");
         }
+
     }
 
     @RequestMapping("loginFailed.do")

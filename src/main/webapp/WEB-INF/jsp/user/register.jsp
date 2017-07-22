@@ -53,16 +53,6 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
-                <div class="checkbox">
-                    <label>
-                        <input type="radio" name="role" value="ROLE_SELL">卖家
-                        <input type="radio" name="role" value="ROLE_BUYER">买家
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-sm-4 control-label"></label>
             <div class="col-sm-4">
                 <a href="/login.do"><p>已有账号，点此登陆</p></a>
