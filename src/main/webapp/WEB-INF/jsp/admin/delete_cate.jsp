@@ -5,9 +5,10 @@
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
-    <title>删除管理员</title>
+    <title>分类管理</title>
 </rapid:override>
-<rapid:override name="detail">
+<rapid:override name="cate_detail">
+
     <div class="modal fade" id="delcfmModel">
         <div class="modal-dialog">
             <div class="modal-content message_align">
@@ -37,26 +38,23 @@
         <div id="myAlert" class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <strong>恭喜！</strong>${success}。
-
         </div>
     </c:if>
     <div class="row">
-        <div class="center-block">
-            <h2>管理员信息：</h2>
-            <c:forEach items="${admins}" var="admin">
-                <div class="col-lg-8">
-                    <h3>管理员：${admin.username}</h3>
-                </div>
-                <div class="col-lg-4">
-                    <h3><a onclick="delete_user('/super_admin/delete_admin/${admin.username}')" >删除</a></h3>
-                </div>
-            </c:forEach>
-        </div>
+        <c:forEach items="${cates}" var="cate">
+            <div class="col-lg-4">
+                <h4>${cate.cate_name}</h4>
+            </div>
+            <div class="col-lg-8">
+                <h4><a class="btn btn-default" onclick="delete_cate('/admin/delete_cate/${cate.cate_id}')" >删除</a> </h4>
+            </div>
+        </c:forEach>
     </div>
+
 </rapid:override>
 <rapid:override name="scripts">
     <script type="text/javascript">
-        function delete_user(url) {
+        function delete_cate(url) {
             $('#url').val(url);//给会话中的隐藏属性URL赋值
             $('#delcfmModel').modal();
         }
@@ -66,4 +64,6 @@
         }
     </script>
 </rapid:override>
-<%@include file="homepage.jsp" %>
+<%@include file="cate_manage.jsp" %>
+
+

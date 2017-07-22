@@ -1,17 +1,27 @@
 package com.shop.model.domain;
 
+import java.util.Date;
+
 public class Goods {
   private Long goods_id;
   private String goods_name;
-  private Long solder_id;
+  private Long store_id;
   private Double price;
   private String info;
   private Long views_time;
-  private java.util.Date date;
+  private Date date;
   private Long sold_number;
   private Long count;
   private String picture;
   private Long promotion_id;
+
+  public Long getStore_id() {
+    return store_id;
+  }
+
+  public void setStore_id(Long store_id) {
+    this.store_id = store_id;
+  }
 
   public Long getGoods_id() {
     return goods_id;
@@ -27,14 +37,6 @@ public class Goods {
 
   public void setGoods_name(String goods_name) {
     this.goods_name = goods_name;
-  }
-
-  public Long getSolder_id() {
-    return solder_id;
-  }
-
-  public void setSolder_id(Long solder_id) {
-    this.solder_id = solder_id;
   }
 
   public Double getPrice() {
@@ -61,11 +63,11 @@ public class Goods {
     this.views_time = views_time;
   }
 
-  public java.util.Date getDate() {
+  public Date getDate() {
     return date;
   }
 
-  public void setDate(java.sql.Date date) {
+  public void setDate(Date date) {
     this.date = date;
   }
 

@@ -16,6 +16,15 @@ public class User implements Serializable{
   private String sex;
   private String is_authentication;
   private Date create_date;
+  private boolean has_store;
+
+  public boolean isHas_store() {
+    return has_store;
+  }
+
+  public void setHas_store(boolean has_store) {
+    this.has_store = has_store;
+  }
 
   public Long getUser_id() {
     return user_id;
