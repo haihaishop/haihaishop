@@ -7,6 +7,15 @@ public class Store {
   private String store_info;
   private java.sql.Timestamp create_date;
   private Long store_status;
+  private String image;
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
 
   public Long getStore_id() {
     return store_id;
