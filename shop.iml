@@ -17,6 +17,25 @@
           <file>file://$MODULE_DIR$/src/main/resources/views.xml</file>
           <file>file://$MODULE_DIR$/src/main/java/com/shop/config/ModuleConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/com/shop/config/MvcConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/shop/config/RootConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/shop/config/SecurityConfig.java</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-bindings-soap/2.3.1/cxf-rt-bindings-soap-2.3.1.jar!/META-INF/cxf/cxf-extension-soap.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-bindings-soap/2.3.1/cxf-rt-bindings-soap-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-bindings-xml/2.3.1/cxf-rt-bindings-xml-2.3.1.jar!/META-INF/cxf/cxf-extension-xml.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-bindings-xml/2.3.1/cxf-rt-bindings-xml-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-core/2.3.1/cxf-rt-core-2.3.1.jar!/META-INF/cxf/cxf.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-core/2.3.1/cxf-rt-core-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-databinding-jaxb/2.3.1/cxf-rt-databinding-jaxb-2.3.1.jar!/META-INF/cxf/java2wsbeans.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-databinding-jaxb/2.3.1/cxf-rt-databinding-jaxb-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-frontend-jaxws/2.3.1/cxf-rt-frontend-jaxws-2.3.1.jar!/META-INF/cxf/cxf-extension-jaxws.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-frontend-jaxws/2.3.1/cxf-rt-frontend-jaxws-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-transports-http/2.3.1/cxf-rt-transports-http-2.3.1.jar!/META-INF/cxf/cxf-extension-http.xml</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-transports-http/2.3.1/cxf-rt-transports-http-2.3.1.jar!/META-INF/cxf/cxf-servlet.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-transports-http/2.3.1/cxf-rt-transports-http-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-ws-addr/2.3.1/cxf-rt-ws-addr-2.3.1.jar!/META-INF/cxf/cxf-extension-addr.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-ws-addr/2.3.1/cxf-rt-ws-addr-2.3.1.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-ws-security/2.3.1/cxf-rt-ws-security-2.3.1.jar!/META-INF/cxf/cxf-extension-ws-security.xml</file>
+          <file>file://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-ws-security/2.3.1/cxf-rt-ws-security-2.3.1.jar</file>
         </fileset>
       </configuration>
     </facet>
