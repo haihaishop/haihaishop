@@ -45,7 +45,12 @@ public interface UserMapper {
     String getPasswordByUsername(@Param("username") String username);
 
     @Select("select role_id from user where username = #{username}")
-    int getRoleIdByUsername(@Param("username") String username);
+
+    int getRoleIdByUsername(@Param("username")String username);
+
+    @Update("update user set has_store=b'1' where username=#{username}")
+    void createStore(@Param("username")String username);
+
 
     @Update("update user set nick_name = #{nick_name}, email = #{email}, phone = #{phone}, sex=#{sex} where username = #{username}")
     void changeInformationByUsername(User user);
