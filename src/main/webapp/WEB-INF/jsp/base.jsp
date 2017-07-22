@@ -42,12 +42,12 @@
                 <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${empty user}">
+                <c:if test="${empty SPRING_SECURITY_CONTEXT}">
                     <li><a href="/register.do">注册</a></li>
                     <li><a href="/login.do">登陆</a></li>
                 </c:if>
-                <c:if test="${!empty user}">
-                    <li><a href="/information.do">${user.username}</a></li>
+                <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
+                    <li><a href="/information.do">${SPRING_SECURITY_CONTEXT.authentication.name}</a></li>
                     <li><a href="/logout.do">注销</a></li>
                 </c:if>
                 <li><a href="#">联系客服</a></li>
