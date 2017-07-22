@@ -11,10 +11,12 @@
             <label for="input-id" class="col-sm-4 control-label">商铺图片</label>
             <!---->
             <div class="col-sm-4">
-            <input id="input-id" type="file" multiple class="file col-sm-4 control-label">
+            <input id="input-id" type="file" multiple class="file col-sm-4 control-label" name="shop_image">
             </div>
         </div>
+        <input type="hidden" name="image" id="logo">
     </form>
+    <img class="img-circle" src="" id="img"/>
 </rapid:override>
 <rapid:override name="scripts">
     <!-- piexif.min.js is only needed if you wish to resize images before upload to restore exif data.
@@ -38,13 +40,23 @@
     <script src="/js/locales/zh.js"></script>
     <script type="text/javascript">
         // with plugin options
-            $("#input-id").fileinput({showUpload:false,
+            $("#input-id").fileinput({
                 language: 'zh', //设置语言
                 showCaption: false,//是否显示标题
+                showUpload:true,//是否显示上传按钮
+                dropZoneEnabled: false,//是否显示拖拽区域
+                uploadUrl: '${ctx}/shop_admin/uploadImage', //上传的地址
                 browseClass: "btn btn-primary", //按钮样式
                 previewFileType:['jpg','png','gif','bmp','jpeg'],
-                allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],
-                maxFileCount: 1
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
+                maxFileCount: 1 //最大文件数量
+            }).on("fileuploaded", function(e, data) {
+            var res = data.response;
+            alert(res.success);
+            $("#logo").attr("value", res.success);
+            $("#img").attr("src", res.success);
+
             });
 
     </script>
