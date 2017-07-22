@@ -66,7 +66,8 @@ public class UserController {
             model.addFlashAttribute("hasUser", "用户已存在！");
             return new ModelAndView("user/register");
         } else {
-            user.setRole_id((long) 5);
+            long roleId=roleManagerInterface.getRoleIdFromName("ROLE_USER");
+            user.setRole_id(roleId);
             user.setCreate_date(new Date());
             user.setPassword(BCryptUtil.encode(user.getPassword()));
             userManagerInterface.addUser(user);
