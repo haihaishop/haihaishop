@@ -1,11 +1,14 @@
-package com.my.db;
+package com.shop.model.domain;
 
-public class Store {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Store implements Serializable{
   private Long store_id;
   private Long user_id;
   private String store_name;
   private String store_info;
-  private java.sql.Timestamp create_date;
+  private Date create_date;
   private Long store_status;
   private String image;
 
@@ -49,11 +52,11 @@ public class Store {
     this.store_info = store_info;
   }
 
-  public java.sql.Timestamp getCreate_date() {
+  public Date getCreate_date() {
     return create_date;
   }
 
-  public void setCreate_date(java.sql.Timestamp create_date) {
+  public void setCreate_date(Date create_date) {
     this.create_date = create_date;
   }
 
