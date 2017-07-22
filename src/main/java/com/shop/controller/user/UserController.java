@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Date;
@@ -66,7 +67,7 @@ public class UserController {
             model.addFlashAttribute("hasUser", "用户已存在！");
             return new ModelAndView("user/register");
         } else {
-            long roleId=roleManagerInterface.getRoleIdFromName("ROLE_USER");
+            long roleId = roleManagerInterface.getRoleIdFromName("ROLE_USER");
             user.setRole_id(roleId);
             user.setCreate_date(new Date());
             user.setPassword(BCryptUtil.encode(user.getPassword()));
@@ -77,23 +78,24 @@ public class UserController {
     }
 
     @RequestMapping("/loginSuccess.do")
-    public ModelAndView loginSuccess(HttpServletRequest request) {
+    public String loginSuccess(HttpServletRequest request, RedirectAttributes model) {
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
         String username = securityContext.getAuthentication().getName();
         int roleId = userManagerInterface.getRoleIdByUsername(username);
         String roleName = roleManagerInterface.getNameFromRoleId(roleId);
+        User user = userManagerInterface.getUserByLoginName(username);
+        model.addFlashAttribute("user", user);
         if (roleName.equals("ROLE_SUPER")) {
-            return new ModelAndView("redirect:/super_admin");
+            return "redirect:/super_admin";
         } else if (roleName.equals("ROLE_ADMIN")) {
-            return new ModelAndView("redirect:/admin");
+            return "redirect:/admin";
         } else if (roleName.equals("ROLE_USER")) {
-            return new ModelAndView("redirect:/");
+            return "redirect:/";
         } else {
-            return new ModelAndView("redirect:/error");
+            return "redirect:/error";
         }
-
     }
 
     @RequestMapping("loginFailed.do")
