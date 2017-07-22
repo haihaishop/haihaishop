@@ -7,7 +7,13 @@
 </rapid:override>
 <rapid:override name="content">
     <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/create_shop_post.do" method="post">
-        <input id="input-id" type="file" class="file" data-preview-file-type="text">
+        <div class="form-group">
+            <label for="input-id" class="col-sm-4 control-label">商铺图片</label>
+            <!---->
+            <div class="col-sm-4">
+            <input id="input-id" type="file" multiple class="file col-sm-4 control-label">
+            </div>
+        </div>
     </form>
 </rapid:override>
 <rapid:override name="scripts">
@@ -31,16 +37,16 @@
     locale file as mentioned below -->
     <script src="/js/locales/zh.js"></script>
     <script type="text/javascript">
-        // initialize with defaults
-        $("#input-id").fileinput();
-
         // with plugin options
-        $("#input-id").fileinput({showUpload:false,
-            language: 'zh', //设置语言
-            showCaption: false,//是否显示标题
-            browseClass: "btn btn-primary", //按钮样式
-            previewFileType:['jpg','png','gif','bmp','jpeg'],
-            allowedFileTypes:['jpg','png','gif','bmp','jpeg']});
+            $("#input-id").fileinput({showUpload:false,
+                language: 'zh', //设置语言
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式
+                previewFileType:['jpg','png','gif','bmp','jpeg'],
+                allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],
+                maxFileCount: 1
+            });
+
     </script>
 
 </rapid:override>>

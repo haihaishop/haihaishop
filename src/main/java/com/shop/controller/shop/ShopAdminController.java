@@ -10,15 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/shop")
-public class ShopController {
+@RequestMapping("/shop_admin")
+public class ShopAdminController {
     @Autowired
     private UserManagerInterface userService;
 
     @RequestMapping("/create")
     public ModelAndView createShop(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("shop/shop_create");
+        modelAndView.setViewName("shop_admin/shop_create");
         return modelAndView;
     }
 
