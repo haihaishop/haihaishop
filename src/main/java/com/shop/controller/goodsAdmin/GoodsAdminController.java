@@ -105,4 +105,17 @@ public class GoodsAdminController {
         model.addFlashAttribute("success", "创建成功");
         return "redirect:/shop_admin/shop";
     }
+
+    @RequestMapping("/goods_edit/{goods_id}")
+    public ModelAndView goodsEdit(@PathVariable("goods_id")Long goodsId){
+        ModelAndView modelAndView = new ModelAndView();
+        Goods goods = goodsService.getGoodsById(goodsId);
+        List<Cate> cates = cateService.getAllCates();
+        List<Cate> goodsCates = goodsService.getAllCateByGoodsId(goodsId);
+        modelAndView.addObject("cates", cates);
+        modelAndView.addObject("goods", goods);
+        modelAndView.setViewName("goods/goods_admin/edit_goods");
+        return modelAndView;
+
+    }
 }
