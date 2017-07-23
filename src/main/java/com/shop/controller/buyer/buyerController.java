@@ -4,6 +4,7 @@ import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.service.CateManagerInterface;
 import com.shop.model.service.GoodsManageInterface;
+import org.apache.bcel.generic.MONITORENTER;
 import org.apache.commons.net.ftp.parser.MacOsPeterFTPEntryParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,14 @@ public class buyerController {
         List<Cate> cateList = cateManagerInterface.getAllCates();
         mav.addObject("cateList", cateList);
         mav.setViewName("buyer/buyer_home_page");
+        return mav;
+    }
+
+    @RequestMapping("goods_detail.do/{goods_id}")
+    public ModelAndView goods_detail(){
+        ModelAndView mav = new ModelAndView();
+        Goods goods;
+        mav.setViewName("goods/goods_detail");
         return mav;
     }
 }
