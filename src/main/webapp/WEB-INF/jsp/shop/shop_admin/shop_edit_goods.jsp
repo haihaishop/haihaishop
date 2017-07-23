@@ -33,10 +33,10 @@
                             <span ><p class="text-right">库存：${goods.count}</p> </span>
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a href="/shop_admin/goods_edit/#{goods.goods_id}">点击编辑</a>
+                                    <a href="/shop_admin/goods_edit/${goods.goods_id}">点击编辑</a>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="/shop_admin/goods_delete/#{goods.goods_id}">点击删除该商品</a>
+                                    <a href="/shop_admin/goods_delete/${goods.goods_id}">点击删除</a>
                                 </div>
                             </div>
                         </div>

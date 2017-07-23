@@ -40,7 +40,12 @@ public class GoodsService implements GoodsManageInterface{
     }
 
     @Cacheable(key = "#root.methodName+#root.args[0]")
-    public List<Cate> getAllCateByGoodsId(int goodsId) {
+    public List<Cate> getAllCateByGoodsId(Long goodsId) {
         return goodsMapper.getAllCateByGoodsId(goodsId);
+    }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
+    public Goods getGoodsById(Long goodsId) {
+        return goodsMapper.getGoodsById(goodsId);
     }
 }

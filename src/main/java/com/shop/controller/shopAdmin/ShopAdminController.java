@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -105,6 +106,18 @@ public class ShopAdminController {
         modelAndView.addObject("goodsList", goodsList);
         modelAndView.addObject("store", store);
         modelAndView.setViewName("shop/shop_admin/shop_home");
+        return modelAndView;
+    }
+
+    @RequestMapping("/{store_id}edit_goods")
+    public ModelAndView shop(HttpServletRequest request,
+                             @PathVariable("store_id")Long storeId){
+        ModelAndView modelAndView = new ModelAndView();
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        List<Goods> goodsList = goodsService.getGoodsByStoreId(storeId);
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("store", store);
+        modelAndView.setViewName("shop/shop_admin/shop_edit_goods");
         return modelAndView;
     }
 
