@@ -48,4 +48,5 @@ public interface UserMapper {
 
     @Update("update user set has_store=b'1' where username=#{username}")
     void createStore(@Param("username")String username);
+
 }

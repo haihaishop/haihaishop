@@ -19,4 +19,5 @@ public interface UserManagerInterface {
     void changePasswordByUsername(String username, String password);
     User getUserByLoginName(String username);
     public int getRoleIdByUsername(String username);
+    void createStore(String username);
 }
