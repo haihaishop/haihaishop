@@ -28,7 +28,7 @@ public class buyerController {
     private GoodsManageInterface goodsManagerInterface;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
-    public ModelAndView cateClick(@PathVariable("cate_id")int cateId){
+    public ModelAndView cateClick(@PathVariable("cate_id")Long cateId){
         ModelAndView mav = new ModelAndView();
         List<Cate> cateList = cateManagerInterface.getAllCates();
         List<Goods> goodsList = goodsManagerInterface.getAllGoodsByCateId(cateId);
@@ -48,9 +48,10 @@ public class buyerController {
     }
 
     @RequestMapping("goods_detail.do/{goods_id}")
-    public ModelAndView goods_detail(){
+    public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId){
         ModelAndView mav = new ModelAndView();
-        Goods goods;
+        Goods goods = goodsManagerInterface.getGoodsById(goodsId);
+        mav.addObject("goods",goods);
         mav.setViewName("goods/goods_detail");
         return mav;
     }

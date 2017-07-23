@@ -15,7 +15,23 @@
 </rapid:override>
 
 <rapid:override name="content">
-
+    <div class="container-fluid">
+        <div class="row">
+            <c:if test="${!empty goods}">
+                <div class="col-md-3 col-md-offset-1">
+                    <img src="${goods.picture}">
+                </div>
+                <div class="col-sm-6 col-sm-offset-1">
+                    <h3>${goods.goods_name}</h3><br>
+                    <h4>${goods.price}</h4>
+                    <p>${goods.info}</p>
+                    <p>${goods.views_time}</p>
+                    <p>${goods.sold_number}</p>
+                    <p>${goods.count}</p>
+                </div>
+            </c:if>
+        </div>
+    </div>
 </rapid:override>
 
 <rapid:override name="scripts">
