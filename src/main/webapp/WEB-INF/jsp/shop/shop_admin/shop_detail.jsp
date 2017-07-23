@@ -4,10 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ page isELIgnored="false" %>
 <rapid:override name="head">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <title>商铺详情</title>
 </rapid:override>
-<rapid:override name="content">
+<rapid:override name="shop_detail">
 
     <c:if test="${!empty warning}">
         <div id="myAlert" class="alert alert-warning">
@@ -37,42 +38,44 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div >
+    <div  class="row">
+        <div class="col-sm-8">
         <img src="${store.image}" class="img-circle center-block" height="200" width="200">
+        </div>
     </div>
     <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/change_shop_post" method="post">
         <input type="hidden" value="${store.store_id}" name="store_id">
         <div class="form-group">
-            <label for="shop_logo" class="col-sm-4 control-label">商铺图片</label>
-            <div class="col-sm-4">
-                <input id="shop_logo" type="file" multiple class="file col-sm-4 control-label" name="shop_image">
+            <label for="shop_logo" class="col-sm-2 control-label">商铺图片</label>
+            <div class="col-sm-2">
+                <input id="shop_logo" type="file" multiple class="file col-sm-2 control-label" name="shop_image">
             </div>
         </div>
         <input type="hidden" name="image" id="logo" value="${store.image}">
         <div class="form-group">
-            <label for="store_name" class="col-sm-4 control-label">商铺名称</label>
+            <label for="store_name" class="col-sm-2 control-label">商铺名称</label>
             <div class="col-sm-4">
-                <input type="text" class="col-sm-8 form-control" name="store_name"
+                <input type="text" class=" form-control" name="store_name"
                        value="${store.store_name}" id="store_name" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="store_info" class="col-sm-4 control-label">商铺简介</label>
+            <label for="store_info" class="col-sm-2 control-label">商铺简介</label>
             <div class="col-sm-4">
-                <textarea class="form-control col-sm-8" rows="3" name="store_info"
+                <textarea class="form-control " rows="3" name="store_info"
                           id="store_info"  required>${store.store_info}</textarea>
             </div>
         </div>
         <div class="form-group">
-            <label for="shop_logo" class="col-sm-4 control-label">是否开通</label>
+            <label for="shop_logo" class="col-sm-2 control-label">是否开通</label>
             <div class="col-sm-4">
                 <input id="store_status" type="checkbox"  class="form-control "
-                       name="store_status" <c:if test="${store.status == true}"> checked</c:if> value="1">
+                       name="store_status" <c:if test="${store.store_status == true}"> checked</c:if> value="1">
                 <input type="hidden" value="0" name="_store_status"/>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
+            <div class="col-sm-offset-3 col-sm-4">
                 <button type="submit" class="btn btn-default">提交</button>
             </div>
         </div>
@@ -105,7 +108,7 @@
             showCaption: false,//是否显示标题
             showUpload:true,//是否显示上传按钮
             dropZoneEnabled: false,//是否显示拖拽区域
-            uploadUrl: '${ctx}/shop_admin/uploadImage', //上传的地址
+            uploadUrl: '${ctx}/shop_admin/shopImage', //上传的地址
             browseClass: "btn btn-primary", //按钮样式
             previewFileType:['jpg','png','gif','bmp','jpeg'],
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
@@ -123,5 +126,5 @@
     </script>
 
 </rapid:override>>
-<%@include file="../base.jsp" %>
+<%@include file="shop_base.jsp" %>
 

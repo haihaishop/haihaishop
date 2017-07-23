@@ -3,7 +3,10 @@ package com.shop.controller.shopAdmin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shop.Utils.UserUtil;
+import com.shop.model.domain.Goods;
 import com.shop.model.domain.Store;
+import com.shop.model.domain.User;
+import com.shop.model.service.GoodsManageInterface;
 import com.shop.model.service.ShopManageInterface;
 import com.shop.model.service.UserManagerInterface;
 import org.apache.commons.io.FileUtils;
@@ -18,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.List;
 
 import static com.shop.Utils.UserUtil.getUserName;
 
@@ -29,15 +34,17 @@ public class ShopAdminController {
     private UserManagerInterface userService;
     @Autowired
     private ShopManageInterface shopService;
+    @Autowired
+    private GoodsManageInterface goodsService;
 
     @RequestMapping("/create")
     public ModelAndView createShop(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("shop_admin/shop_create");
+        modelAndView.setViewName("shop/shop_admin/shop_create");
         return modelAndView;
     }
 
-    @RequestMapping("uploadImage")
+    @RequestMapping("shopImage")
     @ResponseBody
     public JSONObject uploadImage(HttpServletRequest request,
                                   @RequestParam("shop_image")MultipartFile image){
@@ -74,6 +81,9 @@ public class ShopAdminController {
         else {
             shopService.addShop(store, getUserName(request));
             model.addFlashAttribute("success", "创建成功");
+            User user = userService.getUserByLoginName(getUserName(request));
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
             return "redirect:/shop_admin/detail";
         }
     }
@@ -81,15 +91,32 @@ public class ShopAdminController {
     @RequestMapping("/detail")
     public ModelAndView shopDetail(HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("shop_admin/shop_detail");
+        modelAndView.setViewName("shop/shop_admin/shop_detail");
         Store store = shopService.getStoreByUsername(getUserName(request));
         modelAndView.addObject("store", store);
         return modelAndView;
     }
 
+    @RequestMapping("/shop")
+    public ModelAndView shop(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        List<Goods> goodsList = goodsService.getGoodsByStoreId(store.getStore_id());
+        modelAndView.addObject("goodsList", goodsList);
+        modelAndView.addObject("store", store);
+        modelAndView.setViewName("shop/shop_admin/shop_home");
+        return modelAndView;
+    }
+
     @RequestMapping("/change_shop_post")
-    public String changeShopPost(Store store){
-        shopService.changeStore(store);
+    public String changeShopPost(Store store, RedirectAttributes model){
+        if (shopService.hasShop(store.getStore_name())){
+            model.addFlashAttribute("warning", "店铺已存在，请修改店铺名");
+        }
+        else {
+            shopService.changeStore(store);
+            model.addFlashAttribute("success", "修改成功！");
+        }
         return "redirect:/shop_admin/detail";
     }
 

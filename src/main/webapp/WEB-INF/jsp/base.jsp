@@ -49,6 +49,12 @@
                 </c:if>
                 <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
                     <li><a href="/information.do">${SPRING_SECURITY_CONTEXT.authentication.name}</a></li>
+                    <c:if test="${user.has_store == true}">
+                        <li><a href="/shop_admin/shop">我的店铺</a> </li>
+                    </c:if>
+                    <c:if test="${user.has_store == false}">
+                        <li><a href="/shop_admin/create">免费开店</a> </li>
+                    </c:if>
                     <li><a href="/logout.do">注销</a></li>
                 </c:if>
                 <li><a href="#">联系客服</a></li>
