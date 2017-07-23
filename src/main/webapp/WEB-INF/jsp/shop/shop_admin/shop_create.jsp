@@ -5,9 +5,9 @@
 <%@ page isELIgnored="false" %>
 <rapid:override name="head">
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <title>商铺详情</title>
+    <title>创建商铺</title>
 </rapid:override>
-<rapid:override name="content">
+<rapid:override name="shop_detail">
 
     <c:if test="${!empty warning}">
         <div id="myAlert" class="alert alert-warning">
@@ -37,42 +37,40 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div >
-        <img src="${store.image}" class="img-circle center-block" height="200" width="200">
-    </div>
-    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/change_shop_post" method="post">
-        <input type="hidden" value="${store.store_id}" name="store_id">
+
+    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/create_shop_post" method="post">
         <div class="form-group">
-            <label for="shop_logo" class="col-sm-4 control-label">商铺图片</label>
+            <label for="shop_logo" class="col-sm-2 control-label">商铺图片</label>
             <div class="col-sm-4">
-                <input id="shop_logo" type="file" multiple class="file col-sm-4 control-label" name="shop_image">
+            <input id="shop_logo" type="file" multiple class="file col-sm-4 control-label" name="shop_image">
             </div>
         </div>
         <input type="hidden" name="image" id="logo" value="${store.image}">
         <div class="form-group">
-            <label for="store_name" class="col-sm-4 control-label">商铺名称</label>
+            <label for="store_name" class="col-sm-2 control-label">商铺名称</label>
             <div class="col-sm-4">
-                <input type="text" class="col-sm-8 form-control" name="store_name"
-                       value="${store.store_name}" id="store_name" required>
+            <input type="text" class="col-sm-8 form-control" name="store_name"
+                   value="${store.store_name}" id="store_name" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="store_info" class="col-sm-4 control-label">商铺简介</label>
+            <label for="store_info" class="col-sm-2 control-label">商铺简介</label>
             <div class="col-sm-4">
-                <textarea class="form-control col-sm-8" rows="3" name="store_info"
+                <textarea class="form-control col-sm-4" rows="3" name="store_info"
                           id="store_info"  required>${store.store_info}</textarea>
             </div>
         </div>
         <div class="form-group">
-            <label for="shop_logo" class="col-sm-4 control-label">是否开通</label>
-            <div class="col-sm-4">
+            <label for="shop_logo" class="col-sm-4 control-label">是否立即开通</label>
+            <div class="col-sm-2">
                 <input id="store_status" type="checkbox"  class="form-control "
-                       name="store_status" <c:if test="${store.status == true}"> checked</c:if> value="1">
+                       name="store_status" value="1">
                 <input type="hidden" value="0" name="_store_status"/>
+
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
+            <div class="col-sm-offset-3 col-sm-4">
                 <button type="submit" class="btn btn-default">提交</button>
             </div>
         </div>
@@ -100,28 +98,26 @@
     <script src="/js/locales/zh.js"></script>
     <script type="text/javascript">
         // with plugin options
-        $("#shop_logo").fileinput({
-            language: 'zh', //设置语言
-            showCaption: false,//是否显示标题
-            showUpload:true,//是否显示上传按钮
-            dropZoneEnabled: false,//是否显示拖拽区域
-            uploadUrl: '${ctx}/shop_admin/uploadImage', //上传的地址
-            browseClass: "btn btn-primary", //按钮样式
-            previewFileType:['jpg','png','gif','bmp','jpeg'],
-            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-            allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
-            maxFileCount: 1, //最大文件数量
-            required:true
-        }).on("fileuploaded", function(e, data) {
+            $("#shop_logo").fileinput({
+                language: 'zh', //设置语言
+                showCaption: false,//是否显示标题
+                showUpload:true,//是否显示上传按钮
+                dropZoneEnabled: false,//是否显示拖拽区域
+                uploadUrl: '${ctx}/shop_admin/shopImage', //上传的地址
+                browseClass: "btn btn-primary", //按钮样式
+                previewFileType:['jpg','png','gif','bmp','jpeg'],
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
+                maxFileCount: 1, //最大文件数量
+            }).on("fileuploaded", function(e, data) {
             var res = data.response;
             $("#content").text(res.msg);
             $('#alert').modal();
             $("#logo").attr("value", res.path);
-        })
-        ;
+            })
+            ;
 
     </script>
 
 </rapid:override>>
-<%@include file="../base.jsp" %>
-
+<%@include file="shop_base.jsp" %>

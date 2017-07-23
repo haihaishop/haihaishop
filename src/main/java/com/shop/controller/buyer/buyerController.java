@@ -3,7 +3,7 @@ package com.shop.controller.buyer;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.service.CateManagerInterface;
-import com.shop.model.service.GoodsManagerInterface;
+import com.shop.model.service.GoodsManageInterface;
 import org.apache.commons.net.ftp.parser.MacOsPeterFTPEntryParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class buyerController {
     @Autowired
     private CateManagerInterface cateManagerInterface;
     @Autowired
-    private GoodsManagerInterface goodsManagerInterface;
+    private GoodsManageInterface goodsManagerInterface;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
     public ModelAndView cateClick(@PathVariable("cate_id")int cateId){

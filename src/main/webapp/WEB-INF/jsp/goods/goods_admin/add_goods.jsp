@@ -5,9 +5,9 @@
 <%@ page isELIgnored="false" %>
 <rapid:override name="head">
     <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <title>创建商铺</title>
+    <title>增加商品</title>
 </rapid:override>
-<rapid:override name="content">
+<rapid:override name="shop_detail">
 
     <c:if test="${!empty warning}">
         <div id="myAlert" class="alert alert-warning">
@@ -38,39 +38,64 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/create_shop_post" method="post">
+    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/${store_id}add_goods_post" method="post">
         <div class="form-group">
-            <label for="shop_logo" class="col-sm-4 control-label">商铺图片</label>
+            <label for="goods_logo" class="col-sm-2 control-label">商品图片</label>
             <div class="col-sm-4">
-            <input id="shop_logo" type="file" multiple class="file col-sm-4 control-label" name="shop_image">
+                <input id="goods_logo" type="file" multiple class="file col-sm-4 control-label" name="goods_image">
             </div>
         </div>
-        <input type="hidden" name="image" id="logo" value="${store.image}">
+        <input type="hidden" name="picture" id="logo">
         <div class="form-group">
-            <label for="store_name" class="col-sm-4 control-label">商铺名称</label>
+            <label for="goods_name" class="col-sm-2 control-label">商品名称</label>
             <div class="col-sm-4">
-            <input type="text" class="col-sm-8 form-control" name="store_name"
-                   value="${store.store_name}" id="store_name" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="store_info" class="col-sm-4 control-label">商铺简介</label>
-            <div class="col-sm-4">
-                <textarea class="form-control col-sm-8" rows="3" name="store_info"
-                          id="store_info"  required>${store.store_info}</textarea>
+                <input type="text" class="col-sm-8 form-control" name="goods_name"
+                        id="goods_name" required>
             </div>
         </div>
         <div class="form-group">
-            <label for="shop_logo" class="col-sm-4 control-label">是否立即开通</label>
+            <label for="goods_info" class="col-sm-2 control-label">商品简介</label>
             <div class="col-sm-4">
-                <input id="store_status" type="checkbox"  class="form-control "
-                       name="store_status" value="1">
-                <input type="hidden" value="0" name="_store_status"/>
+                <textarea class="form-control col-sm-8" rows="3" name="info"
+                          id="goods_info"  required></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">商品分类</label>
+            <div class="col-sm-4">
+            <c:forEach items="${cates}" var="cate">
+            <label class="checkbox-inline">
+                <input type="checkbox" name="cate[]" value="${cate.cate_id}">${cate.cate_name}
+            </label>
+            </c:forEach>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="goods_count" class="col-sm-2 control-label">商品库存（个、件、斤..）</label>
+            <div class="col-sm-4">
+                <input type="text" class="col-sm-8 form-control" name="count"
+                       id="goods_count" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="goods_price" class="col-sm-2 control-label">商品单价</label>
+            <div class="col-sm-4">
+                <input type="text" class="col-sm-8 form-control" name="price"
+                       id="goods_price" required>
+            </div>
+        </div>
+        <!--todo 增加优惠的活动-->
+        <!--
+        <div class="form-group">
+            <label for="goods_count" class="col-sm-2 control-label">商品优惠（请在下面选择）</label>
+            <div class="col-sm-4">
 
             </div>
         </div>
+        -->
+        <input type="hidden" name="store_id" value="${store_id}">
         <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
+            <div class="col-sm-offset-3 col-sm-4">
                 <button type="submit" class="btn btn-default">提交</button>
             </div>
         </div>
@@ -98,27 +123,27 @@
     <script src="/js/locales/zh.js"></script>
     <script type="text/javascript">
         // with plugin options
-            $("#shop_logo").fileinput({
-                language: 'zh', //设置语言
-                showCaption: false,//是否显示标题
-                showUpload:true,//是否显示上传按钮
-                dropZoneEnabled: false,//是否显示拖拽区域
-                uploadUrl: '${ctx}/shop_admin/uploadImage', //上传的地址
-                browseClass: "btn btn-primary", //按钮样式
-                previewFileType:['jpg','png','gif','bmp','jpeg'],
-                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
-                maxFileCount: 1, //最大文件数量
-            }).on("fileuploaded", function(e, data) {
+        $("#goods_logo").fileinput({
+            language: 'zh', //设置语言
+            showCaption: false,//是否显示标题
+            showUpload:true,//是否显示上传按钮
+            dropZoneEnabled: false,//是否显示拖拽区域
+            uploadUrl: '${ctx}/shop_admin/goodsImage', //上传的地址
+            browseClass: "btn btn-primary", //按钮样式
+            previewFileType:['jpg','png','gif','bmp','jpeg'],
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
+            maxFileCount: 1, //最大文件数量
+            required:true
+        }).on("fileuploaded", function(e, data) {
             var res = data.response;
             $("#content").text(res.msg);
             $('#alert').modal();
             $("#logo").attr("value", res.path);
-            })
-            ;
+        })
+        ;
 
     </script>
 
 </rapid:override>>
-<%@include file="../base.jsp" %>
-
+<%@include file="../../shop/shop_admin/shop_base.jsp" %>

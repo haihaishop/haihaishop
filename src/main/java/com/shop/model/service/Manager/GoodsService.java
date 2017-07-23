@@ -2,30 +2,44 @@ package com.shop.model.service.Manager;
 
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
-import com.shop.model.mapper.CateMapper;
-import com.shop.model.mapper.GoodsCateMapper;
 import com.shop.model.mapper.GoodsMapper;
-import com.shop.model.service.GoodsManagerInterface;
+import com.shop.model.service.GoodsManageInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by 18240 on 2017/7/23.
- */
-
-@Service("goodsManager")
+@Service("goodsService")
+@CacheConfig(cacheNames = {GoodsManageInterface.cacheName})
 @Transactional
-public class GoodsService implements GoodsManagerInterface{
-    @Autowired
-    private GoodsMapper goodsMapper;
+public class GoodsService implements GoodsManageInterface{
 
+    @Autowired
+    GoodsMapper goodsMapper;
+
+    @CacheEvict(allEntries = true)
+    public void addGoods(Goods goods, Long[] allCateId) {
+        Long goodsId = goodsMapper.addGoods(goods);
+        for (Long cateId:allCateId) {
+            goodsMapper.addCateToGoods(goodsId, cateId);
+        }
+    }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
+    public List<Goods> getGoodsByStoreId(Long storeId) {
+        return goodsMapper.getGoodsByStoreId(storeId);
+    }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public List<Goods> getAllGoodsByCateId(int cateId) {
         return goodsMapper.getAllGoodsByCateId(cateId);
     }
 
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public List<Cate> getAllCateByGoodsId(int goodsId) {
         return goodsMapper.getAllCateByGoodsId(goodsId);
     }

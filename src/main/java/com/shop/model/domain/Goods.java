@@ -1,8 +1,9 @@
 package com.shop.model.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Goods {
+public class Goods implements Serializable{
   private Long goods_id;
   private String goods_name;
   private Long store_id;

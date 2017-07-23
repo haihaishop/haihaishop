@@ -96,7 +96,7 @@ public class UserController {
         int roleId = userManagerInterface.getRoleIdByUsername(username);
         String roleName = roleManagerInterface.getNameFromRoleId(roleId);
         User user = userManagerInterface.getUserByLoginName(username);
-        model.addFlashAttribute("user", user);
+        session.setAttribute("user", user);
         if (roleName.equals("ROLE_SUPER")) {
             return "redirect:/super_admin";
         } else if (roleName.equals("ROLE_ADMIN")) {
