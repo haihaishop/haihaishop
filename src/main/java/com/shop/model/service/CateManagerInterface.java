@@ -13,5 +13,6 @@ public interface CateManagerInterface {
     Cate getCateById(Long cateId);
     void changeCateName(Cate cate);
     void deleteCate(Long cate_id);
+    int getCateIdByCateName(String cateName);
 
 }

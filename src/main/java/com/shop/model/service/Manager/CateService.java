@@ -41,10 +41,16 @@ public class CateService implements CateManagerInterface{
         return cateMapper.getCateById(cateId);
     }
 
+    @Cacheable(key = "#root.methodName+#root.args[0]")
+    public int getCateIdByCateName(String cateName) {
+        return cateMapper.getCateIdByCateName(cateName);
+    }
+
     @CacheEvict(allEntries = true)
     public void changeCateName(Cate cate) {
         cateMapper.changeCateName(cate);
     }
+
     @CacheEvict(allEntries = true)
     public void deleteCate(Long cate_id) {
         cateMapper.deleteCate(cate_id);

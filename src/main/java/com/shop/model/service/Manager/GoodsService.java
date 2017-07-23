@@ -1,5 +1,6 @@
 package com.shop.model.service.Manager;
 
+import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.mapper.GoodsMapper;
 import com.shop.model.service.GoodsManageInterface;
@@ -31,5 +32,13 @@ public class GoodsService implements GoodsManageInterface{
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public List<Goods> getGoodsByStoreId(Long storeId) {
         return goodsMapper.getGoodsByStoreId(storeId);
+    }
+
+    public List<Goods> getAllGoodsByCateId(int cateId) {
+        return goodsMapper.getAllGoodsByCateId(cateId);
+    }
+
+    public List<Cate> getAllCateByGoodsId(int goodsId) {
+        return goodsMapper.getAllCateByGoodsId(goodsId);
     }
 }

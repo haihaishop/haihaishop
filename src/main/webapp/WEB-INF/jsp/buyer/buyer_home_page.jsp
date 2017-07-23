@@ -10,17 +10,59 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page isELIgnored="false" %>
 
-<rapid:block name="head">
+<rapid:override name="head">
     <title>海海商城</title>
-</rapid:block>
+</rapid:override>
 
-<rapid:block name="content">
-<h3>买家，欢迎您</h3>
-</rapid:block>
-
-
-<rapid:block name="scripts">
-</rapid:block>
+<rapid:override name="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 col-sm-offset-1">
+                <h3 class="col-sm-offset-0">商品分类</h3>
+                <c:forEach items="${cateList}" var="cate">
+                    <a href="/buyer_home_page.do/${cate.cate_id}" class="list-group-item ">${cate.cate_name}</a>
+                </c:forEach>
+                </div>
+            <div class="col-md-6">
+                <div class="col-md-offset-1">
+                    <div class="input-group" style="width: 500px">
+                        <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">搜索</button>
+                    </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+                <br>
+                <c:forEach items="${goodsList}" var="goods">
+                    <a href="#" class="list-group-item">${goods.goods_name}</a>
+                </c:forEach>
+            </div>
+            <div class="col-md-2">
+                <h3>销量排行</h3>
+                <table class="table-striped" cellpadding="10">
+                    <thead>
+                    <tr>
+                        <th>店铺</th>
+                        <th>销量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Tanmay</td>
+                        <td>Bangalore</td>
+                    </tr>
+                    <tr>
+                        <td>Sachin</td>
+                        <td>Mumbai</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</rapid:override>
+<rapid:override name="scripts">
+</rapid:override>
 
 <%@include file="../base.jsp" %>
 
