@@ -64,7 +64,9 @@
             <label for="shop_logo" class="col-sm-4 control-label">是否立即开通</label>
             <div class="col-sm-4">
                 <input id="store_status" type="checkbox"  class="form-control "
-                       name="store_status" value="${store.store_status}">
+                       name="store_status" value="1">
+                <input type="hidden" value="0" name="_store_status"/>
+
             </div>
         </div>
         <div class="form-group">

@@ -91,4 +91,9 @@ public class UserService implements UserManagerInterface {
     public User getUserByLoginName(String username) {
         return userMapper.getUserByLoginName(username);
     }
+
+    @CacheEvict(allEntries = true)
+    public void createStore(String username) {
+        userMapper.createStore(username);
+    }
 }

@@ -4,6 +4,7 @@ import com.shop.model.domain.Store;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 public interface ShopMapper {
 
@@ -16,5 +17,9 @@ public interface ShopMapper {
 
     @Select("select * from store where user_id=#{user_id}")
     Store getStoreByUserId(@Param("user_id")Long userId);
+
+    @Update("update store set store_name=#{store_name}, store_info=#{store_info}, store_status=#{store_status}, image=#{image}" +
+            " where store_id=#{store_id}")
+    void changeStore(Store store);
 
 }

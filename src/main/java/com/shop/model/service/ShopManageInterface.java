@@ -8,4 +8,5 @@ public interface ShopManageInterface {
     void addShop(Store shop, String username);
     boolean hasShop(String shopName);
     Store getStoreByUsername(String username);
+    void changeStore(Store store);
 }
