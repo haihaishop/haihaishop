@@ -36,12 +36,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">主页</a></li>
             </ul>
-            <form class="navbar-form navbar-left " action="/search">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="search" placeholder="零食">
-                </div>
-                <button type="submit" class="btn btn-default" action="/search">搜索</button>
-            </form>
             <ul class="nav navbar-nav navbar-right">
                 <c:if test="${empty SPRING_SECURITY_CONTEXT}">
                     <li><a href="/register.do">注册</a></li>

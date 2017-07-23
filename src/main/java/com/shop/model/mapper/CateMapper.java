@@ -19,6 +19,9 @@ public interface CateMapper {
     @Select("select * from cate where cate_id=#{cate_id}")
     Cate getCateById(@Param("cate_id")Long cateId);
 
+    @Select("select cate-id from cate where cate_name=#{cate_name}")
+    int getCateIdByCateName(@Param("cate_name")String cateName);
+
     @Update("update cate set cate_name=#{cate_name} where cate_id=#{cate_id}")
     void changeCateName(Cate cate);
 
