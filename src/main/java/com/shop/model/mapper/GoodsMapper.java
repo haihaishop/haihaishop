@@ -32,5 +32,4 @@ public interface GoodsMapper {
 
     @Select("select * from goods where goods_id = #{goods_id}")
     Goods getGoodsById(@Param("goods_id")Long goodsId);
-
 }

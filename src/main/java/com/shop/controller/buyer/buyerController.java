@@ -4,6 +4,7 @@ import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.service.CateManagerInterface;
 import com.shop.model.service.GoodsManageInterface;
+import org.apache.bcel.generic.MONITORENTER;
 import org.apache.commons.net.ftp.parser.MacOsPeterFTPEntryParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class buyerController {
     private GoodsManageInterface goodsManagerInterface;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
-    public ModelAndView cateClick(@PathVariable("cate_id")int cateId){
+    public ModelAndView cateClick(@PathVariable("cate_id")Long cateId){
         ModelAndView mav = new ModelAndView();
         List<Cate> cateList = cateManagerInterface.getAllCates();
         List<Goods> goodsList = goodsManagerInterface.getAllGoodsByCateId(cateId);
@@ -43,6 +44,15 @@ public class buyerController {
         List<Cate> cateList = cateManagerInterface.getAllCates();
         mav.addObject("cateList", cateList);
         mav.setViewName("buyer/buyer_home_page");
+        return mav;
+    }
+
+    @RequestMapping("goods_detail.do/{goods_id}")
+    public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId){
+        ModelAndView mav = new ModelAndView();
+        Goods goods = goodsManagerInterface.getGoodsById(goodsId);
+        mav.addObject("goods",goods);
+        mav.setViewName("goods/goods_detail");
         return mav;
     }
 }
