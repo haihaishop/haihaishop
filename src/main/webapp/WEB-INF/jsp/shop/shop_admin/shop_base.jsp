@@ -29,6 +29,7 @@
     <ul class="nav nav-tabs nav-stacked">
         <li class="active"><a href="#">商品管理</a> </li>
         <li><a href="/shop_admin/${store.store_id}add_goods">增加商品</a></li>
+        <li><a href="/shop_admin/${store.store_id}edit_goods">管理商品</a></li>
     </ul>
 
 </div>
