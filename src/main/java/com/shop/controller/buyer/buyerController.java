@@ -27,7 +27,7 @@ public class buyerController {
     private GoodsManageInterface goodsManagerInterface;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
-    public ModelAndView cateClick(@PathVariable("cate_id")int cateId){
+    public ModelAndView cateClick(@PathVariable("cate_id")Long cateId){
         ModelAndView mav = new ModelAndView();
         List<Cate> cateList = cateManagerInterface.getAllCates();
         List<Goods> goodsList = goodsManagerInterface.getAllGoodsByCateId(cateId);
