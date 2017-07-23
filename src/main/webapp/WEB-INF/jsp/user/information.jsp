@@ -76,6 +76,7 @@
         <div class="form-group">
             <label for="user_image" class="col-sm-4 control-label">头像</label>
             <div class="col-sm-4">
+                <img src="${user.image}" height="200" width="160">
                 <input id="user_image" type="file" multiple class="file col-sm-4 control-label" name="user_image">
             </div>
         </div>

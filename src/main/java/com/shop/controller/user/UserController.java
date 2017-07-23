@@ -30,6 +30,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Date;
 
+import static com.shop.Utils.UserUtil.getUserName;
+
 /**
  * Created by 18240 on 2017/7/17.
  */
@@ -134,8 +136,7 @@ public class UserController {
     @RequestMapping("user_image")
     @ResponseBody
     public JSONObject user_image(HttpServletRequest request,
-                                 @RequestParam("user_image")MultipartFile image,
-                                 @RequestParam("user_name")String user_name){
+                                 @RequestParam("user_image")MultipartFile image){
         JSONObject json = new JSONObject();
         try {
             //获取文件后缀名
