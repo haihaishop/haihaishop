@@ -43,7 +43,7 @@
             <img src="${goods.picture}" class="img-responsive center-block" height="200" width="200">
         </div>
     </div>
-    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/${store_id}add_goods_post" method="post">
+    <form id="create_shop_form" enctype="multipart/form-data" class="form-horizontal" role="form" action="/shop_admin/edit_goods_post" method="post">
         <div class="form-group">
             <label for="goods_logo" class="col-sm-2 control-label">商品图片</label>
             <div class="col-sm-4">
@@ -70,7 +70,12 @@
             <div class="col-sm-4">
                 <c:forEach items="${cates}" var="cate">
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="cate[]" value="${cate.cate_id}">${cate.cate_name}
+                        <input type="checkbox" name="cate[]" value="${cate.cate_id}"
+                        <c:forEach  items="${goodsCates}" var="goodsCate">
+                            <c:if test="${goodsCate.cate_id == cate.cate_id}">
+                                checked
+                            </c:if>
+                        </c:forEach> > ${cate.cate_name}
                     </label>
                 </c:forEach>
             </div>

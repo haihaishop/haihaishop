@@ -112,10 +112,21 @@ public class GoodsAdminController {
         Goods goods = goodsService.getGoodsById(goodsId);
         List<Cate> cates = cateService.getAllCates();
         List<Cate> goodsCates = goodsService.getAllCateByGoodsId(goodsId);
+        for (Cate cate:goodsCates
+             ) {
+            LoggingUtil.log(cate.getCate_name());
+            LoggingUtil.log(cate.getCate_id());
+        }
         modelAndView.addObject("cates", cates);
         modelAndView.addObject("goods", goods);
+        modelAndView.addObject("goodsCates", goodsCates);
         modelAndView.setViewName("goods/goods_admin/edit_goods");
         return modelAndView;
+    }
 
+    @RequestMapping("/edit_goods_post")
+    public String editGoodsPost(Goods goods,
+                                RedirectAttributes model){
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.shop.model.service.Manager;
 
+import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.mapper.GoodsMapper;
@@ -23,9 +24,9 @@ public class GoodsService implements GoodsManageInterface{
 
     @CacheEvict(allEntries = true)
     public void addGoods(Goods goods, Long[] allCateId) {
-        Long goodsId = goodsMapper.addGoods(goods);
+        goodsMapper.addGoods(goods);
         for (Long cateId:allCateId) {
-            goodsMapper.addCateToGoods(goodsId, cateId);
+            goodsMapper.addCateToGoods(goods.getGoods_id(), cateId);
         }
     }
 
