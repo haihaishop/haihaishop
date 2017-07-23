@@ -75,6 +75,14 @@ public class UserService implements UserManagerInterface {
         userMapper.changePasswordByUsername(username, passwordBCrypt);
     }
 
+    public void changeInformationByUsername(User user) {
+        userMapper.changeInformationByUsername(user);
+    }
+
+    public void authentication(User user) {
+        userMapper.authentication(user);
+    }
+
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public int getRoleIdByUsername(String username) {
         return userMapper.getRoleIdByUsername(username);
