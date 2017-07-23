@@ -4,10 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 
-<rapid:block name="head">
+<rapid:override name="head">
+    <link href="/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <title>海海商城</title>
-</rapid:block>
-<rapid:block name="content">
+</rapid:override>
+<rapid:override name="content">
     <div style="margin-top: 80px;"></div>
     <p class="col-sm-5" style="color: #2aabd2;font-size: 30px;">基本信息</p></br></br></br>
     <form id="change_information_form" class="form-horizontal" role="form" action="/change_information.do"
@@ -73,28 +74,60 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="image" class="col-sm-4 control-label">头像</label></br>
-            <div class="col-sm-8">
-                <img width="150" height="200"
-                     src="/images/temp.jpg" alt="图片显示失败"></br>
-                <button id="upload_image_button" onblur="saveImageSrc()">上传</button>
-                <input type="hidden" id="image" name="image">
+            <label for="user_image" class="col-sm-4 control-label">头像</label>
+            <div class="col-sm-4">
+                <input id="user_image" type="file" multiple class="file col-sm-4 control-label" name="user_image">
             </div>
         </div>
+        <input type="hidden" name="image" id="image" value="${user.image}">
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 <button type="submit" class="btn btn-default">提交</button>
             </div>
         </div>
     </form>
-</rapid:block>
-<rapid:block name="scripts">
-<script type="text/javascript">
-function saveImageSrc() {
-    var imageSrc=$("img")[0].src;
-    $("#image")[0].value=imageSrc;
-    alert($("#image")[0].value);
-}
-</script>
-</rapid:block>
+</rapid:override>
+<rapid:override name="scripts">
+    <!-- piexif.min.js is only needed if you wish to resize images before upload to restore exif data.
+    This must be loaded before fileinput.min.js -->
+    <script src="/js/plugins/piexif.min.js" type="text/javascript"></script>
+    <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview.
+    This must be loaded before fileinput.min.js -->
+    <script src="/js/plugins/sortable.min.js" type="text/javascript"></script>
+    <!-- purify.min.js is only needed if you wish to purify HTML content in your preview for HTML files.
+    This must be loaded before fileinput.min.js -->
+    <script src="/js/plugins/purify.min.js" type="text/javascript"></script>
+    <!-- the main fileinput plugin file -->
+    <script src="/js/fileinput.min.js"></script>
+    <!-- bootstrap.js below is needed if you wish to zoom and view file content
+    in a larger detailed modal dialog -->
+    <!-- optionally if you need a theme like font awesome theme you can include
+    it as mentioned below -->
+    <script src="/themes/fa/theme.js"></script>
+    <!-- optionally if you need translation for your language then include
+    locale file as mentioned below -->
+    <script src="/js/locales/zh.js"></script>
+
+    <script type="text/javascript">
+        // with plugin options
+        $("#user_image").fileinput({
+            language: 'zh', //设置语言
+            showCaption: false,//是否显示标题
+            showUpload:true,//是否显示上传按钮
+            dropZoneEnabled: false,//是否显示拖拽区域
+            uploadUrl: '${ctx}/user_image', //上传的地址
+            browseClass: "btn btn-primary", //按钮样式
+            previewFileType:['jpg','png','gif','bmp','jpeg'],
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
+            maxFileCount: 1, //最大文件数量
+        }).on("fileuploaded", function(e, data) {
+            var res = data.response;
+            $("#content").text(res.msg);
+            $('#alert').modal();
+            $("#image").attr("value", res.path);
+        })
+        ;
+    </script>
+</rapid:override>
 <%@include file="../base.jsp" %>

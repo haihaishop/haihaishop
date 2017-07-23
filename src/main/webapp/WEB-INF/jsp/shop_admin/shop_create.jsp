@@ -107,7 +107,6 @@
                 previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
                 allowedFileExtensions:['jpg','png','gif','bmp','jpeg'],//接收的文件名后缀
                 maxFileCount: 1, //最大文件数量
-                required:true
             }).on("fileuploaded", function(e, data) {
             var res = data.response;
             $("#content").text(res.msg);

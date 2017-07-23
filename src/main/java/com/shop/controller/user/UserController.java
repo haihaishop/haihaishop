@@ -1,10 +1,12 @@
 package com.shop.controller.user;
 
+import com.alibaba.fastjson.JSONObject;
 import com.shop.Utils.BCryptUtil;
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.User;
 import com.shop.model.service.RoleManagerInterface;
 import com.shop.model.service.UserManagerInterface;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,12 +18,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.List;
 import java.util.Date;
 
@@ -124,5 +129,31 @@ public class UserController {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/login.do");
         return mav;
+    }
+
+    @RequestMapping("user_image")
+    @ResponseBody
+    public JSONObject user_image(HttpServletRequest request,
+                                 @RequestParam("user_image")MultipartFile image,
+                                 @RequestParam("user_name")String user_name){
+        JSONObject json = new JSONObject();
+        try {
+            //获取文件后缀名
+            String prefix = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf(".")+1);
+            //文件名是用户名，可以保证不会重复
+            String imageName = getUserName(request) +"." + prefix;
+            if (!image.isEmpty()) {
+                //文件保存路径: /static/images/upload/user_image/
+                String dir = request.getSession().getServletContext().getRealPath("/WEB-INF/static/images/upload/user_image");
+                FileUtils.writeByteArrayToFile(new File(dir, imageName), image.getBytes());
+                json.put("path", "/images/upload/user_image" + "\\" + imageName);//保存地址
+                json.put("msg","保存成功！");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            json.put("msg","保存失败，发生了未知错误..");
+        }
+        return json;
     }
 }
