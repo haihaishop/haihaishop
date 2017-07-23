@@ -25,7 +25,7 @@ public interface GoodsMapper {
     List<Goods> getGoodsByStoreId(Long storeId);
 
     @Select("select * from goods where goods_id in (select goods_id from goods_cate where cate_id = #{cate_id})")
-    List<Goods> getAllGoodsByCateId(@Param("cate_id")int cateId);
+    List<Goods> getAllGoodsByCateId(@Param("cate_id")Long cateId);
 
     @Select("select * from cate where cate_id in (select cate_id from goods_cate where goods_id = #{goods_id})")
     List<Cate> getAllCateByGoodsId(@Param("goods_id")Long goodsId);

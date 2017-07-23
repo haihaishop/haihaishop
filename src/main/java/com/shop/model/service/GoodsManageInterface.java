@@ -10,7 +10,7 @@ public interface GoodsManageInterface {
     public static String cacheName = "goods";
     void addGoods(Goods goods, Long[] allCateId);
     List<Goods> getGoodsByStoreId(Long storeId);
-    List<Goods> getAllGoodsByCateId(int cateId);
+    List<Goods> getAllGoodsByCateId(Long cateId);
     List<Cate> getAllCateByGoodsId(Long goodsId);
     Goods getGoodsById(Long goodsId);
 
