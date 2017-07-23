@@ -21,4 +21,5 @@ public interface UserManagerInterface {
     public int getRoleIdByUsername(String username);
     void changeInformationByUsername(User user);
     void authentication(User user);
+    void createStore(String username);
 }

@@ -9,7 +9,7 @@ public class Store implements Serializable{
   private String store_name;
   private String store_info;
   private Date create_date;
-  private Long store_status;
+  private boolean store_status;
   private String image;
 
   public String getImage() {
@@ -60,11 +60,11 @@ public class Store implements Serializable{
     this.create_date = create_date;
   }
 
-  public Long getStore_status() {
+  public boolean getStore_status() {
     return store_status;
   }
 
-  public void setStore_status(Long store_status) {
+  public void setStore_status(boolean store_status) {
     this.store_status = store_status;
   }
 }

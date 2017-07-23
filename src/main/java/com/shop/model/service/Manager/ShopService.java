@@ -5,6 +5,7 @@ import com.shop.model.domain.User;
 import com.shop.model.mapper.ShopMapper;
 import com.shop.model.mapper.UserMapper;
 import com.shop.model.service.ShopManageInterface;
+import com.shop.model.service.UserManagerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -20,11 +21,14 @@ public class ShopService implements ShopManageInterface{
     ShopMapper shopMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    UserManagerInterface userService;
 
     @CacheEvict(allEntries = true)
     public void addShop(Store shop, String username) {
        User user = userMapper.getUserByLoginName(username);
        shop.setUser_id(user.getUser_id());
+       userService.createStore(username);
        shopMapper.addStore(shop);
     }
 
@@ -39,5 +43,10 @@ public class ShopService implements ShopManageInterface{
         User user = userMapper.getUserByLoginName(username);
         Store store = shopMapper.getStoreByUserId(user.getUser_id());
         return store;
+    }
+
+    @CacheEvict(allEntries = true)
+    public void changeStore(Store store) {
+        shopMapper.changeStore(store);
     }
 }

@@ -2,6 +2,7 @@ package com.shop.controller.shopAdmin;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.shop.Utils.UserUtil;
 import com.shop.model.domain.Store;
 import com.shop.model.service.ShopManageInterface;
 import com.shop.model.service.UserManagerInterface;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+
+import static com.shop.Utils.UserUtil.getUserName;
 
 @Controller
 @RequestMapping("/shop_admin")
@@ -84,12 +87,10 @@ public class ShopAdminController {
         return modelAndView;
     }
 
-
-
-    private String getUserName(HttpServletRequest request){
-        SecurityContextImpl securityContext = (SecurityContextImpl) request
-                .getSession()
-                .getAttribute("SPRING_SECURITY_CONTEXT");
-        return securityContext.getAuthentication().getName();
+    @RequestMapping("/change_shop_post")
+    public String changeShopPost(Store store){
+        shopService.changeStore(store);
+        return "redirect:/shop_admin/detail";
     }
+
 }
