@@ -8,6 +8,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by 18240 on 2017/7/24.
  */
@@ -20,5 +22,10 @@ public class OrderService implements OrderManagerInterface{
 
     public void addShoppingCart(Order_form orderForm) {
         orderMapper.addShoppingCart(orderForm);
+    }
+
+    public List<Order_form> getAllOrderByUserId(Long userId) {
+        List<Order_form> orderList = orderMapper.getAllOrderByUserId(userId);
+        return orderList;
     }
 }
