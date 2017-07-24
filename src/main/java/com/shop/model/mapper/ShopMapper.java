@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.jms.annotation.JmsListener;
 
 public interface ShopMapper {
 
@@ -21,5 +22,8 @@ public interface ShopMapper {
     @Update("update store set store_name=#{store_name}, store_info=#{store_info}, store_status=#{store_status}, image=#{image}" +
             " where store_id=#{store_id}")
     void changeStore(Store store);
+
+    @Select("select * from store where store_id = #{store_id}")
+    Store getStoreByStoreId(Long storeId);
 
 }
