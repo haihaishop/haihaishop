@@ -34,7 +34,7 @@
                 </div><!-- /.col-lg-6 -->
                 <br>
                 <c:forEach items="${goodsList}" var="goods">
-                    <a href="#" class="list-group-item">${goods.goods_name}</a>
+                    <a href="/goods_detail.do/${goods.goods_id}" class="list-group-item">${goods.goods_name}</a>
                 </c:forEach>
             </div>
             <div class="col-md-2">
