@@ -1,9 +1,12 @@
 package com.shop.controller.buyer;
 
+import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
+import com.shop.model.domain.OrderGoods;
 import com.shop.model.domain.Order_form;
 import com.shop.model.service.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
@@ -14,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.management.MalformedObjectNameException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 18240 on 2017/7/20.
@@ -74,10 +79,31 @@ public class buyerController {
         String username = securityContext.getAuthentication().getName();
         Order_form orderForm = new Order_form();
         orderForm.setBuy_number(buyCount);
-        orderForm.setDate(new Date());
         orderForm.setGoods_id(goodsId);
+        orderForm.setUnit_price(goodsManagerInterface.getGoodsById(goodsId).getPrice());
         orderForm.setUser_id(userManagerInterface.getUserByLoginName(username).getUser_id());
         orderForm.setSolder_id(shopManageInterface.getStoreByStoreId(goodsManagerInterface.getGoodsById(goodsId).getStore_id()).getUser_id());
         orderManagerInterface.addShoppingCart(orderForm);
+    }
+
+    @RequestMapping("shopping_cart.do")
+    public ModelAndView shopping_cart(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        SecurityContextImpl securityContext = (SecurityContextImpl) request
+                .getSession()
+                .getAttribute("SPRING_SECURITY_CONTEXT");
+        String username = securityContext.getAuthentication().getName();
+        List<Order_form> orderLists = orderManagerInterface.getAllOrderByUserId(userManagerInterface.getUserByLoginName(username).getUser_id());
+        List<OrderGoods> orderGoods = new ArrayList<OrderGoods>();
+        for(int i = 0;i<orderLists.size();i++){
+            OrderGoods tempOrderGoods = new OrderGoods();
+            tempOrderGoods.setGoods(goodsManagerInterface.getGoodsById(orderLists.get(i).getGoods_id()));
+            tempOrderGoods.setOrder(orderLists.get(i));
+            orderGoods.add(tempOrderGoods);
+        }
+        LoggingUtil.log(orderGoods);
+        mav.addObject("orderGoodsList",orderGoods);
+        mav.setViewName("buyer/shopping_cart");
+        return mav;
     }
 }

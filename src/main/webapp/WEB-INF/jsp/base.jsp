@@ -51,6 +51,7 @@
                     </c:if>
                     <li><a href="/logout.do">注销</a></li>
                 </c:if>
+                <li><a href="/shopping_cart.do">购物车</a></li>
                 <li><a href="#">联系客服</a></li>
                 <li><a href="#">反馈建议</a></li>
             </ul>
