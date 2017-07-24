@@ -41,4 +41,8 @@ public interface GoodsMapper {
     @Delete("delete from goods where goods_id=#{goods_id}")
     void deleteGoods(@Param("goods_id")Long goodsId);
 
+    @Update("update goods set promotion_id=#{promotion_id} where goods_id=#{goods_id}")
+    void addPromoton(@Param("promotion_id")Long promotionId,
+                     @Param("goods_id")Long goods_id);
+
 }

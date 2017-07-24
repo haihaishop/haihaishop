@@ -112,11 +112,6 @@ public class GoodsAdminController {
         Goods goods = goodsService.getGoodsById(goodsId);
         List<Cate> cates = cateService.getAllCates();
         List<Cate> goodsCates = goodsService.getAllCateByGoodsId(goodsId);
-        for (Cate cate:goodsCates
-             ) {
-            LoggingUtil.log(cate.getCate_name());
-            LoggingUtil.log(cate.getCate_id());
-        }
         modelAndView.addObject("cates", cates);
         modelAndView.addObject("goods", goods);
         modelAndView.addObject("goodsCates", goodsCates);

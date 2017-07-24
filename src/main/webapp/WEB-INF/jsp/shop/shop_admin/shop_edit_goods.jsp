@@ -9,6 +9,24 @@
     <title>店铺详情</title>
 </rapid:override>
 <rapid:override name="shop_detail">
+    <div class="modal fade" id="delcfmModel">
+        <div class="modal-dialog">
+            <div class="modal-content message_align">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">提示信息</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您确认要删除吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" id="url"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <a  onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <div class="row">
         <c:forEach items="${goodsList}" var="goods">
             <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" href="#">
@@ -36,7 +54,7 @@
                                     <a href="/shop_admin/goods_edit/${goods.goods_id}">点击编辑</a>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="/shop_admin/goods_delete/${goods.goods_id}">点击删除</a>
+                                    <a onclick="delete_goods('/shop_admin/goods_delete/${goods.goods_id}')">点击删除</a>
                                 </div>
                             </div>
                         </div>
@@ -47,5 +65,15 @@
     </div>
 </rapid:override>
 <rapid:override name="scripts">
+    <script type="text/javascript">
+        function delete_goods(url) {
+            $('#url').val(url);//给会话中的隐藏属性URL赋值
+            $('#delcfmModel').modal();
+        }
+        function urlSubmit(){
+            var url=$.trim($("#url").val());//获取会话中的隐藏属性URL
+            window.location.href=url;
+        }
+    </script>
 </rapid:override>>
 <%@include file="shop_base.jsp" %>

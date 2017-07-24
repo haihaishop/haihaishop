@@ -32,6 +32,13 @@
         <li><a href="/shop_admin/${store.store_id}edit_goods">管理商品</a></li>
     </ul>
 
+    <hr>
+    <ul class="nav nav-tabs nav-stacked">
+        <li class="active"><a href="#">活动管理</a> </li>
+        <li><a href="/shop_admin/${store.store_id}add_promotion">增加活动</a></li>
+        <li><a href="/shop_admin/${store.store_id}edit_promotion">管理活动</a></li>
+    </ul>
+
 </div>
     <div class="col-sm-9">
         <rapid:block name="shop_detail">
