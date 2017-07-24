@@ -2,6 +2,7 @@ package com.shop.model.service;
 
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
+import com.shop.model.domain.Store;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface GoodsManageInterface {
     List<Goods> getAllGoodsByCateId(Long cateId);
     List<Cate> getAllCateByGoodsId(Long goodsId);
     Goods getGoodsById(Long goodsId);
+    void changeGoods(Goods goods, Long[] allCateId);
+    void deleteGoods(Long goodsId);
 
 }

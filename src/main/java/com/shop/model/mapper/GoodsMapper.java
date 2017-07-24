@@ -1,6 +1,7 @@
 package com.shop.model.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
@@ -29,5 +30,15 @@ public interface GoodsMapper {
 
     @Select("select * from goods where goods_id = #{goods_id}")
     Goods getGoodsById(@Param("goods_id")Long goodsId);
+
+    @Update("update goods set goods_name=#{goods_name},price=#{price},info=#{info},count=#{count},picture=#{picture} " +
+            "where goods_id=#{goods_id}")
+    void changeGoods(Goods goods);
+
+    @Delete("delete from goods_cate where goods_id=#{goods_id}")
+    void deleteGoodsAllCate(@Param("goods_id")Long goodsId);
+
+    @Delete("delete from goods where goods_id=#{goods_id}")
+    void deleteGoods(@Param("goods_id")Long goodsId);
 
 }

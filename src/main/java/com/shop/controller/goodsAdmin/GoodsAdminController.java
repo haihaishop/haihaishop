@@ -126,7 +126,18 @@ public class GoodsAdminController {
 
     @RequestMapping("/edit_goods_post")
     public String editGoodsPost(Goods goods,
-                                RedirectAttributes model){
-        return null;
+                                RedirectAttributes model,
+                                @RequestParam(value = "cate[]", required = false)Long[] allCateId){
+        goodsService.changeGoods(goods, allCateId);
+        model.addFlashAttribute("success", "修改成功");
+        return "redirect:/shop_admin/shop";
+    }
+
+    @RequestMapping("/goods_delete/{goods_id}")
+    public String  goodsDelete(@PathVariable("goods_id")Long goodsId,
+                                    RedirectAttributes model){
+        goodsService.deleteGoods(goodsId);
+        model.addFlashAttribute("success","删除成功");
+        return "redirect:/shop_admin/shop";
     }
 }
