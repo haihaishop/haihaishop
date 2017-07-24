@@ -54,5 +54,6 @@ public class CateService implements CateManagerInterface{
     @CacheEvict(allEntries = true)
     public void deleteCate(Long cate_id) {
         cateMapper.deleteCate(cate_id);
+        cateMapper.deleteCateFromGoodsCate(cate_id);
     }
 }
