@@ -39,6 +39,11 @@ public class ShopService implements ShopManageInterface{
     }
 
     @Cacheable(key = "#root.methodName+#root.args[0]")
+    public Store getStoreByStoreId(Long storeId) {
+        return shopMapper.getStoreByStoreId(storeId);
+    }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
     public Store getStoreByUsername(String username) {
         User user = userMapper.getUserByLoginName(username);
         Store store = shopMapper.getStoreByUserId(user.getUser_id());

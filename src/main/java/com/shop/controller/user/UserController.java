@@ -87,7 +87,7 @@ public class UserController {
     }
 
     @RequestMapping("/loginSuccess.do")
-    public String loginSuccess(HttpServletRequest request, RedirectAttributes model) {
+    public String loginSuccess(HttpServletRequest request) {
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
