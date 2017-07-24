@@ -1,9 +1,12 @@
 package com.shop.model.domain;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Promotion {
+public class Promotion implements Serializable{
   private Long promotion_id;
   private String name;
   private Long type;
@@ -12,8 +15,28 @@ public class Promotion {
   private Double cut;
   private Long buy;
   private Long give;
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private Date from_time;
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   private Date to_time;
+  private boolean is_all_site;
+  private Long store_id;
+
+  public Long getStore_id() {
+    return store_id;
+  }
+
+  public void setStore_id(Long store_id) {
+    this.store_id = store_id;
+  }
+
+  public boolean isIs_all_site() {
+    return is_all_site;
+  }
+
+  public void setIs_all_site(boolean is_all_site) {
+    this.is_all_site = is_all_site;
+  }
 
   public Long getPromotion_id() {
     return promotion_id;

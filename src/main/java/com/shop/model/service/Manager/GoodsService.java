@@ -3,6 +3,7 @@ package com.shop.model.service.Manager;
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
+import com.shop.model.domain.Store;
 import com.shop.model.mapper.GoodsMapper;
 import com.shop.model.service.GoodsManageInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,20 @@ public class GoodsService implements GoodsManageInterface{
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public Goods getGoodsById(Long goodsId) {
         return goodsMapper.getGoodsById(goodsId);
+    }
+
+    @CacheEvict(allEntries = true)
+    public void changeGoods(Goods goods, Long[] allCateId) {
+        goodsMapper.deleteGoodsAllCate(goods.getGoods_id());
+        goodsMapper.changeGoods(goods);
+        for (Long cateId:allCateId) {
+            goodsMapper.addCateToGoods(goods.getGoods_id(), cateId);
+        }
+    }
+
+    @CacheEvict(allEntries = true)
+    public void deleteGoods(Long goodsId) {
+        goodsMapper.deleteGoodsAllCate(goodsId);
+        goodsMapper.deleteGoods(goodsId);
     }
 }

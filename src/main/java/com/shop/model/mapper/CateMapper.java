@@ -27,4 +27,7 @@ public interface CateMapper {
 
     @Delete("delete from cate where cate_id=#{cate_id}")
     void deleteCate(Long cate_id);
+
+    @Delete("delete from goods_cate where cate_id=#{cate_id}")
+    void deleteCateFromGoodsCate(Long cate_id);
 }
