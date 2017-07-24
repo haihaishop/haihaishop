@@ -44,12 +44,12 @@ public class PromotionController {
         return modelAndView;
     }
 
-    @RequestMapping("/{store_id}add_promotion_post")
+    @RequestMapping("/add_promotion_post")
     public String addPromotionPost(Promotion promotion,
-                                   @RequestParam("goods[]")List<Long> goodsIdList,
+                                   @RequestParam(value = "goods[]",required = false)List<Long> goodsIdList,
                                    RedirectAttributes model){
         promotionService.addPromotion(promotion, goodsIdList);
-        //判断活动重复？
+        model.addFlashAttribute("success", "添加成功");
         return "redirect:/shop_admin/shop";
     }
 }
