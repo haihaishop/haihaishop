@@ -9,6 +9,7 @@ import com.shop.model.domain.Order_form;
 import com.shop.model.service.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,4 +120,5 @@ public class buyerController {
         mav.setViewName("buyer/shopping_cart");
         return mav;
     }
+
 }

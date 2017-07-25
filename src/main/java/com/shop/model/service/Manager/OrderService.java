@@ -28,4 +28,16 @@ public class OrderService implements OrderManagerInterface{
         List<Order_form> orderList = orderMapper.getAllOrderByUserId(userId);
         return orderList;
     }
+
+    public Order_form getOrderById(Long orderFormId) {
+        return orderMapper.getOrderById(orderFormId);
+    }
+
+    public void changePayState(boolean payState, Long orderId) {
+        orderMapper.changePayState(payState,orderId);
+    }
+
+    public void changePlaceState(boolean placeOrder, Long orderId) {
+        orderMapper.changePlaceState(placeOrder,orderId);
+    }
 }

@@ -4,6 +4,8 @@ import com.shop.model.domain.Order_form;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.security.access.method.P;
 
 import java.util.List;
 
@@ -19,4 +21,15 @@ public interface OrderMapper {
 
     @Select("select * from order_form where user_id = #{user_id} and pay_state = 0")
     List<Order_form> getAllOrderByUserId(@Param("user_id")Long UserId);
+
+    @Select("select * from order_form where order_form_id = #{order_form_id}")
+    Order_form getOrderById(Long orderFormId);
+
+    @Update("update order_form set pay_state = #{pay_state} where order_form_id = #{order_form_id}")
+    void changePayState(@Param("pay_state")boolean payState,
+                        @Param("order_form_id")Long orderId);
+
+    @Update("update order_form set place_order = #{place_order} where order_form_id = #{order_form_id}")
+    void changePlaceState(@Param("pay_state")boolean placeOrder,
+                        @Param("order_form_id")Long orderId);
 }

@@ -13,7 +13,7 @@ public class Order_form {
   private Long address_id;
   private String phone;
   private Date date;
-  private String pay_state;
+  private boolean pay_state;
   private String shipping_status;
 
   public Long getOrder_form_id() {
@@ -88,11 +88,11 @@ public class Order_form {
     this.date = date;
   }
 
-  public String getPay_state() {
+  public boolean getPay_state() {
     return pay_state;
   }
 
-  public void setPay_state(String pay_state) {
+  public void setPay_state(boolean pay_state) {
     this.pay_state = pay_state;
   }
 
