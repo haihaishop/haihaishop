@@ -12,4 +12,7 @@ public interface OrderManagerInterface {
 
     void addShoppingCart(Order_form orderForm);
     List<Order_form> getAllOrderByUserId(Long userId);
+    Order_form getOrderById(Long orderFormId);
+    void changePayState(boolean payState, Long orderId);
+    void changePlaceState(boolean placeOrder, Long orderId);
 }
