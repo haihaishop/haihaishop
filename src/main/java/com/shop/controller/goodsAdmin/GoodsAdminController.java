@@ -2,12 +2,10 @@ package com.shop.controller.goodsAdmin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shop.Utils.LoggingUtil;
-import com.shop.model.domain.Cate;
-import com.shop.model.domain.Goods;
-import com.shop.model.domain.Store;
-import com.shop.model.domain.User;
+import com.shop.model.domain.*;
 import com.shop.model.service.CateManagerInterface;
 import com.shop.model.service.GoodsManageInterface;
+import com.shop.model.service.PromotionManagerInterface;
 import com.shop.model.service.ShopManageInterface;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +39,8 @@ public class GoodsAdminController {
     CateManagerInterface cateService;
     @Autowired
     GoodsManageInterface goodsService;
+    @Autowired
+    PromotionManagerInterface promotionService;
 
     @RequestMapping("/{store_id}add_goods")
     public ModelAndView addGoods(@PathVariable("store_id")Long storeId,
@@ -49,6 +49,8 @@ public class GoodsAdminController {
         modelAndView.addObject("store_id", storeId);
         Store store = shopService.getStoreByUsername(getUserName(request));
         modelAndView.addObject("store", store);
+        List<Promotion> promotions = promotionService.getPromotions(storeId);
+        modelAndView.addObject("promotions", promotions);
         List<Cate> cates = cateService.getAllCates();
         modelAndView.addObject("cates", cates);
         modelAndView.setViewName("goods/goods_admin/add_goods");
@@ -107,7 +109,8 @@ public class GoodsAdminController {
     }
 
     @RequestMapping("/goods_edit/{goods_id}")
-    public ModelAndView goodsEdit(@PathVariable("goods_id")Long goodsId){
+    public ModelAndView goodsEdit(@PathVariable("goods_id")Long goodsId,
+                                  HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
         Goods goods = goodsService.getGoodsById(goodsId);
         List<Cate> cates = cateService.getAllCates();
@@ -115,6 +118,9 @@ public class GoodsAdminController {
         modelAndView.addObject("cates", cates);
         modelAndView.addObject("goods", goods);
         modelAndView.addObject("goodsCates", goodsCates);
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        List<Promotion> promotions = promotionService.getPromotions(store.getStore_id());
+        modelAndView.addObject("promotions", promotions);
         modelAndView.setViewName("goods/goods_admin/edit_goods");
         return modelAndView;
     }

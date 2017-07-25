@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface GoodsMapper {
 
-    @Insert("insert into goods(goods_name, store_id, price, info, date, count, picture)" +
-            " values (#{goods_name}, #{store_id}, #{price}, #{info}, #{date}, #{count}, #{picture})")
+    @Insert("insert into goods(goods_name, store_id, price, info, date, count, picture, promotion_id)" +
+            " values (#{goods_name}, #{store_id}, #{price}, #{info}, #{date}, #{count}, #{picture}, #{promotion_id})")
     @Options(keyProperty="goods_id", useGeneratedKeys=true )
     Long addGoods(Goods goods);
 
@@ -31,7 +31,7 @@ public interface GoodsMapper {
     @Select("select * from goods where goods_id = #{goods_id}")
     Goods getGoodsById(@Param("goods_id")Long goodsId);
 
-    @Update("update goods set goods_name=#{goods_name},price=#{price},info=#{info},count=#{count},picture=#{picture} " +
+    @Update("update goods set goods_name=#{goods_name},price=#{price},info=#{info},count=#{count},picture=#{picture},promotion_id=#{promotion_id} " +
             "where goods_id=#{goods_id}")
     void changeGoods(Goods goods);
 
@@ -42,7 +42,7 @@ public interface GoodsMapper {
     void deleteGoods(@Param("goods_id")Long goodsId);
 
     @Update("update goods set promotion_id=#{promotion_id} where goods_id=#{goods_id}")
-    void addPromoton(@Param("promotion_id")Long promotionId,
+    void addPromotion(@Param("promotion_id")Long promotionId,
                      @Param("goods_id")Long goods_id);
 
 }

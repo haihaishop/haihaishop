@@ -52,4 +52,49 @@ public class PromotionController {
         model.addFlashAttribute("success", "添加成功");
         return "redirect:/shop_admin/shop";
     }
+
+    @RequestMapping("/{store_id}edit_promotion")
+    public ModelAndView editPromotionPage(@PathVariable("store_id")Long storeId,
+                                      HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("shop/shop_admin/shop_edit_promotion");
+        List<Promotion> promotions = promotionService.getPromotionsByStoreId(storeId);
+        modelAndView.addObject("promotions", promotions);
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        modelAndView.addObject("store", store);
+        return modelAndView;
+    }
+
+    @RequestMapping("/{promotion_id}_edit_promotion")
+    public ModelAndView editPromotion(@PathVariable("promotion_id")Long promotionId,
+                                      HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        Promotion promotion = promotionService.getPromotionById(promotionId);
+        modelAndView.addObject("promotion", promotion);
+        List<Goods> goodsList = goodsService.getGoodsByStoreId(promotion.getStore_id());
+        modelAndView.addObject("allGoods", goodsList);
+        List<Goods> goodsPromotions = promotionService.getGoodsByPromotionId(promotionId);
+        modelAndView.addObject("goodsPromotions", goodsPromotions);
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        modelAndView.addObject("store", store);
+        modelAndView.setViewName("promotion/edit_promotion");
+        return modelAndView;
+    }
+
+    @RequestMapping("/edit_promotion_post")
+    public String editPromotionPost(Promotion promotion,
+                                    @RequestParam(value = "goods[]",required = false)List<Long> goodsIdList,
+                                    RedirectAttributes model){
+        promotionService.changePromotion(promotion, goodsIdList);
+        model.addFlashAttribute("success", "修改成功！");
+        return "redirect:/shop_admin/shop";
+    }
+
+    @RequestMapping("/{promotion_id}_delete_promotion")
+    public String deletePromotion(@PathVariable("promotion_id")Long promotionId,
+                                  RedirectAttributes model){
+        promotionService.deletePromotion(promotionId);
+        model.addFlashAttribute("success","删除成功!");
+        return "redirect:/shop_admin/shop";
+    }
 }
