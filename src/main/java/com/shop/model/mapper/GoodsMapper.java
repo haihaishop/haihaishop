@@ -19,10 +19,10 @@ public interface GoodsMapper {
     void addCateToGoods(@Param("goods_id")Long goodsId,
                         @Param("cate_id")Long cateId);
 
-    @Select("select * from goods where store_id=#{store_id}")
+    @Select("select * from goods where store_id=#{store_id} Order By sold_number,views_time Desc")
     List<Goods> getGoodsByStoreId(Long storeId);
 
-    @Select("select * from goods where goods_id in (select goods_id from goods_cate where cate_id = #{cate_id})")
+    @Select("select * from goods where goods_id in (select goods_id from goods_cate where cate_id = #{cate_id}) Order By sold_number,views_time Desc")
     List<Goods> getAllGoodsByCateId(@Param("cate_id")Long cateId);
 
     @Select("select * from cate where cate_id in (select cate_id from goods_cate where goods_id = #{goods_id})")
@@ -45,7 +45,13 @@ public interface GoodsMapper {
     void addPromotion(@Param("promotion_id")Long promotionId,
                      @Param("goods_id")Long goods_id);
 
-    @Update("update goods set views_time=views_time+1 where goods_id=goods_id")
-    void increaseViewsTime(Long goodsId);
+    @Update("update goods set views_time=views_time+1 where goods_id=#{goods_id}")
+    void increaseViewsTime(@Param("goods_id") Long goodsId);
+
+    @Select("select * from goods where goods_name like CONCAT('%','${goods_name}','%' )")
+    List<Goods> searchGoodsByName(@Param("goods_name")String goodsName);
+
+    @Select("select * from goods  Order By sold_number,views_time Desc")
+    List<Goods> getAllGoods();
 
 }

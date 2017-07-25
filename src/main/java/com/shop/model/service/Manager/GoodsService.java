@@ -37,7 +37,11 @@ public class GoodsService implements GoodsManageInterface{
         return goodsMapper.getGoodsByStoreId(storeId);
     }
 
-    @Cacheable(key = "#root.methodName+#root.args[0]+#root.args[1]+#root.args[2]")
+    public List<Goods> getGoodsByStoreId(Long storeId, int page, int rows) {
+        PageHelper.startPage(page, rows);
+        return goodsMapper.getGoodsByStoreId(storeId);
+    }
+
     public List<Goods> getAllGoodsByCateId(Long cateId, int page, int rows) {
         PageHelper.startPage(page, rows);
         return goodsMapper.getAllGoodsByCateId(cateId);
@@ -71,5 +75,16 @@ public class GoodsService implements GoodsManageInterface{
     @CacheEvict(allEntries = true)
     public void increaseViewsTime(Long goodsId) {
         goodsMapper.increaseViewsTime(goodsId);
+    }
+
+    public List<Goods> searchGoodsByName(String goodsName, int page, int rows) {
+        PageHelper.startPage(page, rows);
+        LoggingUtil.log(goodsName);
+        return goodsMapper.searchGoodsByName(goodsName);
+    }
+
+    public List<Goods> getAllGoods(int page, int rows) {
+        PageHelper.startPage(page, rows);
+        return goodsMapper.getAllGoods();
     }
 }

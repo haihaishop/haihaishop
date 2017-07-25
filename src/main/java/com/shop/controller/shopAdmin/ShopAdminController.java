@@ -2,6 +2,7 @@ package com.shop.controller.shopAdmin;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.shop.Utils.UserUtil;
 import com.shop.model.domain.Goods;
 import com.shop.model.domain.Store;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import static com.shop.Utils.UserUtil.getUserName;
@@ -80,6 +82,7 @@ public class ShopAdminController {
             return "redirect:/shop_admin/create";
         }
         else {
+            store.setCreate_date(new Date());
             shopService.addShop(store, getUserName(request));
             model.addFlashAttribute("success", "创建成功");
             User user = userService.getUserByLoginName(getUserName(request));
@@ -99,11 +102,15 @@ public class ShopAdminController {
     }
 
     @RequestMapping("/shop")
-    public ModelAndView shop(HttpServletRequest request){
+    public ModelAndView shop(HttpServletRequest request,
+                             @RequestParam(value = "page", required = false, defaultValue = "1")int page,
+                             @RequestParam(value = "rows", required = false, defaultValue = "18")int rows){
         ModelAndView modelAndView = new ModelAndView();
         Store store = shopService.getStoreByUsername(getUserName(request));
-        List<Goods> goodsList = goodsService.getGoodsByStoreId(store.getStore_id());
+        List<Goods> goodsList = goodsService.getGoodsByStoreId(store.getStore_id(), page, rows);
         modelAndView.addObject("goodsList", goodsList);
+        PageInfo<Goods> pageInfo =new  PageInfo<Goods>(goodsList);
+        modelAndView.addObject("pageInfo", pageInfo);
         modelAndView.addObject("store", store);
         modelAndView.setViewName("shop/shop_admin/shop_home");
         return modelAndView;
@@ -111,11 +118,15 @@ public class ShopAdminController {
 
     @RequestMapping("/{store_id}edit_goods")
     public ModelAndView shop(HttpServletRequest request,
-                             @PathVariable("store_id")Long storeId){
+                             @PathVariable("store_id")Long storeId,
+                             @RequestParam(value = "page", required = false, defaultValue = "1")int page,
+                             @RequestParam(value = "rows", required = false, defaultValue = "18")int rows){
         ModelAndView modelAndView = new ModelAndView();
         Store store = shopService.getStoreByUsername(getUserName(request));
-        List<Goods> goodsList = goodsService.getGoodsByStoreId(storeId);
+        List<Goods> goodsList = goodsService.getGoodsByStoreId(storeId, page, rows);
         modelAndView.addObject("goodsList", goodsList);
+        PageInfo<Goods> pageInfo =new  PageInfo<Goods>(goodsList);
+        modelAndView.addObject("pageInfo", pageInfo);
         modelAndView.addObject("store", store);
         modelAndView.setViewName("shop/shop_admin/shop_edit_goods");
         return modelAndView;

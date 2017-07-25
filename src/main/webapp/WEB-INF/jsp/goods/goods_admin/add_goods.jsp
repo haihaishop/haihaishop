@@ -91,7 +91,7 @@
                     <c:forEach items="${promotions}" var="promotion">
                         <option value="${promotion.promotion_id}">${promotion.name}</option>
                     </c:forEach>
-                    <option value="">没有优惠</option>
+                    <option value="" selected>没有优惠</option>
                 </select>
             </div>
         </div>

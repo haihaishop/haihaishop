@@ -53,21 +53,23 @@ public class buyerController {
         mav.addObject("goodsList",goodsList);
         mav.addObject("pageInfo", pageInfo);
         mav.addObject("cate_id", cateId);
-        LoggingUtil.log(pageInfo.getPageSize());
-        LoggingUtil.log(pageInfo.getStartRow());
-        LoggingUtil.log(pageInfo.getEndRow());
-        LoggingUtil.log(pageInfo.getPageNum());
-        LoggingUtil.log(pageInfo.getSize());
-        mav.setViewName("buyer/buyer_home_page");
+        mav.setViewName("goods/goods_show/buyer_home_page");
         return mav;
     }
 
     @RequestMapping("buyer_home_page.do")
-    public ModelAndView buyer_home_page(){
+    public ModelAndView buyer_home_page(
+            @RequestParam(value = "page", required = false, defaultValue = "1")int page,
+            @RequestParam(value = "rows", required = false, defaultValue = "20")int rows
+    ){
         ModelAndView mav = new ModelAndView();
         List<Cate> cateList = cateManagerInterface.getAllCates();
+        List<Goods> goodsList = goodsManagerInterface.getAllGoods(page, rows);
         mav.addObject("cateList", cateList);
-        mav.setViewName("buyer/buyer_home_page");
+        PageInfo<Goods> pageInfo =new  PageInfo<Goods>(goodsList);
+        mav.addObject("goodsList",goodsList);
+        mav.addObject("pageInfo", pageInfo);
+        mav.setViewName("goods/goods_show/buyer_home_page");
         return mav;
     }
 
@@ -119,4 +121,5 @@ public class buyerController {
         mav.setViewName("buyer/shopping_cart");
         return mav;
     }
+
 }
