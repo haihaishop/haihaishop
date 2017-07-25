@@ -33,8 +33,8 @@ public class OrderService implements OrderManagerInterface{
         return orderMapper.getOrderById(orderFormId);
     }
 
-    public void changePayState(boolean payState, Long orderId) {
-        orderMapper.changePayState(payState,orderId);
+    public void changePayState(boolean payState,Long addressId, Long userId) {
+        orderMapper.changePayState(payState,addressId,userId);
     }
 
     public void changePlaceState(boolean placeOrder, Long orderId) {

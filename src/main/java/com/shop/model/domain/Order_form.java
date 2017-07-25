@@ -14,7 +14,7 @@ public class Order_form {
   private String phone;
   private Date date;
   private boolean pay_state;
-  private String shipping_status;
+  private boolean shipping_status;
 
   public Long getOrder_form_id() {
     return order_form_id;
@@ -96,11 +96,11 @@ public class Order_form {
     this.pay_state = pay_state;
   }
 
-  public String getShipping_status() {
+  public boolean getShipping_status() {
     return shipping_status;
   }
 
-  public void setShipping_status(String shipping_status) {
+  public void setShipping_status(boolean shipping_status) {
     this.shipping_status = shipping_status;
   }
 }

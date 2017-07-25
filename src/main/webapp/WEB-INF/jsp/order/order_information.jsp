@@ -10,18 +10,57 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page isELIgnored="false" %>
 <rapid:override name="head">
-    <link href="/css/goods_show.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/css/goods_show.css" media="all" rel="stylesheet" type="text/css"/>
     <title>查看订单</title>
 </rapid:override>
 <rapid:override name="content">
     <div class="container-fluid">
-        <div class="row" style="background-color: gray">
+        <div class="row col-md-offset-2">
             <div class="col-md-1">订单号</div>
             <div class="col-md-4">商品</div>
-            <div class="col-md-1">地址</div>
-            <div class="col-md-1">总计</div>
+            <div class="col-md-2">地址</div>
+            <div class="col-md-1">状态</div>
             <div class="col-md-1">操作</div>
         </div>
+        <c:forEach items="${orderGoodsList}" var="orderGoods">
+            <input hidden class="buy_number" value=${orderGoods.order.buy_number}>
+            <input hidden class="unit_price" value=${orderGoods.order.unit_price}>
+            <input hidden class="order_id" value=${orderGoods.order.order_form_id}>
+            <div class="row form-inline col-md-offset-2">
+                <div class="col-md-1" style="top: 65px">
+                    <p class="form-group"><strong>${orderGoods.order.order_form_id}</strong></p>
+                </div>
+                <div class="col-md-4">
+                    <img src="${orderGoods.goods.picture}" style="width: 100px;height: 150px" class="form-group"
+                         alt="图片加载失败">
+                    <div class="form-group">
+                        <h4>${orderGoods.goods.goods_name}</h4>
+                        <p>${orderGoods.goods.info}</p>
+                    </div>
+                </div>
+                <div class="col-md-2" style="top: 65px">
+                    <p class="form-group">
+                            ${orderGoods.address.province}${orderGoods.address.city}${orderGoods.address.country}${orderGoods.address.detail_address}
+                    </p>
+                </div>
+                <c:if test="${orderGoods.order.shipping_status == true}">
+                    <div class="col-md-1" style="top: 65px">
+                        <p>已发货</p>
+                    </div>
+                    <div class="col-md-1" style="top: 65px">
+                        <button class="btn-danger">去评价</button>
+                    </div>
+                </c:if>
+                <c:if test="${orderGoods.order.shipping_status == false}">
+                    <div class="col-md-1" style="top: 30px">
+                        <p class="col-md-1">发货中</p>
+                    </div>
+                    <div class="col-md-1" style="top: 30px">
+                        <button class="btn">查看状态</button>
+                    </div>
+                </c:if>
+            </div>
+        </c:forEach>
     </div>
 </rapid:override>
 <rapid:override name="scripts">
