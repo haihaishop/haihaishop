@@ -11,27 +11,35 @@
 <rapid:override name="shop_detail">
 <div class="row">
     <c:forEach items="${goodsList}" var="goods">
-        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2" href="#">
+        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
             <div class="speical speical-default speical-radius" >
-                <a href="#">
-                <div class="shape">
-                    <div class="shape-text">
-                        极品
+                <a href="/shop_admin/goods_detail/${goods.goods_id}">
+                        <%--<div class="shape">--%>
+                        <%--<div class="shape-text">--%>
+                        <%--极品--%>
+                        <%--</div>--%>
+                        <%--</div>--%>
+                    <div class="speical-content">
+                        <h4 class="text-special-default">
+                                ${goods.goods_name}
+                        </h4>
+                        <p>
+                            <img class="img-responsive" style="height: 200px" src="${goods.picture}">
+                        </p>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>￥${goods.price}</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>${goods.views_time}人浏览过</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6"><p class="text-left">售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</p> </div>
+                            <div class="col-sm-6"><p class="text-left">库存：${goods.count}</p> </div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="speical-content">
-                    <h3 class="text-special-default">
-                        ${goods.goods_name}
-                    </h3>
-                    <p>
-                        <img class="img-responsive img-rounded" src="${goods.picture}">
-                    </p>
-                    <p>
-                        ￥${goods.price}元
-                    </p>
-                    <span ><p class="text-left">售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</p> </span>
-                    <span ><p class="text-right">库存：${goods.count}</p> </span>
-                </div>
                 </a>
             </div>
         </div>

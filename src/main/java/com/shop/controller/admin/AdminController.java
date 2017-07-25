@@ -2,7 +2,9 @@ package com.shop.controller.admin;
 
 
 import com.shop.model.domain.Cate;
+import com.shop.model.domain.Promotion;
 import com.shop.model.service.CateManagerInterface;
+import com.shop.model.service.PromotionManagerInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,8 @@ public class AdminController {
 
     @Autowired
     private CateManagerInterface cateManager;
+    @Autowired
+    private PromotionManagerInterface promotionService;
 
     @RequestMapping({"/", ""})
     public ModelAndView homePage(){
@@ -96,6 +100,59 @@ public class AdminController {
         cateManager.deleteCate(cate_id);
         model.addFlashAttribute("success", "删除成功！");
         return "redirect:/admin/delete_cate";
+    }
+
+    @RequestMapping("/promote_manage")
+    public String promotionManage(){
+        return "admin/promotion_manage";
+    }
+
+    @RequestMapping("/add_promotion")
+    public String addPromotion(){
+        return "admin/add_promotion";
+    }
+
+    @RequestMapping("/get_promotions")
+    public ModelAndView getPromotions(){
+        ModelAndView modelAndView = new ModelAndView();
+        List<Promotion> promotions = promotionService.getAllSitePromotions();
+        modelAndView.addObject("promotions", promotions);
+        modelAndView.setViewName("admin/get_promotions");
+        return modelAndView;
+    }
+
+    @RequestMapping("/add_promotion_post")
+    public String addPromotionPost(Promotion promotion,
+                                   RedirectAttributes model){
+        promotionService.addPromotion(promotion, null);
+        model.addFlashAttribute("success", "添加成功");
+        return "redirect:/admin/get_promotions";
+    }
+
+    @RequestMapping("/edit_promotion/{promotion_id}")
+    public ModelAndView editPromotion(@PathVariable("promotion_id")Long promotinId){
+        ModelAndView modelAndView = new ModelAndView();
+        Promotion promotion = promotionService.getPromotionById(promotinId);
+        modelAndView.addObject("promotion", promotion);
+        modelAndView.setViewName("admin/edit_promotion");
+        return modelAndView;
+    }
+
+    @RequestMapping("/edit_promotion_post")
+    public String editPromotionPost(Promotion promotion,
+                                    RedirectAttributes redirectAttributes){
+        promotionService.changePromotion(promotion, null);
+        redirectAttributes.addFlashAttribute("success", "修改成功！");
+        return "redirect:/admin/get_promotions";
+    }
+
+    @RequestMapping("/delete_promotion/{promotion_id}")
+    public String deletePromotion(@PathVariable("promotion_id")Long promotionId,
+                                  RedirectAttributes redirectAttributes){
+        promotionService.deletePromotion(promotionId);
+        redirectAttributes.addFlashAttribute("success", "删除成功！");
+        return "redirect:/admin/get_promotions";
+
     }
 
 }

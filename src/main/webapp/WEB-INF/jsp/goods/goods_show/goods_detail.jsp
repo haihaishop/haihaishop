@@ -11,6 +11,7 @@
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
     <title>商品详情</title>
 </rapid:override>
 

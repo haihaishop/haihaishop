@@ -75,6 +75,7 @@ public class UserService implements UserManagerInterface {
         userMapper.changePasswordByUsername(username, passwordBCrypt);
     }
 
+    @CacheEvict(allEntries = true)
     public void changeInformationByUsername(User user) {
         userMapper.changeInformationByUsername(user);
     }

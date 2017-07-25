@@ -11,6 +11,7 @@
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
+    <link href="/css/goods_show.css" media="all" rel="stylesheet" type="text/css" />
     <title>海海商城</title>
 </rapid:override>
 
@@ -22,7 +23,7 @@
                 <c:forEach items="${cateList}" var="cate">
                     <a href="/buyer_home_page.do/${cate.cate_id}" class="list-group-item ">${cate.cate_name}</a>
                 </c:forEach>
-                </div>
+            </div>
             <div class="col-md-6">
                 <div class="col-md-offset-1">
                     <div class="input-group" style="width: 500px">
@@ -33,9 +34,55 @@
                     </div><!-- /input-group -->
                 </div><!-- /.col-lg-6 -->
                 <br>
+                <div class="row">
                 <c:forEach items="${goodsList}" var="goods">
-                    <a href="/goods_detail.do/${goods.goods_id}" class="list-group-item">${goods.goods_name}</a>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+                        <div class="speical speical-default speical-radius" >
+                            <a href="/goods_detail.do/${goods.goods_id}">
+                                    <%--<div class="shape">--%>
+                                    <%--<div class="shape-text">--%>
+                                    <%--极品--%>
+                                    <%--</div>--%>
+                                    <%--</div>--%>
+                                <div class="speical-content">
+                                    <h4 class="text-special-default">
+                                            ${goods.goods_name}
+                                    </h4>
+                                    <p>
+                                        <img class="img-responsive" style="height: 200px" src="${goods.picture}">
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <p>￥${goods.price}</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p>${goods.views_time}人浏览过</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6"><p class="text-left">售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</p> </div>
+                                        <div class="col-sm-6"><p class="text-left">库存：${goods.count}</p> </div>
+                                    </div>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
                 </c:forEach>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-6">
+                        <ul class="pagination">
+                            <li><a href="/buyer_home_page.do/${cate_id}">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="col-md-2">
                 <h3>销量排行</h3>
