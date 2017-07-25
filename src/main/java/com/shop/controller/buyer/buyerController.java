@@ -1,5 +1,7 @@
 package com.shop.controller.buyer;
 
+import com.github.pagehelper.PageInfo;
+import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.domain.Order_form;
@@ -9,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.management.MalformedObjectNameException;
@@ -35,12 +38,22 @@ public class buyerController {
     private ShopManageInterface shopManageInterface;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
-    public ModelAndView cateClick(@PathVariable("cate_id")Long cateId){
+    public ModelAndView cateClick(@PathVariable("cate_id")Long cateId,
+                                  @RequestParam(value = "page", required = false, defaultValue = "1")int page,
+                                  @RequestParam(value = "rows", required = false, defaultValue = "20")int rows){
         ModelAndView mav = new ModelAndView();
         List<Cate> cateList = cateManagerInterface.getAllCates();
-        List<Goods> goodsList = goodsManagerInterface.getAllGoodsByCateId(cateId);
+        List<Goods> goodsList = goodsManagerInterface.getAllGoodsByCateId(cateId, page, rows);
         mav.addObject("cateList", cateList);
+        PageInfo<Goods> pageInfo =new  PageInfo<Goods>(goodsList);
         mav.addObject("goodsList",goodsList);
+        mav.addObject("pageInfo", pageInfo);
+        mav.addObject("cate_id", cateId);
+        LoggingUtil.log(pageInfo.getPageSize());
+        LoggingUtil.log(pageInfo.getStartRow());
+        LoggingUtil.log(pageInfo.getEndRow());
+        LoggingUtil.log(pageInfo.getPageNum());
+        LoggingUtil.log(pageInfo.getSize());
         mav.setViewName("buyer/buyer_home_page");
         return mav;
     }
@@ -58,6 +71,7 @@ public class buyerController {
     public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId){
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsManagerInterface.getGoodsById(goodsId);
+        goodsManagerInterface.increaseViewsTime(goodsId);
         mav.addObject("goods",goods);
         mav.setViewName("goods/goods_show/goods_detail");
         return mav;

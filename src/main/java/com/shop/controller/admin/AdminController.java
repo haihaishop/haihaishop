@@ -129,4 +129,30 @@ public class AdminController {
         return "redirect:/admin/get_promotions";
     }
 
+    @RequestMapping("/edit_promotion/{promotion_id}")
+    public ModelAndView editPromotion(@PathVariable("promotion_id")Long promotinId){
+        ModelAndView modelAndView = new ModelAndView();
+        Promotion promotion = promotionService.getPromotionById(promotinId);
+        modelAndView.addObject("promotion", promotion);
+        modelAndView.setViewName("admin/edit_promotion");
+        return modelAndView;
+    }
+
+    @RequestMapping("/edit_promotion_post")
+    public String editPromotionPost(Promotion promotion,
+                                    RedirectAttributes redirectAttributes){
+        promotionService.changePromotion(promotion, null);
+        redirectAttributes.addFlashAttribute("success", "修改成功！");
+        return "redirect:/admin/get_promotions";
+    }
+
+    @RequestMapping("/delete_promotion/{promotion_id}")
+    public String deletePromotion(@PathVariable("promotion_id")Long promotionId,
+                                  RedirectAttributes redirectAttributes){
+        promotionService.deletePromotion(promotionId);
+        redirectAttributes.addFlashAttribute("success", "删除成功！");
+        return "redirect:/admin/get_promotions";
+
+    }
+
 }

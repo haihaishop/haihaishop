@@ -141,4 +141,13 @@ public class GoodsAdminController {
         model.addFlashAttribute("success","删除成功");
         return "redirect:/shop_admin/shop";
     }
+
+    @RequestMapping("goods_detail/{goods_id}")
+    public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId){
+        ModelAndView mav = new ModelAndView();
+        Goods goods = goodsService.getGoodsById(goodsId);
+        mav.addObject("goods",goods);
+        mav.setViewName("goods/goods_show/goods_detail_admin");
+        return mav;
+    }
 }

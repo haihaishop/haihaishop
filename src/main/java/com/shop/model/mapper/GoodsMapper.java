@@ -45,4 +45,7 @@ public interface GoodsMapper {
     void addPromotion(@Param("promotion_id")Long promotionId,
                      @Param("goods_id")Long goods_id);
 
+    @Update("update goods set views_time=views_time+1 where goods_id=goods_id")
+    void increaseViewsTime(Long goodsId);
+
 }

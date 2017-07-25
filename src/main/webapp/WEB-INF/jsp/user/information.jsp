@@ -13,11 +13,20 @@
     <p class="col-sm-5" style="color: #2aabd2;font-size: 30px;">基本信息</p></br></br></br>
     <form id="change_information_form" class="form-horizontal" role="form" action="/change_information.do"
           method="post">
+        <div class="form-group">
+            <label for="user_image" class="col-sm-4 control-label">头像</label>
+            <div class="col-sm-4">
+                <img src="${user.image}" height="200" width="160">
+                <input id="user_image" type="file" multiple class="file col-sm-4 control-label" name="user_image">
+            </div>
+    </div>
+        <input type="hidden" name="image" id="image" value="${user.image}">
+        <input type="hidden" name="username" value="${user.username}">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="form-group">
             <label class="col-sm-4 control-label">用户名</label>
-            <div class="col-sm-1 control-label">
-                <input  readonly  unselectable="on"  id="username" name="username" value="${user.username}">
+            <div class="col-sm-4 control-label">
+                <input  disabled class="form-control" value="${user.username}">
             </div>
         </div>
         <div class="form-group">
@@ -30,10 +39,12 @@
         <div class="form-group">
             <label class="col-sm-4 control-label">性别</label>
             <div for="sex" class="col-sm-1 control-label">
-                <input type="radio" id="male" name="sex" value="0">男
+                <input type="radio" id="male" name="sex" value="0"
+                    <c:if test="${user.sex == false}">checked</c:if> >男
             </div>
             <div for="female" class="col-sm-1 control-label">
-                <input type="radio" id="female" name="sex" value="1">女
+                <input type="radio" id="female" name="sex" value="1"
+                       <c:if test="${user.sex == true}">checked</c:if> >女
             </div>
         </div>
         <div class="form-group">
@@ -73,14 +84,7 @@
                        name="id_card" value="${user.id_card}">
             </div>
         </div>
-        <div class="form-group">
-            <label for="user_image" class="col-sm-4 control-label">头像</label>
-            <div class="col-sm-4">
-                <img src="${user.image}" height="200" width="160">
-                <input id="user_image" type="file" multiple class="file col-sm-4 control-label" name="user_image">
-            </div>
-        </div>
-        <input type="hidden" name="image" id="image" value="${user.image}">
+
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
                 <button type="submit" class="btn btn-default">提交</button>

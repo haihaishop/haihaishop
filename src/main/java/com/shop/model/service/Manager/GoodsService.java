@@ -1,5 +1,6 @@
 package com.shop.model.service.Manager;
 
+import com.github.pagehelper.PageHelper;
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
@@ -36,8 +37,9 @@ public class GoodsService implements GoodsManageInterface{
         return goodsMapper.getGoodsByStoreId(storeId);
     }
 
-    @Cacheable(key = "#root.methodName+#root.args[0]")
-    public List<Goods> getAllGoodsByCateId(Long cateId) {
+    @Cacheable(key = "#root.methodName+#root.args[0]+#root.args[1]+#root.args[2]")
+    public List<Goods> getAllGoodsByCateId(Long cateId, int page, int rows) {
+        PageHelper.startPage(page, rows);
         return goodsMapper.getAllGoodsByCateId(cateId);
     }
 
@@ -64,5 +66,10 @@ public class GoodsService implements GoodsManageInterface{
     public void deleteGoods(Long goodsId) {
         goodsMapper.deleteGoodsAllCate(goodsId);
         goodsMapper.deleteGoods(goodsId);
+    }
+
+    @CacheEvict(allEntries = true)
+    public void increaseViewsTime(Long goodsId) {
+        goodsMapper.increaseViewsTime(goodsId);
     }
 }
