@@ -39,15 +39,14 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-1">
-
+            <div class="col-md-offset-1">
                 <div class="row">
                     <h2>商品详情</h2>
                     <c:if test="${!empty goods}">
-                        <div class="col-md-3 col-md-offset-2">
+                        <div class="col-md-3 col-md-offset-1">
                             <img src="${goods.picture}" alt="Loading Failed" width="200" height="300">
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <h3>名称：${goods.goods_name}</h3><br>
                             <h3>价格：${goods.price}</h3>
                             <p>简介：${goods.info}</p>
@@ -58,8 +57,8 @@
                     </c:if>
                 </div>
                 <div class="row">
-                    <div class="form-inline">
-                        <div class="col-md-2 col-sm-offset-5">
+                    <div class="form-inline  col-sm-offset-4">
+                        <div class="col-md-3">
                             <button class="form-control" onclick="decrease()">-</button>
                             <input id="buy_num" style="width: 30%" class="form-control" value="1">
                             <button class="form-control" onclick="increase()">+</button>
@@ -71,27 +70,29 @@
                         </div>
                     </div>
                 </div>
-                <h2>评价</h2>
-                <div class="row"></div>
+                <h2>买家</h2>
             </div>
-            <div class="col-sm-3">
+
+            <div class="col-md-2">
                 <div class="row">
-                    <h2 class="text-center">卖家信息</h2>
-                    <div class="col-sm-4 col-sm-offset-4">
+                    <h>卖家信息</h>
+                    <div class="col-sm-4 col-sm-offset-1">
                         <strong><h4>${store.store_name} <a href="/shop/${store.store_id}">进入店铺</a></h4></strong>
-                    <p class="text-left">掌柜：
-                        <c:if test="${empty solder.nick_name}">
-                            ${solder.username}
-                        </c:if>
-                        <c:if test="${!empty solder.nick_name}">
-                            ${solder.nick_name}
-                        </c:if>
-                    </p>
-                    <p><a href="/chat?toId=${solder.username}"> 和我联系</a></p>
+                        <p class="text-left">掌柜：
+                            <c:if test="${empty solder.nick_name}">
+                                ${solder.username}
+                            </c:if>
+                            <c:if test="${!empty solder.nick_name}">
+                                ${solder.nick_name}
+                            </c:if>
+                        </p>
+                        <p><a href="/chat?toId=${solder.username}"> 和我联系</a></p>
                     </div>
                 </div>
             </div>
         </div>
+        <h2>评价</h2>
+        <div class="row"></div>
     </div>
 </rapid:override>
 
