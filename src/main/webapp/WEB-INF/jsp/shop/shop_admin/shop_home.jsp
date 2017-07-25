@@ -10,6 +10,8 @@
 </rapid:override>
 <rapid:override name="shop_detail">
 <div class="row">
+    <c:if test="${!empty pageInfo}">
+    <c:if test="${pageInfo.pages != 0}">
     <c:forEach items="${goodsList}" var="goods">
         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
             <div class="speical speical-default speical-radius" >
@@ -26,24 +28,40 @@
                         <p>
                             <img class="img-responsive" style="height: 200px" src="${goods.picture}">
                         </p>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p>￥${goods.price}</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p>${goods.views_time}人浏览过</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6"><p class="text-left">售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</p> </div>
-                            <div class="col-sm-6"><p class="text-left">库存：${goods.count}</p> </div>
-                        </div>
+                        <p>￥${goods.price}</p>
+                        <p>${goods.views_time}人浏览过</p>
+                        <p class="text-left">
+                            售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</p>
+                        <p class="text-left">库存：${goods.count}</p>
 
                     </div>
                 </a>
             </div>
         </div>
     </c:forEach>
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-4">
+                <ul class="pagination">
+                    <li><a href="/shop_admin/shop?page=${pageInfo.prePage}&rows=${pageInfo.pageSize}">&laquo;</a></li>
+                    <c:forEach begin="0" end="${pageInfo.pages - 1}" var="pageNum">
+                        <li
+                                <c:if test="${pageInfo.pageNum == pageNum + 1}"> class="active" </c:if>>
+                            <a href="/shop_admin/shop?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}"
+                            >${pageNum+1}</a></li>
+                    </c:forEach>
+                    <li><a href="/shop_admin/shop?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </c:if>
+        <c:if test="${pageInfo.pages == 0}">
+            <h3>暂无数据！</h3>
+        </c:if>
+    </c:if>
+    <c:if test="${empty pageInfo}">
+        <h3>暂无数据！</h3>
+    </c:if>
 </div>
 </rapid:override>
 <rapid:override name="scripts">

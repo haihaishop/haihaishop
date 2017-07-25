@@ -22,4 +22,5 @@ public interface UserManagerInterface {
     void changeInformationByUsername(User user);
     void authentication(User user);
     void createStore(String username);
+    User getUserById(Long userId);
 }

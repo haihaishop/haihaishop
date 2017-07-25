@@ -10,6 +10,7 @@ import java.util.List;
 public interface GoodsManageInterface {
     public static String cacheName = "goods";
     void addGoods(Goods goods, Long[] allCateId);
+    List<Goods> getGoodsByStoreId(Long storeId, int page, int rows);
     List<Goods> getGoodsByStoreId(Long storeId);
     List<Goods> getAllGoodsByCateId(Long cateId, int page, int rows);
     List<Cate> getAllCateByGoodsId(Long goodsId);
@@ -17,5 +18,8 @@ public interface GoodsManageInterface {
     void changeGoods(Goods goods, Long[] allCateId);
     void deleteGoods(Long goodsId);
     void increaseViewsTime(Long goodsId);
+    List<Goods> searchGoodsByName(String goodsName, int page, int rows);
+    List<Goods> getAllGoods(int page, int rows);
+
 
 }

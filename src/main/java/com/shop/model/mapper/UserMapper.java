@@ -56,4 +56,7 @@ public interface UserMapper {
     @Update("update user set name = #{name}, id_card = #{id_card}, image = #{image} where username = #{username}")
     void authentication(User user);
 
+    @Select("select * from user where user_id=#{user_id}")
+    User getUserById(@Param("user_id")Long userId);
+
 }

@@ -1,4 +1,4 @@
-package com.shop.controller.goodsAdmin;
+package com.shop.controller.goods.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.shop.Utils.LoggingUtil;
@@ -143,10 +143,13 @@ public class GoodsAdminController {
     }
 
     @RequestMapping("goods_detail/{goods_id}")
-    public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId){
+    public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId,
+                                     HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsService.getGoodsById(goodsId);
         mav.addObject("goods",goods);
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        mav.addObject("store", store);
         mav.setViewName("goods/goods_show/goods_detail_admin");
         return mav;
     }
