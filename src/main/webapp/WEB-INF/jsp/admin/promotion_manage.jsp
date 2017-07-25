@@ -10,15 +10,14 @@
 <rapid:override name="detail">
     <div class="row">
         <div class="col-lg-2">
-            <ul class="nav nav-tabs nav-stacked">
-                <li><a href="/admin/add_cate">增加分类</a> </li>
-                <li><a href="/admin/delete_cate">删除分类</a> </li>
-                <li><a href="/admin/get_cates">查看/编辑分类</a> </li>
-            </ul>
 
+            <ul class="nav nav-tabs nav-stacked">
+                <li><a href="/admin/add_promotion">增加活动</a> </li>
+                <li><a href="/admin/get_promotions">查看/编辑活动</a> </li>
+            </ul>
         </div>
         <div class="col-lg-10">
-            <rapid:block name="cate_detail"/>
+            <rapid:block name="promotion_detail"/>
         </div>
     </div>
 </rapid:override>

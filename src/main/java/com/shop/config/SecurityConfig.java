@@ -83,7 +83,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         "/login.do",
                         "/",
                         "/user_register.do",
-                        "/themes/**");
+                        "/themes/**",
+                        "/buyer_home_page.do/**",
+                        "/goods_detail.do/**");
 
     }
 

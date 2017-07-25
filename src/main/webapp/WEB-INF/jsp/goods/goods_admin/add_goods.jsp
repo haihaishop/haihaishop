@@ -84,15 +84,17 @@
                        id="goods_price" required>
             </div>
         </div>
-        <!--todo 增加优惠的活动-->
-        <!--
         <div class="form-group">
             <label for="goods_count" class="col-sm-2 control-label">商品优惠（请在下面选择）</label>
             <div class="col-sm-4">
-
+                <select class="form-control col-sm-8" id="type" name="promotion_id">
+                    <c:forEach items="${promotions}" var="promotion">
+                        <option value="${promotion.promotion_id}">${promotion.name}</option>
+                    </c:forEach>
+                    <option value="">没有优惠</option>
+                </select>
             </div>
         </div>
-        -->
         <input type="hidden" name="store_id" value="${store_id}">
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-4">

@@ -2,10 +2,11 @@
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 <rapid:override name="head">
     <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-    <title>增加活动</title>
+    <title>修改活动</title>
 </rapid:override>
 <rapid:override name="shop_detail">
 
@@ -38,87 +39,114 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <form id="add_form" method="post" class="form-horizontal" action="/shop_admin/add_promotion_post" role="form">
+    <form id="add_form" method="post" class="form-horizontal" action="/shop_admin/edit_promotion_post" role="form">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="name">请输入活动名</label>
             <div class="col-sm-4">
-            <input type="text" class="form-control col-sm-8" id="name" name="name" placeholder="请输入名称" required>
+                <input type="text" class="form-control col-sm-8" id="name" name="name" placeholder="请输入名称"
+                       value="${promotion.name}" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label" for="type">请选择活动类型</label>
             <div class="col-sm-4">
-            <select class="form-control col-sm-8" id="type" name="type">
-                <option value="1" selected>打折</option>
-                <option value="2" >满减</option>
-                <option value="3" >几免几</option>
-            </select>
+                <select class="form-control col-sm-8" id="type" name="type">
+                    <option value="1" <c:if test="${promotion.type == 1}">selected</c:if> >打折</option>
+                    <option value="2" <c:if test="${promotion.type == 2}">selected</c:if>>满减</option>
+                    <option value="3" <c:if test="${promotion.type == 3}">selected</c:if>>几免几</option>
+                </select>
             </div>
         </div>
-        <div id="discount_div" class="form-group" >
+    <div id="discount_div" class="form-group" <c:if test="${promotion.type != 1}">style="display: none" </c:if> >
             <label class="col-sm-2 control-label" for="discount">请输入折扣</label>
             <div class="col-sm-4">
-            <input type="number" class="form-control col-sm-8" id="discount" name="discount" required>
+                <input type="number" class="form-control col-sm-8" id="discount" name="discount"
+                       <c:if test="${promotion.type == 1}">required </c:if>
+                value="${promotion.discount}">
             </div>
         </div>
-        <div id="full_div" class="form-group" style="display: none">
+        <div id="full_div" class="form-group" <c:if test="${promotion.type != 2}">style="display: none" </c:if>>
             <label class="col-sm-2 control-label" for="full">请输入满足价格（满几）</label>
             <div class="col-sm-4">
-            <input type="number" class="form-control col-sm-8" id="full" name="full" >
+                <input type="number" class="form-control col-sm-8" id="full" name="full" value="${promotion.full}"
+                       <c:if test="${promotion.type == 2}">required </c:if>>
             </div>
         </div>
-        <div id="cut_div" class="form-group" style="display: none">
+        <div id="cut_div" class="form-group" <c:if test="${promotion.type != 2}">style="display: none" </c:if>>
             <label class="col-sm-2 control-label" for="cut">请输入减少价格（减几）</label>
             <div class="col-sm-4">
-            <input type="number" class="form-control col-sm-8" id="cut" name="cut" >
+                <input type="number" class="form-control col-sm-8" id="cut" name="cut"
+                       value="${promotion.cut}"
+                       <c:if test="${promotion.type == 2}">required </c:if>>
             </div>
         </div>
-        <div id="buy_div" class="form-group" style="display: none">
+        <div id="buy_div" class="form-group" <c:if test="${promotion.type != 3}">style="display: none" </c:if>>
             <label class="col-sm-2 control-label" for="buy">请输入满足数量（满几）</label>
             <div class="col-sm-4">
-            <input type="number" class="form-control col-sm-8" id="buy" name="buy" >
+                <input type="number" class="form-control col-sm-8" id="buy" name="buy"
+                       value="${promotion.buy}"
+                       <c:if test="${promotion.type == 3}">required </c:if>>
             </div>
         </div>
-        <div id="give_div" class="form-group" style="display: none">
+        <div id="give_div" class="form-group" <c:if test="${promotion.type != 3}">style="display: none" </c:if>>
             <label class="col-sm-2 control-label" for="give">请输入减少数量（免几）</label>
             <div class="col-sm-4">
-            <input type="number" class="form-control col-sm-8" id="give" name="give" >
+                <input type="number" class="form-control col-sm-8" id="give" name="give"
+                       value="${promotion.give}"
+                       <c:if test="${promotion.type == 3}">required </c:if>>
             </div>
         </div>
 
         <div class="form-group">
             <label for="from_time" class="col-sm-2 control-label">开始日期</label>
-            <div class="input-group date form_datetime col-sm-4"  data-date-format="dd MM yyyy - HH:ii p" data-link-field="from_time">
-                <input class="form-control col-sm-8" size="16" type="text" value="" readonly>
+            <div class="input-group date form_datetime col-sm-4"
+                 data-date="<fmt:formatDate value='${promotion.from_time}' pattern='yyyy-MM-dd HH:mm:ss' />"
+                 data-date-format="dd MM yyyy - HH:ii p"
+                 data-link-field="from_time">
+                <input class="form-control col-sm-8" size="16" type="text"  readonly>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
             </div>
-            <input type="hidden" id="from_time" name="from_time" value="" /><br/>
+            <input type="hidden" id="from_time" name="from_time"
+                   value="<fmt:formatDate value='${promotion.from_time}' pattern='yyyy-MM-dd HH:mm:ss' />" /><br/>
         </div>
         <div class="form-group">
             <label for="from_time" class="col-sm-2 control-label">结束日期</label>
-            <div class="input-group date form_datetime col-sm-4"  data-date-format="dd MM yyyy - HH:ii p" data-link-field="to_time">
-                <input class="form-control col-sm-8" size="16" type="text" value="" readonly>
+            <div class="input-group date form_datetime col-sm-4"
+                 data-date="<fmt:formatDate value='${promotion.to_time}' pattern='yyyy-MM-dd HH:mm:ss' />"
+                 data-date-format="dd MM yyyy - HH:ii p"
+                 data-link-field="to_time">
+                <input class="form-control col-sm-8" size="16" type="text"  readonly>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
             </div>
-            <input type="hidden" id="to_time" name="to_time" value="" /><br/>
+            <input type="hidden" id="to_time" name="to_time"
+                   value="<fmt:formatDate value='${promotion.to_time}' pattern='yyyy-MM-dd HH:mm:ss' />" /><br/>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">参与活动的商品</label>
             <div class="col-sm-4">
                 <c:forEach items="${allGoods}" var="goods">
                     <label class="checkbox">
-                        <input type="checkbox" name="goods[]" value="${goods.goods_id}">${goods.goods_name}
+                        <input type="checkbox" name="goods[]" value="${goods.goods_id}"
+                        <c:forEach  items="${goodsPromotions}" var="goodsPromotion">
+                        <c:if test="${goodsPromotion.goods_id == goods.goods_id}">
+                               checked
+                        </c:if>
+                        </c:forEach>
+                        >${goods.goods_name}
                     </label>
                 </c:forEach>
             </div>
         </div>
-        <input type="hidden" value="${store_id}" name="store_id">
-        <input type="hidden" value="0" name="is_all_site">
+        <input type="hidden" value="${promotion.store_id}" name="store_id">
+        <input type="hidden" value="${promotion.is_all_site}" name="is_all_site">
+        <input type="hidden" value="${promotion.promotion_id}" name="promotion_id">
+        <div class="form-group">
         <div class="col-sm-offset-3 col-sm-4">
-            <button type="submit" class="btn btn-default">提交</button>
+            <button type="submit" class="btn btn-default">提交(不修改日期则使用之前的)</button>
         </div>
+    </div>
     </form>
 </rapid:override>
 <rapid:override name="scripts">
@@ -169,16 +197,16 @@
         });
     </script>
     <script type="text/javascript">
-    $(".form_datetime").datetimepicker({
-    language:  'zh-CN',
-    weekStart: 1,
-    todayBtn:  1,
-    autoclose: 1,
-    todayHighlight: 1,
-    startView: 2,
-    forceParse: 0,
-    showMeridian: 1
-    });
+        $(".form_datetime").datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
     </script>
 
 </rapid:override>>

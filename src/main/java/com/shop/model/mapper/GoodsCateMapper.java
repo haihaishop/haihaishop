@@ -2,6 +2,7 @@ package com.shop.model.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.security.access.method.P;
 
 /**
@@ -14,4 +15,5 @@ public interface GoodsCateMapper {
 
     @Select("select cate_id from goods_cate where goods_id = #{goods_id}")
     int getCateIdByGoodsId(@Param("goods_id")int goodsId);
+
 }
