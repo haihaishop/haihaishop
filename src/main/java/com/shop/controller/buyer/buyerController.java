@@ -2,10 +2,7 @@ package com.shop.controller.buyer;
 
 import com.github.pagehelper.PageInfo;
 import com.shop.Utils.LoggingUtil;
-import com.shop.model.domain.Cate;
-import com.shop.model.domain.Goods;
-import com.shop.model.domain.OrderGoods;
-import com.shop.model.domain.Order_form;
+import com.shop.model.domain.*;
 import com.shop.model.service.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +74,12 @@ public class buyerController {
     public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId){
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsManagerInterface.getGoodsById(goodsId);
-        goodsManagerInterface.increaseViewsTime(goodsId);
         mav.addObject("goods",goods);
+        Store store = shopManageInterface.getStoreByStoreId(goods.getStore_id());
+        mav.addObject("store", store);
+        User solder = userManagerInterface.getUserById(store.getUser_id());
+        mav.addObject("solder", solder);
+        goodsManagerInterface.increaseViewsTime(goodsId);
         mav.setViewName("goods/goods_show/goods_detail");
         return mav;
     }

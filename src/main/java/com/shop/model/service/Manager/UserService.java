@@ -97,4 +97,9 @@ public class UserService implements UserManagerInterface {
     public void createStore(String username) {
         userMapper.createStore(username);
     }
+
+    @Cacheable(key = "#root.methodName+#root.args[0]")
+    public User getUserById(Long userId) {
+        return userMapper.getUserById(userId);
+    }
 }
