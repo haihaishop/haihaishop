@@ -10,23 +10,29 @@
     <br>
     <input type="hidden" id="clientID" value="${clientId}">
     <input type="hidden" id="toID" value="${toId}">
+    <input type="hidden" id="theMessage">
 
     <div class="container">
         <div class="row form-group">
-            <div class="col-xs-12 col-md-offset-2 col-md-8 col-lg-8 col-lg-offset-2">
+            <div class="col-md-2 col-lg-2">
+                <ul class="chat_list">
+
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-offset-2 col-md-8 col-lg-8 col-lg-offset-2 " id="chat_content">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <span class="glyphicon glyphicon-comment"></span>与商家聊天
+                        <span class="glyphicon glyphicon-comment"></span>与买家聊天
                     </div>
                     <div class="panel-body body-panel">
                         <ul class="chat" id="chat">
                         </ul>
                     </div>
                     <div class="panel-footer clearfix">
-                        <textarea class="form-control" id="sendMsg" rows="3" cols="50"></textarea>
+                        <textarea class="form-control" id="sendMsg" rows="3"  cols="50"></textarea>
                         <span class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-xs-12"
                               style="margin-top: 10px">
-                        <button id='sendBtn' class="btn btn-warning btn-lg btn-block" id="btn-chat">发送</button>
+                        <button id='sendBtn' onclick="sendMessage()" class="btn btn-warning btn-lg btn-block" id="btn-chat">发送</button>
                     </span>
                     </div>
                 </div>
@@ -40,6 +46,7 @@
     <script type="text/javascript">
         var client;
         var clientID;
+        var toIds =[];
         $(window).on('beforeunload', function () {
             client = null;
             window.opener.document.getElementById("flag").value = "0";
@@ -55,6 +62,7 @@
                 var msgObj = jQuery.parseJSON(message.payloadString);
                 clientID = $('#clientID').val();
                 if (msgObj.to === clientID) {
+                    //if(msgObj.from in toIds);
                     $('#toID').val(msgObj.from);
                     $("#chat").append('<li class="left clearfix">\n' +
                         '            <div class="chat-body clearfix">\n' +
@@ -78,35 +86,42 @@
                 }
             });
             //});
-            $('#sendBtn').bind('click', function () {
-                clientID = $('#clientID').val();
-                var msg = {};
-                msg.from = clientID;
-                msg.to = $('#toID').val();
-                msg.body = $('#sendMsg').val();
-                $("#sendMsg").val("");
-                message = new Messaging.Message(JSON.stringify(msg));
-                message.destinationName = "topic";
-                client.send(message);
-                $("#chat").append('<li class="right clearfix">\n' +
-                    '            <div class="chat-body clearfix">\n' +
-                    '                <div class="header">\n' +
-                    '                    <strong class="pull-right primary-font">'
-                    +msg.from+
-                    '</strong>\n' +
-                    '                </div>\n' +
-                    '                <br/><p >' +
-                    msg.body +
-                    '                </p>\n' +
-                    '            </div>\n' +
-                    '        </li>');
-            });
         });
     </script>
     <script type="text/javascript">
         window.onunload = function () {
             client.disconnect();
         }
+    </script>
+    <script type="text/javascript">
+        function changeMessage() {
+            
+        }
+    </script>
+    <script type="text/javascript">
+        function sendMessage() {
+            clientID = $('#clientID').val();
+            var msg = {};
+            msg.from = clientID;
+            msg.to = $('#toID').val();
+            msg.body = $('#sendMsg').val();
+            $("#sendMsg").val("");
+            message = new Messaging.Message(JSON.stringify(msg));
+            message.destinationName = "topic";
+            client.send(message);
+            $("#chat").append('<li class="right clearfix">\n' +
+                '            <div class="chat-body clearfix">\n' +
+                '                <div class="header">\n' +
+                '                    <strong class="pull-right primary-font">'
+                +msg.from+
+                '</strong>\n' +
+                '                </div>\n' +
+                '                <br/><p >' +
+                msg.body +
+                '                </p>\n' +
+                '            </div>\n' +
+                '        </li>');
+        };
     </script>
 </rapid:override>>
 <%@include file="../base.jsp" %>
