@@ -78,7 +78,7 @@
                 <div class="row">
                     <h2 class="text-center">卖家信息</h2>
                     <div class="col-sm-4 col-sm-offset-4">
-                        <strong><h4>${store.store_name}</h4></strong>
+                        <strong><h4>${store.store_name} <a href="/shop/${store.store_id}">进入店铺</a></h4></strong>
                     <p class="text-left">掌柜：
                         <c:if test="${empty solder.nick_name}">
                             ${solder.username}

@@ -18,15 +18,16 @@
 <rapid:override name="content">
     <div class="container-fluid">
         <div class="row">
+            <h1 class="col-sm-offset-4">${store.store_name}</h1>
             <div class="col-md-2 col-sm-offset-1">
                 <h3 class="col-sm-offset-0">商品分类</h3>
                 <c:forEach items="${cateList}" var="cate">
-                    <a href="/buyer_home_page.do/${cate.cate_id}" class="list-group-item ">${cate.cate_name}</a>
+                    <a href="/shop/${store.store_id}/${cate.cate_id}" class="list-group-item ">${cate.cate_name}</a>
                 </c:forEach>
             </div>
             <div class="col-md-6">
                 <div class="col-md-offset-1">
-                    <form action="/search" role="form">
+                    <form action="/shop/${store.store_id}/search" role="form">
                     <div class="input-group" style="width: 500px">
                         <input type="text" class="form-control" name="word" value="${word}" required>
                         <span class="input-group-btn">
@@ -71,14 +72,14 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-4">
                             <ul class="pagination">
-                                <li><a href="/search?page=${pageInfo.prePage}&rows=${pageInfo.pageSize}&word=${word}">&laquo;</a></li>
+                                <li><a href="/shop/${store.store_id}/search?page=${pageInfo.prePage}&rows=${pageInfo.pageSize}&word=${word}">&laquo;</a></li>
                                 <c:forEach begin="0" end="${pageInfo.pages - 1}" var="pageNum">
                                     <li
                                             <c:if test="${pageInfo.pageNum == pageNum + 1}"> class="active" </c:if>>
-                                        <a href="/search?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&word=${word}"
+                                        <a href="/shop/${store.store_id}/search?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&word=${word}"
                                         >${pageNum+1}</a></li>
                                 </c:forEach>
-                                <li><a href="/search?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&word=${word}">&raquo;</a></li>
+                                <li><a href="/shop/${store.store_id}/search?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&word=${word}">&raquo;</a></li>
                             </ul>
                         </div>
                     </div>
@@ -90,6 +91,23 @@
                 <c:if test="${empty pageInfo}">
                     <h3>暂无数据！</h3>
                 </c:if>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <h2 class="text-center">卖家信息</h2>
+                    <div class="col-sm-4 col-sm-offset-4">
+                        <strong><h4>${store.store_name}</h4></strong>
+                        <p class="text-left">掌柜：
+                            <c:if test="${empty solder.nick_name}">
+                                ${solder.username}
+                            </c:if>
+                            <c:if test="${!empty solder.nick_name}">
+                                ${solder.nick_name}
+                            </c:if>
+                        </p>
+                        <p>和我联系</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

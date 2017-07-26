@@ -41,7 +41,7 @@
                     <c:if test="${pageInfo.pages != 0}">
                 <c:forEach items="${goodsList}" var="goods">
                     <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 " >
-                        <div class="speical speical-default speical-radius" style="height: 300px">
+                        <div class="speical speical-default speical-radius" style="height: 330px">
                             <a href="/goods_detail.do/${goods.goods_id}">
                                     <%--<div class="shape">--%>
                                     <%--<div class="shape-text">--%>
@@ -103,27 +103,6 @@
                     <h3>暂无数据！</h3>
                 </c:if>
 
-            </div>
-            <div class="col-md-2">
-                <h3>销量排行</h3>
-                <table class="table-striped" cellpadding="10">
-                    <thead>
-                    <tr>
-                        <th>店铺</th>
-                        <th>销量</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Tanmay</td>
-                        <td>Bangalore</td>
-                    </tr>
-                    <tr>
-                        <td>Sachin</td>
-                        <td>Mumbai</td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

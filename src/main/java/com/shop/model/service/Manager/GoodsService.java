@@ -87,4 +87,14 @@ public class GoodsService implements GoodsManageInterface{
         PageHelper.startPage(page, rows);
         return goodsMapper.getAllGoods();
     }
+
+    public List<Goods> getGoodsByStoreIdAndCateId(Long storeId, Long cateId, int page, int rows) {
+        PageHelper.startPage(page, rows);
+        return goodsMapper.getGoodsByStoreIdAndCateId(storeId, cateId);
+    }
+
+    public List<Goods> searchGoodsByNameAndStoreId(String goodsName, Long storeId, int page, int rows) {
+        PageHelper.startPage(page, rows);
+        return goodsMapper.searchGoodsByNameAndStoreId(goodsName, storeId);
+    }
 }

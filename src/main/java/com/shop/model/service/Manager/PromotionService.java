@@ -43,8 +43,8 @@ public class PromotionService implements PromotionManagerInterface{
     }
 
     @Cacheable(key = "#root.methodName+#root.args[0]")
-    public Promotion getPromotionById(Long promtionId) {
-        return promotionMapper.getPromotionById(promtionId);
+    public Promotion getPromotionById(Long promotionId) {
+        return promotionMapper.getPromotionById(promotionId);
     }
 
     @Cacheable(key = "#root.methodName+#root.args[0]")
