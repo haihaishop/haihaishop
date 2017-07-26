@@ -32,6 +32,10 @@ public class GoodsService implements GoodsManageInterface{
         }
     }
 
+    public void changeGoods(Goods goods) {
+        goodsMapper.changeGoods(goods);
+    }
+
     @Cacheable(key = "#root.methodName+#root.args[0]")
     public List<Goods> getGoodsByStoreId(Long storeId) {
         return goodsMapper.getGoodsByStoreId(storeId);
