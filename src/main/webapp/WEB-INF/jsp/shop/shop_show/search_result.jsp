@@ -18,7 +18,7 @@
 <rapid:override name="content">
     <div class="container-fluid">
         <div class="row">
-            <h1 class="col-sm-offset-4">${store.store_name}</h1>
+            <h1 class="text-center">${store.store_name}</h1>
             <div class="col-md-2 col-sm-offset-1">
                 <h3 class="col-sm-offset-0">商品分类</h3>
                 <c:forEach items="${cateList}" var="cate">
