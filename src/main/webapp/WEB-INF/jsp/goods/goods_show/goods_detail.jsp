@@ -87,7 +87,7 @@
                             ${solder.nick_name}
                         </c:if>
                     </p>
-                    <p>和我联系</p>
+                    <p><a href="/chat?toId=${solder.username}"> 和我联系</a></p>
                     </div>
                 </div>
             </div>

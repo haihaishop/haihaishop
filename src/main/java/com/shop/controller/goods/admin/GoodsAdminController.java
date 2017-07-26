@@ -153,4 +153,6 @@ public class GoodsAdminController {
         mav.setViewName("goods/goods_show/goods_detail_admin");
         return mav;
     }
+
+
 }

@@ -13,8 +13,8 @@
     <c:if test="${!empty pageInfo}">
     <c:if test="${pageInfo.pages != 0}">
     <c:forEach items="${goodsList}" var="goods">
-        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 " >
-            <div class="speical speical-default speical-radius" style="height: 300px">
+        <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 " >
+            <div class="speical speical-default speical-radius" style="height: 330px">
                 <a href="/shop_admin/goods_detail/${goods.goods_id}">
                         <%--<div class="shape">--%>
                         <%--<div class="shape-text">--%>

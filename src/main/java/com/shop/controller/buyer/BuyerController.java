@@ -2,6 +2,7 @@ package com.shop.controller.buyer;
 
 import com.github.pagehelper.PageInfo;
 import com.shop.Utils.LoggingUtil;
+import com.shop.Utils.UserUtil;
 import com.shop.model.domain.*;
 import com.shop.model.service.*;
 import org.apache.ibatis.annotations.Param;
@@ -72,10 +73,13 @@ public class BuyerController {
     }
 
     @RequestMapping("goods_detail.do/{goods_id}")
-    public ModelAndView goods_detail(@PathVariable("goods_id") Long goodsId) {
+    public ModelAndView goods_detail(@PathVariable("goods_id")Long goodsId,
+                                     HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsManagerInterface.getGoodsById(goodsId);
-        mav.addObject("goods", goods);
+        User user = userManagerInterface.getUserByLoginName(UserUtil.getUserName(request));
+        mav.addObject("user",user);
+        mav.addObject("goods",goods);
         Store store = shopManageInterface.getStoreByStoreId(goods.getStore_id());
         mav.addObject("store", store);
         User solder = userManagerInterface.getUserById(store.getUser_id());
