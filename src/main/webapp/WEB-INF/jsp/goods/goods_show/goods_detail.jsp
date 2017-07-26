@@ -39,7 +39,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-offset-1">
+            <div class="col-md-offset-1 col-md-8">
                 <div class="row">
                     <h2>商品详情</h2>
                     <c:if test="${!empty goods}">
@@ -70,13 +70,13 @@
                         </div>
                     </div>
                 </div>
-                <h2>买家</h2>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="row">
-                    <h>卖家信息</h>
-                    <div class="col-sm-4 col-sm-offset-1">
+                    <h2 >卖家信息</h2>
+                    <div class="col-md-4">
+                        <br/>
                         <strong><h4>${store.store_name} <a href="/shop/${store.store_id}">进入店铺</a></h4></strong>
                         <p class="text-left">掌柜：
                             <c:if test="${empty solder.nick_name}">
