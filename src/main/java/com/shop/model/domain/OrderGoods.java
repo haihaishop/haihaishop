@@ -6,6 +6,7 @@ package com.shop.model.domain;
 public class OrderGoods {
     private Goods goods;
     private Order_form order;
+    private Address address;
 
     public void setGoods(Goods goods) {
         this.goods = goods;
@@ -22,4 +23,8 @@ public class OrderGoods {
     public Order_form getOrder() {
         return order;
     }
+
+    public Address getAddress(){return address; }
+
+    public void setAddress(Address address){this.address = address; }
 }

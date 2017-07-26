@@ -26,62 +26,64 @@
                 联系方式：<input type="text" style="width: 50%" class="form-control">
             </div>
         </div>
-        <div class="row col-sm-offset-2">
-            <h4>收货人地址</h4><br>
-            <label class="control-label">请选择</label><br>
-            <div class="form-inline">
-                <div data-toggle="distpicker">
-                    <div class="form-group">
-                        <label class="sr-only" for="province">Province</label>
-                        <select class="form-control" id="province"></select>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="city">City</label>
-                        <select class="form-control" id="city"></select>
-                    </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="district">District</label>
-                        <select class="form-control" id="district"></select>
+        <form action="/pay_order.do" method="post">
+            <div class="row col-sm-offset-2">
+                <h4>收货人地址</h4><br>
+                <label class="control-label">请选择</label><br>
+                <div class="form-inline">
+                    <div data-toggle="distpicker">
+                        <div class="form-group">
+                            <label class="sr-only" for="province">Province</label>
+                            <select class="form-control" name="province" id="province"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="city">City</label>
+                            <select class="form-control" id="city" name="city"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="country">District</label>
+                            <select class="form-control" id="country" name="country"></select>
+                        </div>
                     </div>
                 </div>
-            </div><br>
-            <div class="form-group">
-                <label class="control-label">详细地址</label>
-                <input type="text" class="form-control" id="detail_address" style="width: 50%" placeholder="请输入详细地址">
-            </div>
-        </div>
-        <div class="row col-sm-offset-2">
-            <h4>支付方式</h4><br>
-            <div class="form-inline">
-                <button class="form-control">银行卡支付</button>
-                <button class="form-control">支付宝支付</button>
-            </div>
-            <%--<div class="form-group">
-                <label class="control-label" id="pay_way">银行卡</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="请输入卡号" >
+                <br>
+                <div class="form-group">
+                    <label class="control-label">详细地址</label>
+                    <input type="text" class="form-control" name="detail_address" id="detail_address" style="width: 50%"
+                           placeholder="请输入详细地址">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label">密码</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" placeholder="请输入密码" >
+            <div class="row col-sm-offset-2">
+                <h4>支付方式</h4><br>
+                <div class="form-inline">
+                    <button class="form-control">银行卡支付</button>
+                    <button class="form-control">支付宝支付</button>
                 </div>
-            </div>--%>
-        </div>
+                    <%--<div class="form-group">
+                        <label class="control-label" id="pay_way">银行卡</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" placeholder="请输入卡号" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">密码</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" placeholder="请输入密码" >
+                        </div>
+                    </div>--%>
+            </div>
 
-        <div class="row">
-            <div class="form-inline">
-                <div class="col-md-2 col-sm-offset-5">
-                    <h4>总价:￥<span id="sum">${total}</span></h4>
-                </div>
-                <div class="col-md-2">
-                    <a href="/order_information.do">
-                        <button class="form-control" style="width: 100%;background-color: lightseagreen">确认支付</button>
-                    </a>
+            <div class="row">
+                <div class="form-inline">
+                    <div class="col-md-2 col-sm-offset-5">
+                        <h4>总价:￥<span id="sum">${total}</span></h4>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="submit" class="form-control" style="width: 100%;background-color: lightseagreen" value="确认支付">
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </rapid:override>
 <rapid:override name="scripts">

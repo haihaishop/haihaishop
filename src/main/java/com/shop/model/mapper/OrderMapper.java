@@ -19,17 +19,18 @@ public interface OrderMapper {
     "values (#{goods_id}, #{user_id}, #{solder_id}, #{buy_number}, #{unit_price})")
     void addShoppingCart(Order_form orderForm);
 
-    @Select("select * from order_form where user_id = #{user_id} and pay_state = 0")
+    @Select("select * from order_form where user_id = #{user_id}")
     List<Order_form> getAllOrderByUserId(@Param("user_id")Long UserId);
 
     @Select("select * from order_form where order_form_id = #{order_form_id}")
     Order_form getOrderById(Long orderFormId);
 
-    @Update("update order_form set pay_state = #{pay_state} where order_form_id = #{order_form_id}")
+    @Update("update order_form set pay_state = #{pay_state}, address_id = #{address_id} where user_id = #{user_id} and place_order = true")
     void changePayState(@Param("pay_state")boolean payState,
-                        @Param("order_form_id")Long orderId);
+                        @Param("address_id")Long addressId,
+                        @Param("user_id")Long userId);
 
     @Update("update order_form set place_order = #{place_order} where order_form_id = #{order_form_id}")
-    void changePlaceState(@Param("pay_state")boolean placeOrder,
+    void changePlaceState(@Param("place_order")boolean placeOrder,
                         @Param("order_form_id")Long orderId);
 }
