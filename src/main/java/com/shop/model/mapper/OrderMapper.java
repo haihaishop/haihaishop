@@ -42,5 +42,7 @@ public interface OrderMapper {
     void changeShippingState(@Param("shipping_state")int shippingState,
                           @Param("order_form_id")Long orderId);
 
+    @Update("update order_form set address_id = #{address_id} where order_form_id = #{order_form_id}")
+    void updateAddressId(@Param("address_id")Long addressId,@Param("order_form_id")Long orderId);
 
 }

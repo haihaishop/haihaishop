@@ -48,4 +48,8 @@ public class OrderService implements OrderManagerInterface{
     public void changePlaceState(boolean placeOrder, Long orderId) {
         orderMapper.changePlaceState(placeOrder,orderId);
     }
+
+    public void updateAddressId(Long addressId, Long orderId) {
+        orderMapper.updateAddressId(addressId,orderId);
+    }
 }
