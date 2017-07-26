@@ -9,6 +9,11 @@ public class UserUtil {
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
-        return securityContext.getAuthentication().getName();
+        if (securityContext != null){
+            return securityContext.getAuthentication().getName();
+        }
+        else {
+            return null;
+        }
     }
 }

@@ -33,41 +33,40 @@
         <c:if test="${!empty pageInfo}">
             <c:if test="${pageInfo.pages != 0}">
                 <c:forEach items="${goodsList}" var="goods">
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <div class="speical speical-default speical-radius">
-                            <a href="${ctx}/shop_admin/goods_detail/${goods.goods_id}">
-                                    <%--<div class="shape">--%>
-                                    <%--<div class="shape-text">--%>
-                                    <%--极品--%>
-                                    <%--</div>--%>
-                                    <%--</div>--%>
-                                <div class="speical-content">
-                                    <h4 class="text-special-default">
-                                            ${goods.goods_name}
-                                    </h4>
-                                    <div>
-                                        <img class="img-responsive" style="height: 180px;width: 150px"
-                                             src="${pageContext.request.contextPath}${goods.picture}">
-                                    </div>
-                                    <div>￥${goods.price}</div>
-                                    <div>${goods.views_time}人浏览过</div>
-                                    <div class="text-left">
-                                        售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if
-                                            test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件
-                                    </div>
-                                    <div class="text-left">库存：${goods.count}</div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <a href="/shop_admin/goods_edit/${goods.goods_id}">编辑</a>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <a onclick="delete_goods('/shop_admin/goods_delete/${goods.goods_id}')">删除</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
+                    <div class="col-xs-12 col-sm-4 col-md-2 col-lg-2 " >
+                    <div class="speical speical-default speical-radius" style="height: 360px">
+                    <a href="/shop_admin/goods_detail/${goods.goods_id}">
+                    <%--<div class="shape">--%>
+                    <%--<div class="shape-text">--%>
+                    <%--极品--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <div class="speical-content">
+                        <h4 class="text-special-default">
+                                ${goods.goods_name}
+                        </h4>
+                        <div >
+                            <img class="img-responsive" style="height: 180px;width: 150px" src="${pageContext.request.contextPath}${goods.picture}">
                         </div>
+                        <div>￥${goods.price}</div>
+                        <div>${goods.views_time}人浏览过</div>
+                        <div class="text-left">
+                            售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</div>
+                        <div class="text-left">库存：${goods.count}</div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-default" href="/shop_admin/goods_edit/${goods.goods_id}">编辑</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-default" onclick="delete_goods('/shop_admin/delete_goods/${goods.goods_id}')">删除</a>
+                            </div>
+                        </div>
+
                     </div>
+                    </a>
+                    </div>
+                    </div>
+
                 </c:forEach>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-4">

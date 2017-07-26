@@ -2,6 +2,7 @@ package com.shop.controller.goods.show;
 
 import com.github.pagehelper.PageInfo;
 import com.shop.Utils.LoggingUtil;
+import com.shop.Utils.UserUtil;
 import com.shop.model.domain.Cate;
 import com.shop.model.domain.Goods;
 import com.shop.model.domain.Store;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -119,4 +121,16 @@ public class GoodsShowController {
         return modelAndView;
 
     }
+
+    @RequestMapping("/chat")
+    public ModelAndView chat(@RequestParam("toId")String toId,
+                             HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        User user = userService.getUserByLoginName(UserUtil.getUserName(request));
+        modelAndView.addObject("clientId", user.getUsername());
+        modelAndView.addObject("toId", toId);
+        modelAndView.setViewName("chat/chat");
+        return modelAndView;
+    }
+
 }

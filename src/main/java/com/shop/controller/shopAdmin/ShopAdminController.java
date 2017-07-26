@@ -144,4 +144,13 @@ public class ShopAdminController {
         return "redirect:/shop_admin/detail";
     }
 
+    @RequestMapping("chat")
+    public ModelAndView chat(HttpServletRequest request){
+        User user = userService.getUserByLoginName(UserUtil.getUserName(request));
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("clientId", user.getUsername());
+        modelAndView.setViewName("chat/chat");
+        return modelAndView;
+    }
+
 }
