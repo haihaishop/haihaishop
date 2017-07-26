@@ -19,8 +19,12 @@ public interface OrderMapper {
     "values (#{goods_id}, #{user_id}, #{solder_id}, #{buy_number}, #{unit_price})")
     void addShoppingCart(Order_form orderForm);
 
+    @Select("select * from order_form where shipping_state = #{shipping_state} and user_id = #{user_id}")
+    List<Order_form> getAllStateOrderByUserId(@Param("shipping_state")int shippingState,@Param("user_id")Long UserId);
+
     @Select("select * from order_form where user_id = #{user_id}")
     List<Order_form> getAllOrderByUserId(@Param("user_id")Long UserId);
+
 
     @Select("select * from order_form where order_form_id = #{order_form_id}")
     Order_form getOrderById(Long orderFormId);
@@ -33,4 +37,10 @@ public interface OrderMapper {
     @Update("update order_form set place_order = #{place_order} where order_form_id = #{order_form_id}")
     void changePlaceState(@Param("place_order")boolean placeOrder,
                         @Param("order_form_id")Long orderId);
+
+    @Update("update order_form set shipping_state = #{shipping_state} where order_form_id = #{order_form_id}")
+    void changeShippingState(@Param("shipping_state")int shippingState,
+                          @Param("order_form_id")Long orderId);
+
+
 }

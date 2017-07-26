@@ -24,9 +24,13 @@ public class OrderService implements OrderManagerInterface{
         orderMapper.addShoppingCart(orderForm);
     }
 
-    public List<Order_form> getAllOrderByUserId(Long userId) {
-        List<Order_form> orderList = orderMapper.getAllOrderByUserId(userId);
+    public List<Order_form> getAllStateOrderByUserId(int shippingState, Long userId) {
+        List<Order_form> orderList = orderMapper.getAllStateOrderByUserId(shippingState, userId);
         return orderList;
+    }
+
+    public List<Order_form> getAllOrderByUserId(Long userId) {
+        return orderMapper.getAllOrderByUserId(userId);
     }
 
     public Order_form getOrderById(Long orderFormId) {
@@ -35,6 +39,10 @@ public class OrderService implements OrderManagerInterface{
 
     public void changePayState(boolean payState,Long addressId, Long userId) {
         orderMapper.changePayState(payState,addressId,userId);
+    }
+
+    public void changeShippingState(int shippingState, Long orderId) {
+        orderMapper.changeShippingState(shippingState, orderId);
     }
 
     public void changePlaceState(boolean placeOrder, Long orderId) {
