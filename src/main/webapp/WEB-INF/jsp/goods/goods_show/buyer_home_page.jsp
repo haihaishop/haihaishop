@@ -40,8 +40,8 @@
                     <c:if test="${!empty pageInfo}">
                     <c:if test="${pageInfo.pages != 0}">
                 <c:forEach items="${goodsList}" var="goods">
-                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-                        <div class="speical speical-default speical-radius" >
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 " >
+                        <div class="speical speical-default speical-radius" style="height: 300px">
                             <a href="/goods_detail.do/${goods.goods_id}">
                                     <%--<div class="shape">--%>
                                     <%--<div class="shape-text">--%>
@@ -52,14 +52,14 @@
                                     <h4 class="text-special-default">
                                             ${goods.goods_name}
                                     </h4>
-                                    <p>
-                                        <img class="img-responsive" style="height: 200px" src="${pageContext.request.contextPath}${goods.picture}">
-                                    </p>
-                                    <p>￥${goods.price}</p>
-                                    <p>${goods.views_time}人浏览过</p>
-                                    <p class="text-left">
-                                                售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</p>
-                                    <p class="text-left">库存：${goods.count}</p>
+                                    <div >
+                                        <img class="img-responsive" style="height: 180px;width: 150px" src="${pageContext.request.contextPath}${goods.picture}">
+                                    </div>
+                                    <div>￥${goods.price}</div>
+                                    <div>${goods.views_time}人浏览过</div>
+                                    <div class="text-left">
+                                                售出：<c:if test="${empty goods.sold_number}">0</c:if><c:if test="${!empty goods.sold_number}">${goods.sold_number}</c:if>件</div>
+                                    <div class="text-left">库存：${goods.count}</div>
 
 
                                 </div>
