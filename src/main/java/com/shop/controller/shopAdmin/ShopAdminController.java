@@ -149,7 +149,7 @@ public class ShopAdminController {
         User user = userService.getUserByLoginName(UserUtil.getUserName(request));
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("clientId", user.getUsername());
-        modelAndView.setViewName("chat/chat");
+        modelAndView.setViewName("chat/chat_solder");
         return modelAndView;
     }
 
