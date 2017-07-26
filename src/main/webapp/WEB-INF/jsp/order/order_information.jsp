@@ -43,20 +43,44 @@
                             ${orderGoods.address.province}${orderGoods.address.city}${orderGoods.address.country}${orderGoods.address.detail_address}
                     </p>
                 </div>
-                <c:if test="${orderGoods.order.shipping_status == true}">
+                <c:if test="${orderGoods.order.shipping_state == 1}">
                     <div class="col-md-1" style="top: 65px">
-                        <p>已发货</p>
+                        <p>未支付</p>
                     </div>
                     <div class="col-md-1" style="top: 65px">
-                        <button class="btn-danger">去评价</button>
+                        <button class="btn-danger">去支付</button>
                     </div>
                 </c:if>
-                <c:if test="${orderGoods.order.shipping_status == false}">
+                <c:if test="${orderGoods.order.shipping_state == 2}">
+                    <div class="col-md-1" style="top: 30px">
+                        <p class="col-md-1">待发货</p>
+                    </div>
+                    <div class="col-md-1" style="top: 30px">
+                        <button class="btn">联系商家</button>
+                    </div>
+                </c:if>
+                <c:if test="${orderGoods.order.shipping_state == 3}">
                     <div class="col-md-1" style="top: 30px">
                         <p class="col-md-1">发货中</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <button class="btn">查看状态</button>
+                        <button class="btn">查看发货状态</button>
+                    </div>
+                </c:if>
+                <c:if test="${orderGoods.order.shipping_state == 4}">
+                    <div class="col-md-1" style="top: 30px">
+                        <p class="col-md-1">已收货</p>
+                    </div>
+                    <div class="col-md-1" style="top: 30px">
+                        <button class="btn">去评价</button>
+                    </div>
+                </c:if>
+                <c:if test="${orderGoods.order.shipping_state == 5}">
+                    <div class="col-md-1" style="top: 30px">
+                        <p class="col-md-1">已评价</p>
+                    </div>
+                    <div class="col-md-1" style="top: 30px">
+                        <button class="btn">查看详情</button>
                     </div>
                 </c:if>
             </div>

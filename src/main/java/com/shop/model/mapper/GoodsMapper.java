@@ -31,7 +31,7 @@ public interface GoodsMapper {
     @Select("select * from goods where goods_id = #{goods_id}")
     Goods getGoodsById(@Param("goods_id")Long goodsId);
 
-    @Update("update goods set goods_name=#{goods_name},price=#{price},info=#{info},count=#{count},picture=#{picture},promotion_id=#{promotion_id} " +
+    @Update("update goods set sold_number = #{sold_number} goods_name=#{goods_name},price=#{price},info=#{info},count=#{count},picture=#{picture},promotion_id=#{promotion_id} " +
             "where goods_id=#{goods_id}")
     void changeGoods(Goods goods);
 

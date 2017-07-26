@@ -16,6 +16,7 @@ public interface GoodsManageInterface {
     List<Cate> getAllCateByGoodsId(Long goodsId);
     Goods getGoodsById(Long goodsId);
     void changeGoods(Goods goods, Long[] allCateId);
+    void changeGoods(Goods goods);
     void deleteGoods(Long goodsId);
     void increaseViewsTime(Long goodsId);
     List<Goods> searchGoodsByName(String goodsName, int page, int rows);

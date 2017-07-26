@@ -1,10 +1,7 @@
 package com.shop.controller.order;
 
 import com.shop.Utils.LoggingUtil;
-import com.shop.model.domain.Address;
-import com.shop.model.domain.OrderGoods;
-import com.shop.model.domain.Order_form;
-import com.shop.model.domain.User;
+import com.shop.model.domain.*;
 import com.shop.model.service.*;
 import org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +38,7 @@ public class OrderController {
         float total = 0;
         for (int i = 0; i < orderid.length; i++) {
             if (orderid[i] != null) {
-                orderManagerInterface.changePlaceState(true, orderid[i]);
+                orderManagerInterface.changeShippingState(1, orderid[i]);
                 Order_form order = orderManagerInterface.getOrderById(orderid[i]);
                 total += order.getBuy_number() * order.getUnit_price();
             }
@@ -61,7 +58,22 @@ public class OrderController {
         User user = userManagerInterface.getUserByLoginName(username);
         addressManageInterface.addAddress(address);
         userAddressManageInterface.addUserAddress(user.getUser_id(), address.getAddress_id());
-        orderManagerInterface.changePayState(true, address.getAddress_id(), user.getUser_id());
+        List<Order_form> orderListState1 = orderManagerInterface.getAllStateOrderByUserId(1, user.getUser_id());
+        for (Order_form orderState1: orderListState1
+             ) {
+            orderManagerInterface.changeShippingState(2, orderState1.getOrder_form_id());
+            if(orderState1.getBuy_number() > goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount()){
+                mav.setViewName("order/pay_order");
+                mav.addObject("error","商品数量不足");
+                return mav;
+            }else {
+                Long num = goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount() - orderState1.getBuy_number();
+                Goods goods = goodsManageInterface.getGoodsById(orderState1.getGoods_id());
+                goods.setCount(num);
+                goods.setSold_number(goods.getSold_number() + orderState1.getBuy_number());
+                goodsManageInterface.changeGoods(goods);
+            }
+        }
         mav.setViewName("redirect:/order_information.do");
         return mav;
     }
@@ -77,7 +89,7 @@ public class OrderController {
         List<OrderGoods> orderGoods = new ArrayList<OrderGoods>();
         for (int i = 0; i < orderLists.size(); i++) {
             if (orderLists.get(i)!=null && orderLists.get(i).getPay_state()) {
-                orderManagerInterface.getOrderById(orderLists.get(i).getAddress_id());
+                orderManagerInterface.getOrderById(orderLists.get(i).getOrder_form_id());
                 OrderGoods tempOrderGoods = new OrderGoods();
                 tempOrderGoods.setAddress(addressManageInterface.getAddressById(orderLists.get(i).getAddress_id()));
                 tempOrderGoods.setGoods(goodsManageInterface.getGoodsById(orderLists.get(i).getGoods_id()));
@@ -85,7 +97,6 @@ public class OrderController {
                 orderGoods.add(tempOrderGoods);
             }
         }
-        LoggingUtil.log(orderGoods);
         mav.addObject("orderGoodsList", orderGoods);
         mav.setViewName("order/order_information");
         return mav;

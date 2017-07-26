@@ -114,7 +114,7 @@ public class BuyerController {
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
         String username = securityContext.getAuthentication().getName();
-        List<Order_form> orderLists = orderManagerInterface.getAllOrderByUserId(userManagerInterface.getUserByLoginName(username).getUser_id());
+        List<Order_form> orderLists = orderManagerInterface.getAllStateOrderByUserId(0, userManagerInterface.getUserByLoginName(username).getUser_id());
         List<OrderGoods> orderGoods = new ArrayList<OrderGoods>();
         for (int i = 0; i < orderLists.size(); i++) {
             if (orderLists.get(i) != null && !orderLists.get(i).getPay_state()) {
@@ -129,5 +129,4 @@ public class BuyerController {
         mav.setViewName("buyer/shopping_cart");
         return mav;
     }
-
 }
