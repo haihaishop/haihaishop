@@ -93,7 +93,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                         "/themes/**",
                         "/buyer_home_page.do/**",
                         "/goods_detail.do/**",
-                        "/search/**");
+                        "/search/**",
+                        "/shop/**");
 
     }
 

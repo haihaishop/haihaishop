@@ -20,7 +20,7 @@ public interface GoodsMapper {
                         @Param("cate_id")Long cateId);
 
     @Select("select * from goods where store_id=#{store_id} Order By sold_number,views_time Desc")
-    List<Goods> getGoodsByStoreId(Long storeId);
+    List<Goods> getGoodsByStoreId(@Param("store_id") Long storeId);
 
     @Select("select * from goods where goods_id in (select goods_id from goods_cate where cate_id = #{cate_id}) Order By sold_number,views_time Desc")
     List<Goods> getAllGoodsByCateId(@Param("cate_id")Long cateId);
@@ -54,4 +54,14 @@ public interface GoodsMapper {
     @Select("select * from goods  Order By sold_number,views_time Desc")
     List<Goods> getAllGoods();
 
+    @Select("select * from goods where store_id=#{store_id} and " +
+            "goods_id in " +
+            "(select goods_id from goods_cate where cate_id = #{cate_id}) " +
+            "Order By sold_number,views_time Desc")
+    List<Goods> getGoodsByStoreIdAndCateId(@Param("store_id") Long storeId,
+                                  @Param("cate_id") Long cateId);
+
+    @Select("select * from goods where goods_name like CONCAT('%','${goods_name}','%' ) and store_id=#{store_id}")
+    List<Goods> searchGoodsByNameAndStoreId(@Param("goods_name")String goodsName,
+                                            @Param("store_id")Long storeId);
 }
