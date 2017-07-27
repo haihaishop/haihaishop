@@ -40,6 +40,8 @@ public class BuyerController {
     private UserManagerInterface userManagerInterface;
     @Autowired
     private ShopManageInterface shopManageInterface;
+    @Autowired
+    private CommentManageInterface commentManageInterface;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
     public ModelAndView cateClick(@PathVariable("cate_id") Long cateId,
@@ -135,5 +137,16 @@ public class BuyerController {
     public ModelAndView confirm_receipt(@PathVariable("order_id")Long orderId){
         orderManagerInterface.changeShippingState(4,orderId);
         return new ModelAndView("redirect:/order_information.do");
+    }
+
+    @RequestMapping("comment_goods.do/{goods_id}")
+    public ModelAndView comment_goods(@PathVariable("goods_id")Long goodsId){
+        ModelAndView mav = new ModelAndView();
+        Goods goods = goodsManagerInterface.getGoodsById(goodsId);
+        List<Comment_table> commentList = commentManageInterface.getCommentByGoodsId(goodsId);
+        mav.addObject("commentList",commentList);
+        mav.addObject("goods",goods);
+        mav.setViewName("goods/goods_show/goods_comment");
+        return mav;
     }
 }

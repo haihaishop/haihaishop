@@ -34,13 +34,13 @@ public class OrderController {
     private GoodsManageInterface goodsManageInterface;
 
     @RequestMapping("place_order.do")
-    public ModelAndView pay_order(@RequestParam(value = "orderId[]", required = false) Long[] orderid) {
+    public ModelAndView pay_order(@RequestParam(value = "orderId[]", required = false) Long[] orderId) {
         ModelAndView mav = new ModelAndView();
         float total = 0;
-        for (int i = 0; i < orderid.length; i++) {
-            if (orderid[i] != null) {
-                orderManagerInterface.changeShippingState(1, orderid[i]);
-                Order_form order = orderManagerInterface.getOrderById(orderid[i]);
+        for (int i = 0; i < orderId.length; i++) {
+            if (orderId[i] != null) {
+                orderManagerInterface.changeShippingState(1, orderId[i]);
+                Order_form order = orderManagerInterface.getOrderById(orderId[i]);
                 total += order.getBuy_number() * order.getUnit_price();
             }
         }

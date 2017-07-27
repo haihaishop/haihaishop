@@ -72,7 +72,7 @@
                         <p class="col-md-1">已收货</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <button class="btn">去评价</button>
+                        <a href="/comment_goods.do/${orderGoods.goods.goods_id}"><button class="btn">去评价</button></a>
                     </div>
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 5}">

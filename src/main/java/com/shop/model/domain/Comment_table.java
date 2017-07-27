@@ -6,8 +6,17 @@ import java.util.Date;
 public class Comment_table {
   private Long comment_table_id;
   private Long goods_id;
-  private Long user_id;
   private String comment;
+  private String username;
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
   private Long rate;
   private Date comment_date;
 
@@ -33,14 +42,6 @@ public class Comment_table {
 
   public void setGoods_id(Long goods_id) {
     this.goods_id = goods_id;
-  }
-
-  public Long getUser_id() {
-    return user_id;
-  }
-
-  public void setUser_id(Long user_id) {
-    this.user_id = user_id;
   }
 
   public String getComment() {
