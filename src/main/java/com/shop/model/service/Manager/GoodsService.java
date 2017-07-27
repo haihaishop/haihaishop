@@ -27,8 +27,10 @@ public class GoodsService implements GoodsManageInterface{
     @CacheEvict(allEntries = true)
     public void addGoods(Goods goods, Long[] allCateId) {
         goodsMapper.addGoods(goods);
-        for (Long cateId:allCateId) {
-            goodsMapper.addCateToGoods(goods.getGoods_id(), cateId);
+        if( allCateId != null) {
+            for (Long cateId : allCateId) {
+                goodsMapper.addCateToGoods(goods.getGoods_id(), cateId);
+            }
         }
     }
 
