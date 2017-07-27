@@ -86,7 +86,7 @@
                                 ${solder.nick_name}
                             </c:if>
                         </p>
-                        <p><a href="/chat?toId=${solder.username}"> 和我联系</a></p>
+                        <p><a href="<%= request.getContextPath()%>/chat?toId=${solder.username}"> 和我联系</a></p>
                     </div>
                 </div>
             </div>
@@ -113,7 +113,7 @@
         function buy() {
             var xmlhttp;
             var buy_count = $("#buy_num")[0].value;
-            var url = "${ctx}/add_shopping_cart.do/" + buy_count + "/" + ${goods.goods_id};
+            var url = "<%= request.getContextPath()%>/add_shopping_cart.do/" + buy_count + "/" + ${goods.goods_id};
             if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp = new XMLHttpRequest();
             }
