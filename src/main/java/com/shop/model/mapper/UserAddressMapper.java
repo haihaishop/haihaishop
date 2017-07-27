@@ -16,6 +16,6 @@ public interface UserAddressMapper {
     @Insert("insert into user_address(user_id, address_id) values (#{user_id}, #{address_id})")
     void addUserAddress(@Param("user_id")Long userId,@Param("address_id")Long addressId);
 
-    @Select("select * from user_address where user_id = #{user_id]")
+    @Select("select * from user_address where user_id = #{user_id}")
     List<User_address> getAddressList(@Param("user_id")Long userId);
 }

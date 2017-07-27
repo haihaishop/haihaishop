@@ -42,12 +42,12 @@
                     <input onclick="return chooseGoods()" type="checkbox" name="orderId[]" class="choose"
                            value="${orderGoods.order.order_form_id}">
                 </div>
-                <div class="col-md-4">
-                    <img src="${orderGoods.goods.picture}" style="width: 100px;height: 150px" class="form-group"
+                <div class="col-md-4" style="overflow: hidden">
+                    <img src="${orderGoods.goods.picture}" style="width: 100px;height: 150px" class="form-group col-md-2"
                          alt="图片加载失败">
-                    <div class="form-group">
+                    <div style="height: 150px">
                         <h4>${orderGoods.goods.goods_name}</h4>
-                        <p>${orderGoods.goods.info}</p>
+                        <p style="word-break: break-all;">${orderGoods.goods.info}</p>
                     </div>
                 </div>
                 <div class="col-md-1" style="top: 65px">
@@ -64,16 +64,17 @@
                 </div>
             </div>
         </c:forEach>
-    <div class="row">
-        <div class="form-inline">
-            <div class="col-md-2 col-sm-offset-5">
-                <h4>总价:￥<span id="sum">0</span></h4>
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="form-control" style="width: 100%;background-color: lightseagreen" value="下单">
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-md-2 col-sm-offset-5">
+                    <h4>总价:￥<span id="sum">0</span></h4>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="form-control" style="width: 100%;background-color: lightseagreen"
+                           value="下单">
+                </div>
             </div>
         </div>
-    </div>
     </form>
 </rapid:override>
 <rapid:override name="scripts">

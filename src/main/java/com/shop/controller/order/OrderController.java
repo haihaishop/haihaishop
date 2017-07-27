@@ -8,9 +8,12 @@ import org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -36,10 +39,11 @@ public class OrderController {
 
     @RequestMapping("place_order.do")
     public ModelAndView pay_order(@RequestParam(value = "orderId[]", required = false) Long[] orderId,
-                                  HttpServletRequest request) {
+                                  HttpServletRequest request,
+                                  RedirectAttributes model) {
         ModelAndView mav = new ModelAndView();
-        if(orderId.length == 0){
-            mav.addObject("failed","您未选择商品");
+        if (orderId == null) {
+            model.addFlashAttribute("failed", "您未选择商品");
             mav.setViewName("redirect:shopping_cart.do");
             return mav;
         }
@@ -54,13 +58,36 @@ public class OrderController {
         String username = UserUtil.getUserName(request);
         List<User_address> userAddressList = userAddressManageInterface.getAddressList(userManagerInterface.getUserByLoginName(username).getUser_id());
         List<Address> addressList = new ArrayList<Address>();
-        for (User_address userAddress:userAddressList
-             ) {
+        for (User_address userAddress : userAddressList
+                ) {
             Address address = new Address();
             address = addressManageInterface.getAddressById(userAddress.getAddress_id());
             addressList.add(address);
         }
-        mav.addObject("addressList",addressList);
+        mav.addObject("addressList", addressList);
+        mav.addObject("total", total);
+        mav.setViewName("order/pay_order");
+        return mav;
+    }
+
+    @RequestMapping("goToPay.do/{order_id}")
+    public ModelAndView goToPay(@PathVariable("order_id") Long orderId,
+                                HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView();
+        double total = 0;
+        Order_form order = orderManagerInterface.getOrderById(orderId);
+        total = order.getBuy_number() * order.getUnit_price();
+
+        String username = UserUtil.getUserName(request);
+        List<User_address> userAddressList = userAddressManageInterface.getAddressList(userManagerInterface.getUserByLoginName(username).getUser_id());
+        List<Address> addressList = new ArrayList<Address>();
+        for (User_address userAddress : userAddressList
+                ) {
+            Address address = new Address();
+            address = addressManageInterface.getAddressById(userAddress.getAddress_id());
+            addressList.add(address);
+        }
+        mav.addObject("addressList", addressList);
         mav.addObject("total", total);
         mav.setViewName("order/pay_order");
         return mav;
@@ -77,15 +104,15 @@ public class OrderController {
         addressManageInterface.addAddress(address);
         userAddressManageInterface.addUserAddress(user.getUser_id(), address.getAddress_id());
         List<Order_form> orderListState1 = orderManagerInterface.getAllStateOrderByUserId(1, user.getUser_id());
-        for (Order_form orderState1: orderListState1
-             ) {
+        for (Order_form orderState1 : orderListState1
+                ) {
             orderManagerInterface.changeShippingState(2, orderState1.getOrder_form_id());
-            orderManagerInterface.updateAddressId(address.getAddress_id(),new Date(), orderState1.getOrder_form_id());
-            if(orderState1.getBuy_number() > goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount()){
+            orderManagerInterface.updateAddressId(address.getAddress_id(), new Date(), orderState1.getOrder_form_id());
+            if (orderState1.getBuy_number() > goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount()) {
                 mav.setViewName("order/pay_order");
-                mav.addObject("error","商品数量不足");
+                mav.addObject("error", "商品数量不足");
                 return mav;
-            }else {
+            } else {
                 Long num = goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount() - orderState1.getBuy_number();
                 Goods goods = goodsManageInterface.getGoodsById(orderState1.getGoods_id());
                 goods.setCount(num);
@@ -100,7 +127,7 @@ public class OrderController {
     }
 
     @RequestMapping("order_information.do")
-    public ModelAndView order_information(HttpServletRequest request){
+    public ModelAndView order_information(HttpServletRequest request) {
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
@@ -109,7 +136,7 @@ public class OrderController {
         List<Order_form> orderLists = orderManagerInterface.getAllOrderByUserId(userManagerInterface.getUserByLoginName(username).getUser_id());
         List<OrderGoods> orderGoods = new ArrayList<OrderGoods>();
         for (int i = 0; i < orderLists.size(); i++) {
-            if (orderLists.get(i)!=null) {
+            if (orderLists.get(i) != null) {
                 orderManagerInterface.getOrderById(orderLists.get(i).getOrder_form_id());
                 OrderGoods tempOrderGoods = new OrderGoods();
                 tempOrderGoods.setAddress(addressManageInterface.getAddressById(orderLists.get(i).getAddress_id()));

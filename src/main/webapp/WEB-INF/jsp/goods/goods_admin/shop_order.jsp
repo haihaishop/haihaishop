@@ -33,7 +33,7 @@
                 <div class="col-md-3"  style="overflow:hidden;">
                     <img src="${orderGoods.goods.picture}" style="width: 100px;height: 150px" class="form-group col-md-2"
                          alt="图片加载失败">
-                    <div class="form-group" style="height: 150px">
+                    <div style="height: 150px">
                         <h4>${orderGoods.goods.goods_name}</h4>
                         <p style="word-break: break-all;">${orderGoods.goods.info}</p>
                     </div>
@@ -78,7 +78,7 @@
                         <p>已评价</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <button class="btn">查看评价</button>
+                        <a href="/goods_detail.do/${orderGoods.goods.goods_id}"><button class="btn">查看评价</button></a>
                     </div>
                 </c:if>
             </div>

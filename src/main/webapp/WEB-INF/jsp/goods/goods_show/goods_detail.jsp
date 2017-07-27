@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
@@ -106,7 +106,7 @@
                         <p>${comment.rate}分</p>
                     </div>
                     <div class="form-group col-md-2">
-                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss"/> </p>
+                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
                     </div>
                 </div>
             </c:forEach>

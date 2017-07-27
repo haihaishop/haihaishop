@@ -48,7 +48,7 @@
                         <p>未支付</p>
                     </div>
                     <div class="col-md-1" style="top: 65px">
-                        <button class="btn-danger">去支付</button>
+                        <a href="/goToPay.do/${orderGoods.order.order_form_id}"><button class="btn-danger">去支付</button></a>
                     </div>
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 2}">
@@ -72,7 +72,7 @@
                         <p>已收货</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <a href="/comment_goods.do/${orderGoods.goods.goods_id}"><button class="btn">去评价</button></a>
+                        <a href="/comment_goods.do/${orderGoods.order.order_form_id}"><button class="btn">去评价</button></a>
                     </div>
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 5}">
@@ -80,7 +80,7 @@
                         <p>已评价</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <a href="/comment_goods.do/${orderGoods.goods.goods_id}"><button class="btn">查看详情</button></a>
+                        <a href="/goods_detail.do/${orderGoods.goods.goods_id}"><button class="btn">查看详情</button></a>
                     </div>
                 </c:if>
             </div>
