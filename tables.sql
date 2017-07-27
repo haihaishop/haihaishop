@@ -201,3 +201,4 @@ INSERT INTO role (name) VALUE ("ROLE_USER");
 
 INSERT INTO user(username, password, role_id) VALUE ("admin", "$2a$10$i6P0z/zwpipBHmW2DHNZqejuwyh4zbtYfvy8YRJdIBJQEnRMNs0RK", 1);
 
+ALTER TABLE comment_table modify rate FLOAT ;
