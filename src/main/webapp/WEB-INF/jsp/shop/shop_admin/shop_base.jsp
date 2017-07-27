@@ -30,6 +30,7 @@
         <li class="active"><a href="#">商品管理</a> </li>
         <li><a href="/shop_admin/${store.store_id}add_goods">增加商品</a></li>
         <li><a href="/shop_admin/${store.store_id}edit_goods">管理商品</a></li>
+        <li><a href="/shop_admin/${store.store_id}shop_order">店铺订单</a></li>
     </ul>
 
     <hr>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import javax.management.MalformedObjectNameException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -128,5 +129,11 @@ public class BuyerController {
         mav.addObject("orderGoodsList", orderGoods);
         mav.setViewName("buyer/shopping_cart");
         return mav;
+    }
+
+    @RequestMapping("confirm_receipt.do/{order_id}")
+    public ModelAndView confirm_receipt(@PathVariable("order_id")Long orderId){
+        orderManagerInterface.changeShippingState(4,orderId);
+        return new ModelAndView("redirect:/order_information.do");
     }
 }

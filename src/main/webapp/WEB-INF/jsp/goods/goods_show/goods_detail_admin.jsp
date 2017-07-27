@@ -22,10 +22,10 @@
                 <div class="col-md-3 col-md-offset-2">
                     <img src="${goods.picture}" alt="Loading Failed" width="200" height="300">
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-5" style="overflow: hidden">
                     <h3>名称：${goods.goods_name}</h3><br>
                     <h3>价格：${goods.price}</h3>
-                    <p>简介：${goods.info}</p>
+                    <p style="word-break: break-all">简介：${goods.info}</p>
                     <p>浏览次数：${goods.views_time}</p>
                     <p>已卖数量：${goods.sold_number}</p>
                     <p>库存：${goods.count}</p>
