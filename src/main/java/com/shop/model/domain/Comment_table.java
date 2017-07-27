@@ -8,7 +8,7 @@ public class Comment_table {
   private Long goods_id;
   private String comment;
   private String username;
-
+  private float rate;
   public String getUsername() {
     return username;
   }
@@ -17,7 +17,6 @@ public class Comment_table {
     this.username = username;
   }
 
-  private Long rate;
   private Date comment_date;
 
   public Date getComment_date() {
@@ -52,11 +51,11 @@ public class Comment_table {
     this.comment = comment;
   }
 
-  public Long getRate() {
+  public float getRate() {
     return rate;
   }
 
-  public void setRate(Long rate) {
+  public void setRate(float rate) {
     this.rate = rate;
   }
 }

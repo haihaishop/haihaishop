@@ -12,7 +12,7 @@
     <c:if test="${!empty hasUser}">
         <div id="myAlert" class="alert alert-warning">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>${hasUser}。</strong>
+            <strong class="col-sm-offset-5">${hasUser}。</strong>
         </div>
     </c:if>
     <form id="add_user_form" class="form-horizontal" role="form" action="/user_register.do" method="post">

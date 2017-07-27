@@ -8,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
@@ -65,7 +66,7 @@
                         </div>
                         <div class="col-md-2">
                             <button class="form-control" onclick="buy()"
-                                    style="width: 100%;background-color: lightseagreen">加入购物车
+                                    style="width: 200%;background-color: lightseagreen">加入购物车
                             </button>
                         </div>
                     </div>
@@ -91,8 +92,25 @@
                 </div>
             </div>
         </div>
-        <h2>评价</h2>
-        <div class="row"></div>
+        <div class="row col-sm-offset-2">
+            <h2>评论列表</h2>
+            <c:forEach items="${commentList}" var="comment">
+                <div class="row form-inline">
+                    <div class="form-group col-md-1">
+                        <p>${comment.username}</p>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <p>${comment.comment}</p>
+                    </div>
+                    <div class="form-group col-sm-offset-1 col-md-1">
+                        <p>${comment.rate}分</p>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss"/> </p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </rapid:override>
 

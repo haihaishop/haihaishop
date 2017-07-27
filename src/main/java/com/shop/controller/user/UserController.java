@@ -72,9 +72,8 @@ public class UserController {
     @RequestMapping("/user_register.do")
     public ModelAndView user_register(User user, RedirectAttributes model) {
         if (userManagerInterface.hasUser(user.getUsername())) {
-            LoggingUtil.log("hasUser");
             model.addFlashAttribute("hasUser", "用户已存在！");
-            return new ModelAndView("user/register");
+            return new ModelAndView("redirect:/register.do");
         } else {
             long roleId = roleManagerInterface.getRoleIdFromName("ROLE_USER");
             user.setRole_id(roleId);
@@ -126,9 +125,10 @@ public class UserController {
     }
 
     @RequestMapping("loginFailed.do")
-    public ModelAndView loginFailed() {
+    public ModelAndView loginFailed(RedirectAttributes model) {
         LoggingUtil.log("fff");
         ModelAndView mav = new ModelAndView();
+        model.addFlashAttribute("loginFailed","用户名或密码错误");
         mav.setViewName("redirect:/login.do");
         return mav;
     }

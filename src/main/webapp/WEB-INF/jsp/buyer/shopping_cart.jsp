@@ -15,6 +15,12 @@
     <title>购物车</title>
 </rapid:override>
 <rapid:override name="content">
+    <c:if test="${!empty failed}">
+        <div id="myAlert" class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong class="col-sm-offset-5">${failed}。</strong>
+        </div>
+    </c:if>
     <div class="container-fluid">
     <div class="row" style="background-color: gray">
         <div class="col-md-1 col-md-offset-1">

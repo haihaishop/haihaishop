@@ -27,7 +27,7 @@
             </div>
         </div>
         <form action="/pay_order.do" method="post">
-            <div class="row col-sm-offset-2">
+            <div id="address" class="row col-sm-offset-2">
                 <h4>收货人地址</h4><br>
                 <label class="control-label">请选择</label><br>
                 <div class="form-inline">
