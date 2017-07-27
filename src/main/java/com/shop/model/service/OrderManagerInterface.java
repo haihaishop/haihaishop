@@ -17,5 +17,7 @@ public interface OrderManagerInterface {
     void changePayState(boolean payState,Long addressId, Long userId);
     void changePlaceState(boolean placeOrder, Long orderId);
     void changeShippingState(int shippingState, Long orderId);
+    void updateAddressId(Long addressId, Long orderId);
+
 
 }
