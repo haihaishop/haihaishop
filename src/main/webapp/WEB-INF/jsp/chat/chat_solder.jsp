@@ -15,8 +15,7 @@
     <div class="container">
         <div class="row form-group">
             <div class="col-md-2 col-lg-2">
-                <div class="list-group">
-                    <a onclick="clear_items(this.id)" id="1" class="list-group-item">666<span class="badge">新</span> </a>
+                <div class="list-group" id="chat_list">
                 </div>
             </div>
             <div class="col-xs-12  col-md-8 col-lg-8  " id="chat_content">
@@ -46,21 +45,19 @@
     <script type="text/javascript" src="/js/mqttws31.js"></script>
     <script type="text/javascript">
         var client;
-        var clientID;
+        var clientID = $('#clientID').val();
         var toIds = [];
         var currentTo;
         $(function ($) {
             //$('#con').bind('click',function(){
-            clientID = $('#clientID').val();
             client = new Messaging.Client('127.0.0.1', 61614, clientID);
             client.onConnectionLost = function () {
             };
             client.onMessageArrived = function (message) {
                 var msgObj = jQuery.parseJSON(message.payloadString);
-                clientID = $('#clientID').val();
                 if (msgObj.to === clientID) {
                     //是自己的消息
-                    currentTo = msgObj.from;
+                   // currentTo = msgObj.from;
                     var sender = msgObj.from;
                     if(sender === currentTo){
                         saveAndShowMessage(sender, sender, msgObj, "left");
@@ -92,16 +89,13 @@
             chatInfo.msg.body = msg.body;
             addMessage(chatInfo);
         }
-    </script>
-    <script type="text/javascript">
+
         window.beforeonunload = function () {
             client.disconnect();
             client = null;
-        }
-    </script>
-    <script type="text/javascript">
+        };
+
         function sendMessage() {
-            clientID = $('#clientID').val();
             var msg = {};
             msg.from = clientID;
             msg.to = currentTo;
@@ -114,8 +108,7 @@
             }
                 $("#sendingMsg").val("");
         }
-    </script>
-    <script type="text/javascript">
+
         function isInArray(item, array) {
             for (var key in array) {
                 if (item === array[key].id)
@@ -130,11 +123,12 @@
                     return i;
             }
         }
-    </script>
-    <script type="text/javascript">
+
         function saveAndHintMessage(sender, msg) {
             if($("#"+sender).length === 0){//新用户
-
+                $("#chat_list").append('' +
+                    '<a onclick="changeUser(this.id)" id="'+sender+'" class="list-group-item">'+sender+'<span class="badge">新</span> </a>\n')
+                saveMessage(sender, msg, "left");
             }
             else {
                 if($("#"+sender).find("span").length > 0)//存在用户而且已经提示
@@ -147,14 +141,13 @@
                 }
             }
         }
-    </script>
-    <script type="text/javascript">
+
         function saveMessage(who, msg, side) {
             if (isInArray(who, toIds)) {
                 var index = getIndex(who, toIds);
                 toIds[index].msg.push(
                     {side: side, body: msg.body});
-                console.log("msg from " + who);
+                console.log("msg of " + who+" "+side);
             }
             else {
                 var chat_info = {
@@ -164,24 +157,21 @@
                         body: msg.body
                     }]
                 };
+                console.log("save:" + who);
+                console.log(chat_info);
                 toIds.push(chat_info);
             }
         }
-    </script>
-    <script type="text/javascript">
+
         function clearNew(id) {
             $("#"+id).find("span").remove();
             console.log(id);
         }
-    </script>
 
-    <script type="text/javascript">
         function clearChatBox() {
             $("#chat").find("li").remove();
         }
-    </script>
 
-    <script type="text/javascript">
         function addMessage(chatInfo) {
             if(chatInfo.msg.side === "left"){
                 $("#chat").append('<li class="left clearfix">\n' +
@@ -212,6 +202,29 @@
                     '        </li>');
             }
             }
+
+        function changeUser(id) {
+            console.log(toIds);
+            if(currentTo === id)
+                return;
+            else {
+                clearNew(id);//清空消息提示
+                clearChatBox();
+                currentTo = id;
+                var index = getIndex(id, toIds);
+                var chatInfo = {};
+                for (var i in toIds[index].msg){
+                    if (toIds[index].msg[i].side === "left"){
+                        chatInfo.id = id;
+                    }
+                    else {
+                        chatInfo.id = clientID;
+                    }
+                    chatInfo.msg = toIds[index].msg[i];
+                    addMessage(chatInfo);
+                }
+            }
+        }
     </script>
 </rapid:override>>
 <%@include file="../base.jsp" %>
