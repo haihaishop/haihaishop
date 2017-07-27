@@ -41,6 +41,7 @@
         var client;
         var clientID;
         $(window).on('beforeunload', function () {
+            client.disconnect();
             client = null;
             window.opener.document.getElementById("flag").value = "0";
         });
@@ -74,6 +75,7 @@
             client.connect({
                 onSuccess: function () {
                     //订阅topic
+                    console.log("ok");
                     client.subscribe("topic");
                 }
             });
@@ -83,6 +85,7 @@
                 var msg = {};
                 msg.from = clientID;
                 msg.to = $('#toID').val();
+                console.log(msg.to);
                 msg.body = $('#sendMsg').val();
                 $("#sendMsg").val("");
                 message = new Messaging.Message(JSON.stringify(msg));
@@ -102,11 +105,6 @@
                     '        </li>');
             });
         });
-    </script>
-    <script type="text/javascript">
-        window.onunload = function () {
-            client.disconnect();
-        }
     </script>
 </rapid:override>>
 <%@include file="../base.jsp" %>
