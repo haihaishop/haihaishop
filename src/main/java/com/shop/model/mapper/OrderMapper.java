@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.security.access.method.P;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,11 +23,13 @@ public interface OrderMapper {
     @Select("select * from order_form where shipping_state = #{shipping_state} and user_id = #{user_id}")
     List<Order_form> getAllStateOrderByUserId(@Param("shipping_state")int shippingState,@Param("user_id")Long UserId);
 
-    @Select("select * from order_form where user_id = #{user_id}")
-    List<Order_form> getAllOrderByUserId(@Param("user_id")Long UserId);
+    @Select("select * from order_form where user_id = #{user_id} order by order_form_id desc")
+    List<Order_form> getAllOrderByUserId(@Param("user_id")Long userId);
 
+    @Select("select * from order_form where solder_id = #{solder_id}  order by order_form_id desc")
+    List<Order_form> getAllOrderBySolderId(@Param("solder_id")Long solderId);
 
-    @Select("select * from order_form where order_form_id = #{order_form_id}")
+    @Select("select * from order_form where order_form_id = #{order_form_id}  order by order_form_id desc")
     Order_form getOrderById(Long orderFormId);
 
     @Update("update order_form set pay_state = #{pay_state}, address_id = #{address_id} where user_id = #{user_id} and place_order = true")
@@ -42,7 +45,8 @@ public interface OrderMapper {
     void changeShippingState(@Param("shipping_state")int shippingState,
                           @Param("order_form_id")Long orderId);
 
-    @Update("update order_form set address_id = #{address_id} where order_form_id = #{order_form_id}")
-    void updateAddressId(@Param("address_id")Long addressId,@Param("order_form_id")Long orderId);
+    @Update("update order_form set address_id = #{address_id},date = #{date} where order_form_id = #{order_form_id}")
+    void updateAddressId(@Param("address_id")Long addressId, @Param("date")Date date, @Param("order_form_id")Long orderId);
+
 
 }

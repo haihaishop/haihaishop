@@ -3,10 +3,7 @@ package com.shop.controller.goods.admin;
 import com.alibaba.fastjson.JSONObject;
 import com.shop.Utils.LoggingUtil;
 import com.shop.model.domain.*;
-import com.shop.model.service.CateManagerInterface;
-import com.shop.model.service.GoodsManageInterface;
-import com.shop.model.service.PromotionManagerInterface;
-import com.shop.model.service.ShopManageInterface;
+import com.shop.model.service.*;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +38,12 @@ public class GoodsAdminController {
     GoodsManageInterface goodsService;
     @Autowired
     PromotionManagerInterface promotionService;
+    @Autowired
+    OrderManagerInterface orderManagerInterface;
+    @Autowired
+    UserManagerInterface userManagerInterface;
+    @Autowired
+    AddressManageInterface addressManageInterface;
 
     @RequestMapping("/{store_id}add_goods")
     public ModelAndView addGoods(@PathVariable("store_id")Long storeId,
@@ -154,5 +157,29 @@ public class GoodsAdminController {
         return mav;
     }
 
+    @RequestMapping("/{store_id}shop_order")
+    public ModelAndView shop_order(@PathVariable("store_id")Long storeId){
+        ModelAndView mav = new ModelAndView();
+        List<OrderGoods> orderGoodsList = new ArrayList<OrderGoods>();
+        List<Order_form> orderList = orderManagerInterface.getAllOrderBySolderId(shopService.getStoreByStoreId(storeId).getUser_id());
+        for (Order_form order:orderList
+             ) {
+            OrderGoods orderGoods = new OrderGoods();
+            orderGoods.setAddress(addressManageInterface.getAddressById(order.getAddress_id()));
+            orderGoods.setBuyer(userManagerInterface.getUserById(order.getUser_id()));
+            orderGoods.setSeller(userManagerInterface.getUserById(order.getSolder_id()));
+            orderGoods.setGoods(goodsService.getGoodsById(order.getGoods_id()));
+            orderGoods.setOrder(order);
+            orderGoodsList.add(orderGoods);
+        }
+        mav.addObject("orderGoodsList",orderGoodsList);
+        mav.setViewName("goods/goods_admin/shop_order");
+        return mav;
+    }
 
+    @RequestMapping("/{store_id}send_goods/{order_id}")
+    public ModelAndView send_goods(@PathVariable("store_id")Long storeId,@PathVariable("order_id")Long orderId){
+        orderManagerInterface.changeShippingState(3,orderId);
+        return new ModelAndView("redirect:/shop_admin/"+storeId+"shop_order");
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,10 @@ public class OrderService implements OrderManagerInterface{
         return orderMapper.getAllOrderByUserId(userId);
     }
 
+    public List<Order_form> getAllOrderBySolderId(Long solderId) {
+        return orderMapper.getAllOrderBySolderId(solderId);
+    }
+
     public Order_form getOrderById(Long orderFormId) {
         return orderMapper.getOrderById(orderFormId);
     }
@@ -49,7 +54,7 @@ public class OrderService implements OrderManagerInterface{
         orderMapper.changePlaceState(placeOrder,orderId);
     }
 
-    public void updateAddressId(Long addressId, Long orderId) {
-        orderMapper.updateAddressId(addressId,orderId);
+    public void updateAddressId(Long addressId, Date date, Long orderId) {
+        orderMapper.updateAddressId(addressId,date,orderId);
     }
 }

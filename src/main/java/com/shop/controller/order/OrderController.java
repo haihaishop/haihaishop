@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,7 +63,7 @@ public class OrderController {
         for (Order_form orderState1: orderListState1
              ) {
             orderManagerInterface.changeShippingState(2, orderState1.getOrder_form_id());
-            orderManagerInterface.updateAddressId(address.getAddress_id(), orderState1.getOrder_form_id());
+            orderManagerInterface.updateAddressId(address.getAddress_id(),new Date(), orderState1.getOrder_form_id());
             if(orderState1.getBuy_number() > goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount()){
                 mav.setViewName("order/pay_order");
                 mav.addObject("error","商品数量不足");

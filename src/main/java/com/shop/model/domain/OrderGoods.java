@@ -7,6 +7,24 @@ public class OrderGoods {
     private Goods goods;
     private Order_form order;
     private Address address;
+    private User buyer;
+    private User seller;
+
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
 
     public void setGoods(Goods goods) {
         this.goods = goods;
