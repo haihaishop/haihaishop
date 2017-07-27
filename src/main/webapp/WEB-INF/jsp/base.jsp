@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -44,30 +44,32 @@
                 <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
                     <li><a href="/information.do">${SPRING_SECURITY_CONTEXT.authentication.name}</a></li>
                     <c:if test="${user.has_store == true}">
-                        <li><a href="/shop_admin/shop">我的店铺</a> </li>
+                        <li><a href="/shop_admin/shop">我的店铺</a></li>
                     </c:if>
                     <c:if test="${user.has_store == false}">
-                        <li><a href="/shop_admin/create">免费开店</a> </li>
+                        <li><a href="/shop_admin/create">免费开店</a></li>
                     </c:if>
                     <li><a href="/logout.do">注销</a></li>
                 </c:if>
+                <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
                 <li><a href="/shopping_cart.do">购物车</a></li>
-                <li><a href="/pay_order.do">我的订单</a></li>
+                    <li><a href="/order_information.do">我的订单</a></li>
+                </c:if>
                 <li><a href="#">联系客服</a></li>
                 <li><a href="#">反馈建议</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div ></div>
+<div></div>
 <div class="page-header">
 </div>
 <rapid:block name="content">
 </rapid:block>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.min.js"></script>
 <rapid:block name="scripts">
 </rapid:block>
 </body>

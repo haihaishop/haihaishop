@@ -62,6 +62,7 @@ public class OrderController {
         for (Order_form orderState1: orderListState1
              ) {
             orderManagerInterface.changeShippingState(2, orderState1.getOrder_form_id());
+            orderManagerInterface.updateAddressId(address.getAddress_id(), orderState1.getOrder_form_id());
             if(orderState1.getBuy_number() > goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount()){
                 mav.setViewName("order/pay_order");
                 mav.addObject("error","商品数量不足");
@@ -70,6 +71,8 @@ public class OrderController {
                 Long num = goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount() - orderState1.getBuy_number();
                 Goods goods = goodsManageInterface.getGoodsById(orderState1.getGoods_id());
                 goods.setCount(num);
+                LoggingUtil.log(orderState1.getBuy_number());
+                LoggingUtil.log(goods.getSold_number());
                 goods.setSold_number(goods.getSold_number() + orderState1.getBuy_number());
                 goodsManageInterface.changeGoods(goods);
             }
@@ -88,7 +91,7 @@ public class OrderController {
         List<Order_form> orderLists = orderManagerInterface.getAllOrderByUserId(userManagerInterface.getUserByLoginName(username).getUser_id());
         List<OrderGoods> orderGoods = new ArrayList<OrderGoods>();
         for (int i = 0; i < orderLists.size(); i++) {
-            if (orderLists.get(i)!=null && orderLists.get(i).getPay_state()) {
+            if (orderLists.get(i)!=null) {
                 orderManagerInterface.getOrderById(orderLists.get(i).getOrder_form_id());
                 OrderGoods tempOrderGoods = new OrderGoods();
                 tempOrderGoods.setAddress(addressManageInterface.getAddressById(orderLists.get(i).getAddress_id()));
