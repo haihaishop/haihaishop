@@ -80,8 +80,8 @@ public class BuyerController {
                                      HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsManagerInterface.getGoodsById(goodsId);
-        List<Comment_table> comment = commentManageInterface.getCommentByGoodsId(goodsId);
-        mav.addObject("comment",comment);
+        List<Comment_table> commentList = commentManageInterface.getCommentByGoodsId(goodsId);
+        mav.addObject("commentList",commentList);
         User user = userManagerInterface.getUserByLoginName(UserUtil.getUserName(request));
         mav.addObject("user",user);
         mav.addObject("goods",goods);
@@ -141,24 +141,27 @@ public class BuyerController {
         return new ModelAndView("redirect:/order_information.do");
     }
 
-    @RequestMapping("comment_goods.do/{goods_id}")
-    public ModelAndView comment_goods(@PathVariable("goods_id")Long goodsId){
+    @RequestMapping("comment_goods.do/{order_id}")
+    public ModelAndView comment_goods(@PathVariable("order_id")Long orderId){
         ModelAndView mav = new ModelAndView();
+        Long goodsId = orderManagerInterface.getOrderById(orderId).getGoods_id();
         Goods goods = goodsManagerInterface.getGoodsById(goodsId);
         List<Comment_table> commentList = commentManageInterface.getCommentByGoodsId(goodsId);
+        mav.addObject("orderId",orderId);
         mav.addObject("commentList",commentList);
         mav.addObject("goods",goods);
         mav.setViewName("goods/goods_show/goods_comment");
         return mav;
     }
 
-    @RequestMapping("submit_comment.do")
-    public ModelAndView submit_comment(Comment_table comment,HttpServletRequest request){
+    @RequestMapping("submit_comment.do/{order_id}")
+    public ModelAndView submit_comment(Comment_table comment,HttpServletRequest request,@PathVariable("order_id")Long orderId){
         ModelAndView mav = new ModelAndView();
         comment.setUsername(UserUtil.getUserName(request));
         comment.setComment_date(new Date());
+        orderManagerInterface.changeShippingState(5,orderId);
         commentManageInterface.addComment(comment);
-        mav.setViewName("redirect:comment_goods.do/" + comment.getGoods_id());
+        mav.setViewName("redirect:/order_information.do");
         return mav;
     }
 }

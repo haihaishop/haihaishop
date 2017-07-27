@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.rapid-framework.org.cn/rapid" prefix="rapid" %>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page isELIgnored="false" %>
 
 <rapid:override name="head">
@@ -36,7 +36,7 @@
         </div>
         <div class="row col-sm-offset-2">
             <h2>发表评论</h2>
-            <form action="/submit_comment.do" method="post">
+            <form action="/submit_comment.do/${orderId}" method="post">
                 <input hidden name="goods_id" value="${goods.goods_id}">
                 评论：
                 <textarea class="form-group" style="width: 50%;height: 100px" type="text" name="comment"></textarea><br>
