@@ -80,6 +80,8 @@ public class BuyerController {
                                      HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsManagerInterface.getGoodsById(goodsId);
+        List<Comment_table> comment = commentManageInterface.getCommentByGoodsId(goodsId);
+        mav.addObject("comment",comment);
         User user = userManagerInterface.getUserByLoginName(UserUtil.getUserName(request));
         mav.addObject("user",user);
         mav.addObject("goods",goods);
@@ -147,6 +149,16 @@ public class BuyerController {
         mav.addObject("commentList",commentList);
         mav.addObject("goods",goods);
         mav.setViewName("goods/goods_show/goods_comment");
+        return mav;
+    }
+
+    @RequestMapping("submit_comment.do")
+    public ModelAndView submit_comment(Comment_table comment,HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        comment.setUsername(UserUtil.getUserName(request));
+        comment.setComment_date(new Date());
+        commentManageInterface.addComment(comment);
+        mav.setViewName("redirect:comment_goods.do/" + comment.getGoods_id());
         return mav;
     }
 }

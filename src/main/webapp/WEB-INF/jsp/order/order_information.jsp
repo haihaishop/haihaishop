@@ -53,7 +53,7 @@
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 2}">
                     <div class="col-md-1" style="top: 30px">
-                        <p class="col-md-1">待发货</p>
+                        <p>待发货</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
                         <button class="btn">联系商家</button>
@@ -61,7 +61,7 @@
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 3}">
                     <div class="col-md-1" style="top: 30px">
-                        <p class="col-md-1">发货中</p>
+                        <p>发货中</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
                         <a href="/confirm_receipt.do/${orderGoods.order.order_form_id}"><button class="btn">确认收货</button></a>
@@ -69,7 +69,7 @@
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 4}">
                     <div class="col-md-1" style="top: 30px">
-                        <p class="col-md-1">已收货</p>
+                        <p>已收货</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
                         <a href="/comment_goods.do/${orderGoods.goods.goods_id}"><button class="btn">去评价</button></a>
@@ -77,10 +77,10 @@
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 5}">
                     <div class="col-md-1" style="top: 30px">
-                        <p class="col-md-1">已评价</p>
+                        <p>已评价</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <button class="btn">查看详情</button>
+                        <a href="/comment_goods.do/${orderGoods.goods.goods_id}"><button class="btn">查看详情</button></a>
                     </div>
                 </c:if>
             </div>

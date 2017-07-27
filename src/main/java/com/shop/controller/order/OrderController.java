@@ -1,6 +1,7 @@
 package com.shop.controller.order;
 
 import com.shop.Utils.LoggingUtil;
+import com.shop.Utils.UserUtil;
 import com.shop.model.domain.*;
 import com.shop.model.service.*;
 import org.apache.xpath.operations.Mod;
@@ -34,8 +35,14 @@ public class OrderController {
     private GoodsManageInterface goodsManageInterface;
 
     @RequestMapping("place_order.do")
-    public ModelAndView pay_order(@RequestParam(value = "orderId[]", required = false) Long[] orderId) {
+    public ModelAndView pay_order(@RequestParam(value = "orderId[]", required = false) Long[] orderId,
+                                  HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+        if(orderId.length == 0){
+            mav.addObject("failed","您未选择商品");
+            mav.setViewName("redirect:shopping_cart.do");
+            return mav;
+        }
         float total = 0;
         for (int i = 0; i < orderId.length; i++) {
             if (orderId[i] != null) {
@@ -44,6 +51,16 @@ public class OrderController {
                 total += order.getBuy_number() * order.getUnit_price();
             }
         }
+        String username = UserUtil.getUserName(request);
+        List<User_address> userAddressList = userAddressManageInterface.getAddressList(userManagerInterface.getUserByLoginName(username).getUser_id());
+        List<Address> addressList = new ArrayList<Address>();
+        for (User_address userAddress:userAddressList
+             ) {
+            Address address = new Address();
+            address = addressManageInterface.getAddressById(userAddress.getAddress_id());
+            addressList.add(address);
+        }
+        mav.addObject("addressList",addressList);
         mav.addObject("total", total);
         mav.setViewName("order/pay_order");
         return mav;

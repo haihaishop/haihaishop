@@ -158,7 +158,7 @@ public class GoodsAdminController {
     }
 
     @RequestMapping("/{store_id}shop_order")
-    public ModelAndView shop_order(@PathVariable("store_id")Long storeId){
+    public ModelAndView shop_order(@PathVariable("store_id")Long storeId, HttpServletRequest request){
         ModelAndView mav = new ModelAndView();
         List<OrderGoods> orderGoodsList = new ArrayList<OrderGoods>();
         List<Order_form> orderList = orderManagerInterface.getAllOrderBySolderId(shopService.getStoreByStoreId(storeId).getUser_id());
@@ -172,14 +172,22 @@ public class GoodsAdminController {
             orderGoods.setOrder(order);
             orderGoodsList.add(orderGoods);
         }
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        mav.addObject("store", store);
         mav.addObject("orderGoodsList",orderGoodsList);
         mav.setViewName("goods/goods_admin/shop_order");
         return mav;
     }
 
     @RequestMapping("/{store_id}send_goods/{order_id}")
-    public ModelAndView send_goods(@PathVariable("store_id")Long storeId,@PathVariable("order_id")Long orderId){
+    public ModelAndView send_goods(@PathVariable("store_id")Long storeId,
+                                   @PathVariable("order_id")Long orderId,
+                                   HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
         orderManagerInterface.changeShippingState(3,orderId);
-        return new ModelAndView("redirect:/shop_admin/"+storeId+"shop_order");
+        Store store = shopService.getStoreByUsername(getUserName(request));
+        mav.addObject("store", store);
+        mav.setViewName("redirect:/shop_admin/"+storeId+"shop_order");
+        return mav;
     }
 }

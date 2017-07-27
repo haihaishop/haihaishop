@@ -25,4 +25,8 @@ public class CommentService implements CommentManageInterface{
     public List<Comment_table> getCommentByGoodsId(Long goodsId) {
         return commentMapper.getCommentByGoodsId(goodsId);
     }
+
+    public void addComment(Comment_table comment) {
+        commentMapper.addComment(comment);
+    }
 }
