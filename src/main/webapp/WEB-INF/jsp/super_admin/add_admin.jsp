@@ -96,7 +96,7 @@
             });
         });
     </script>
-</rapid:override>>
+</rapid:override>
 <%@include file="homepage.jsp" %>
 
 

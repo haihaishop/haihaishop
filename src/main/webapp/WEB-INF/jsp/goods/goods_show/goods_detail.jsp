@@ -73,20 +73,22 @@
                         </div>
                     </c:if>
                 </div>
-                <div class="row">
-                    <div class="form-inline  col-sm-offset-4">
-                        <div class="col-md-3">
-                            <button class="form-control" onclick="decrease()">-</button>
-                            <input id="buy_num" style="width: 30%" class="form-control" value="1">
-                            <button class="form-control" onclick="increase()">+</button>
-                        </div>
-                        <div class="col-md-2">
-                            <button class="form-control" onclick="buy()"
-                                    style="width: 200%;background-color: lightseagreen">加入购物车
-                            </button>
+                <c:if test="${!empty SPRING_SECURITY_CONTEXT}">
+                    <div class="row">
+                        <div class="form-inline  col-sm-offset-4">
+                            <div class="col-md-3">
+                                <button class="form-control" onclick="decrease()">-</button>
+                                <input id="buy_num" style="width: 30%" class="form-control" value="1">
+                                <button class="form-control" onclick="increase()">+</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="form-control" onclick="buy()"
+                                        style="width: 200%;background-color: lightseagreen">加入购物车
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </c:if>
             </div>
 
             <div class="col-md-3">
@@ -94,7 +96,8 @@
                     <h2>卖家信息</h2>
                     <div class="col-md-4">
                         <br/>
-                        <strong><h4>${store.store_name} <a href="/shop/${store.store_id}">进入店铺</a></h4></strong>
+                        <strong><h4>${store.store_name} </h4></strong>
+                        <a href="/shop/${store.store_id}">进入店铺</a>
                         <p class="text-left">掌柜：
                             <c:if test="${empty solder.nick_name}">
                                 ${solder.username}
