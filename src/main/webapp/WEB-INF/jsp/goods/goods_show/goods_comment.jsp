@@ -13,7 +13,7 @@
 
 <rapid:override name="head">
     <link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
-    <link href="/css/goods_show.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/css/goods_show.css" media="all" rel="stylesheet" type="text/css"/>
     <title>评论商品</title>
 </rapid:override>
 <rapid:override name="content">
@@ -41,29 +41,32 @@
                 评论：
                 <textarea class="form-group" style="width: 50%;height: 100px" type="text" name="comment"></textarea><br>
                 打分：
-                <input id="input-21b" value="4" name="rate" type="number" class="rating" min=0 max=5 step=0.2 data-size="lg"><br>
+                <input id="input-21b" value="4" name="rate" type="number" class="rating" min=0 max=5 step=0.2
+                       data-size="lg"><br>
                 <input class="form-group button col-sm-offset-6" type="submit" value="提交评论">
             </form>
         </div>
-        <div class="row col-sm-offset-2">
-            <h2>评论列表</h2>
+        <table class="col-sm-offset-1" width="80%">
+            <h2 class="col-sm-offset-1">评论列表</h2>
+            <tbody>
             <c:forEach items="${commentList}" var="comment">
-                <div class="row form-inline">
-                    <div class="form-group col-md-1">
+                <tr>
+                    <td>
                         <p>${comment.username}</p>
-                    </div>
-                    <div class="form-group col-md-5">
+                    </td>
+                    <td>
                         <p>${comment.comment}</p>
-                    </div>
-                    <div class="form-group col-sm-offset-1 col-md-1">
+                    </td>
+                    <td>
                         <p>${comment.rate}分</p>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss"/> </p>
-                    </div>
-                </div>
+                    </td>
+                    <td>
+                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+                    </td>
+                </tr>
             </c:forEach>
-        </div>
+            </tbody>
+        </table>
     </div>
 </rapid:override>
 <rapid:override name="scripts">
