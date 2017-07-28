@@ -88,6 +88,6 @@
             });
         });
     </script>
-</rapid:override>>
+</rapid:override>
 <%@include file="../base.jsp" %>
 
