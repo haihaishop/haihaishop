@@ -56,7 +56,7 @@
                         <p>待发货</p>
                     </div>
                     <div class="col-md-1" style="top: 30px">
-                        <button class="btn">联系商家</button>
+                        <a href="<%= request.getContextPath()%>/chat?toId=${orderGoods.seller.username}"><button class="btn">联系商家</button></a>
                     </div>
                 </c:if>
                 <c:if test="${orderGoods.order.shipping_state == 3}">

@@ -60,7 +60,7 @@
                     <strong>￥${orderGoods.order.buy_number * orderGoods.order.unit_price}</strong>
                 </div>
                 <div class="col-md-1" style="top: 65px">
-                    <button class="btn-danger">删除</button>
+                    <a href="/delete_order/${orderGoods.order.order_form_id}"><button type="button" class="btn-default">删除</button></a>
                 </div>
             </div>
         </c:forEach>

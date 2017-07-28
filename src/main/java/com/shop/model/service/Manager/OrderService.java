@@ -57,4 +57,8 @@ public class OrderService implements OrderManagerInterface{
     public void updateAddressId(Long addressId, Date date, Long orderId) {
         orderMapper.updateAddressId(addressId,date,orderId);
     }
+
+    public void deleteOrder(Long orderId) {
+        orderMapper.deleteOrder(orderId);
+    }
 }

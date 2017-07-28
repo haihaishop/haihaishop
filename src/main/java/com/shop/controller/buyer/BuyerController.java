@@ -118,6 +118,12 @@ public class BuyerController {
         orderManagerInterface.addShoppingCart(orderForm);
     }
 
+    @RequestMapping("delete_order/{order_id}")
+    public ModelAndView delete_order(@PathVariable("order_id")Long orderId){
+        orderManagerInterface.deleteOrder(orderId);
+        return new ModelAndView("redirect:/shopping_cart.do");
+    }
+
     @RequestMapping("shopping_cart.do")
     public ModelAndView shopping_cart(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
