@@ -42,8 +42,15 @@ public class GoodsShowController {
     throws Exception{
         ModelAndView modelAndView = new ModelAndView();
         List<Cate> cateList = cateService.getAllCates();
+        String str;
         modelAndView.addObject("cateList", cateList);
-        String str=new String(goodsName.getBytes("ISO-8859-1"),"UTF-8");
+        if(goodsName.equals(new String(goodsName.getBytes("iso8859-1"), "iso8859-1")))
+        {
+            str=new String(goodsName.getBytes("ISO-8859-1"),"UTF-8");
+        }
+        else {
+            str = goodsName;
+        }
         List<Goods> goodsList = goodsService.searchGoodsByName(str, page, rows);
         LoggingUtil.log(str);
         PageInfo<Goods> pageInfo =new  PageInfo<Goods>(goodsList);
