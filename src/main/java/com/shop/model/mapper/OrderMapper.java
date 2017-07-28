@@ -1,10 +1,7 @@
 package com.shop.model.mapper;
 
 import com.shop.model.domain.Order_form;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.security.access.method.P;
 
 import java.util.Date;
@@ -48,5 +45,6 @@ public interface OrderMapper {
     @Update("update order_form set address_id = #{address_id},date = #{date} where order_form_id = #{order_form_id}")
     void updateAddressId(@Param("address_id")Long addressId, @Param("date")Date date, @Param("order_form_id")Long orderId);
 
-
+    @Delete("delete from order_form where order_form_id = #{order_form_id}")
+    void deleteOrder(@Param("order_form_id")Long orderId);
 }

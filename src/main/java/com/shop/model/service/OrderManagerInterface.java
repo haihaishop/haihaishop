@@ -20,6 +20,5 @@ public interface OrderManagerInterface {
     void changePlaceState(boolean placeOrder, Long orderId);
     void changeShippingState(int shippingState, Long orderId);
     void updateAddressId(Long addressId, Date date, Long orderId);
-
-
+    void deleteOrder(Long orderId);
 }
