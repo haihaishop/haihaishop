@@ -32,6 +32,7 @@
             <label for="password" class="col-sm-4 control-label"></label>
             <div >
                 <input id="_spring_security_remember_me" name="_spring_security_remember_me" type="checkbox" value="true"/> 记住我
+
             </div>
         </div>
         <div class="form-group">
