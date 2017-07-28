@@ -94,20 +94,31 @@ public class OrderController {
     }
 
     @RequestMapping("pay_order.do")
-    public ModelAndView pay_order(Address address, HttpServletRequest request) {
+    public ModelAndView pay_order(Address address, HttpServletRequest request,@RequestParam("choice")Long choice) {
         SecurityContextImpl securityContext = (SecurityContextImpl) request
                 .getSession()
                 .getAttribute("SPRING_SECURITY_CONTEXT");
         String username = securityContext.getAuthentication().getName();
         ModelAndView mav = new ModelAndView();
         User user = userManagerInterface.getUserByLoginName(username);
-        addressManageInterface.addAddress(address);
-        userAddressManageInterface.addUserAddress(user.getUser_id(), address.getAddress_id());
         List<Order_form> orderListState1 = orderManagerInterface.getAllStateOrderByUserId(1, user.getUser_id());
+        if(choice == null){
+            addressManageInterface.addAddress(address);
+            userAddressManageInterface.addUserAddress(user.getUser_id(), address.getAddress_id());
+            for (Order_form orderState1 : orderListState1
+                    ) {
+                orderManagerInterface.updateAddressId(address.getAddress_id(), new Date(), orderState1.getOrder_form_id());
+            }
+        }else{
+            for (Order_form orderState1 : orderListState1
+                    ) {
+                orderManagerInterface.updateAddressId(choice, new Date(), orderState1.getOrder_form_id());
+            }
+        }
+
         for (Order_form orderState1 : orderListState1
                 ) {
             orderManagerInterface.changeShippingState(2, orderState1.getOrder_form_id());
-            orderManagerInterface.updateAddressId(address.getAddress_id(), new Date(), orderState1.getOrder_form_id());
             if (orderState1.getBuy_number() > goodsManageInterface.getGoodsById(orderState1.getGoods_id()).getCount()) {
                 mav.setViewName("order/pay_order");
                 mav.addObject("error", "商品数量不足");
