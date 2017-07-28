@@ -53,7 +53,7 @@
                             <p style="word-break: break-all">简介：${goods.info}</p>
                             <p>浏览次数：${goods.views_time}</p>
                             <c:if test="${!empty promotion}">
-                                <c:set var="nowDate" value="<%=new Date()%>" />
+                                <c:set var="nowDate" value="<%=new Date()%>"/>
                                 <c:if test="${promotion.from_time.time < nowDate.time}">
                                     <c:if test="${promotion.to_time.time > nowDate.time}">
                                         <c:if test="${promotion.type == 1}">
@@ -91,7 +91,7 @@
 
             <div class="col-md-3">
                 <div class="row">
-                    <h2 >卖家信息</h2>
+                    <h2>卖家信息</h2>
                     <div class="col-md-4">
                         <br/>
                         <strong><h4>${store.store_name} <a href="/shop/${store.store_id}">进入店铺</a></h4></strong>
@@ -108,25 +108,27 @@
                 </div>
             </div>
         </div>
-        <div class="row col-sm-offset-2">
-            <h2>评论列表</h2>
+        <table class="col-sm-offset-1" width="80%">
+            <h2 class="col-sm-offset-1">评论列表</h2>
+            <tbody>
             <c:forEach items="${commentList}" var="comment">
-                <div class="row form-inline">
-                    <div class="form-group col-md-1">
+                <tr>
+                    <td>
                         <p>${comment.username}</p>
-                    </div>
-                    <div class="form-group col-md-5">
+                    </td>
+                    <td>
                         <p>${comment.comment}</p>
-                    </div>
-                    <div class="form-group col-sm-offset-1 col-md-1">
+                    </td>
+                    <td>
                         <p>${comment.rate}分</p>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss" /></p>
-                    </div>
-                </div>
+                    </td>
+                    <td>
+                        <p><fmt:formatDate value="${comment.comment_date}" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+                    </td>
+                </tr>
             </c:forEach>
-        </div>
+            </tbody>
+        </table>
     </div>
 </rapid:override>
 
