@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
@@ -52,6 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and()
                 .rememberMe()
+                .key("log")
+                .rememberMeParameter("rememberMe")
+                .useSecureCookie(true)
+                .tokenValiditySeconds(1209600)
                 .and()
                 .formLogin()
                 .loginPage("/login.do").permitAll()
