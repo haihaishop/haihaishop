@@ -50,7 +50,7 @@
         var currentTo;
         $(function ($) {
             //$('#con').bind('click',function(){
-            client = new Messaging.Client('127.0.0.1', 61614, clientID);
+            client = new Messaging.Client('106.15.205.112', 61614, clientID);
             client.onConnectionLost = function () {
             };
             client.onMessageArrived = function (message) {

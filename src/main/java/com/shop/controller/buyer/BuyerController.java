@@ -42,6 +42,8 @@ public class BuyerController {
     private ShopManageInterface shopManageInterface;
     @Autowired
     private CommentManageInterface commentManageInterface;
+    @Autowired
+    private PromotionManagerInterface promotionService;
 
     @RequestMapping("buyer_home_page.do/{cate_id}")
     public ModelAndView cateClick(@PathVariable("cate_id") Long cateId,
@@ -89,6 +91,10 @@ public class BuyerController {
         mav.addObject("store", store);
         User solder = userManagerInterface.getUserById(store.getUser_id());
         mav.addObject("solder", solder);
+        if(goods.getPromotion_id() != null){
+        Promotion promotion = promotionService.getPromotionById(goods.getPromotion_id());
+        mav.addObject("promotion", promotion);
+        }
         goodsManagerInterface.increaseViewsTime(goodsId);
         mav.setViewName("goods/goods_show/goods_detail");
         return mav;
