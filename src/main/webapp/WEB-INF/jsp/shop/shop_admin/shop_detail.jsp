@@ -9,19 +9,6 @@
     <title>商铺详情</title>
 </rapid:override>
 <rapid:override name="shop_detail">
-
-    <c:if test="${!empty warning}">
-        <div id="myAlert" class="alert alert-warning">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>警告！</strong>${warning}。
-        </div>
-    </c:if>
-    <c:if test="${!empty success}">
-        <div id="myAlert" class="alert alert-success">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>恭喜！</strong>${success}。
-        </div>
-    </c:if>
     <div class="modal fade" id="alert">
         <div class="modal-dialog">
             <div class="modal-content message_align">
@@ -125,6 +112,6 @@
 
     </script>
 
-</rapid:override>>
+</rapid:override>
 <%@include file="shop_base.jsp" %>
 

@@ -54,4 +54,14 @@ public class ShopService implements ShopManageInterface{
     public void changeStore(Store store) {
         shopMapper.changeStore(store);
     }
+
+    @CacheEvict(allEntries = true)
+    public void changeStatus(Long storeId) {
+        Store store = shopMapper.getStoreByStoreId(storeId);
+        if (store.getStore_status()){
+            shopMapper.changeStatus(false, storeId);
+        }else {
+            shopMapper.changeStatus(true, storeId);
+        }
+    }
 }

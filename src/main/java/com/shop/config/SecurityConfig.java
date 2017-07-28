@@ -53,10 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and()
                 .rememberMe()
-                .key("log")
-                .rememberMeParameter("rememberMe")
-                .useSecureCookie(true)
+
                 .tokenValiditySeconds(1209600)
+                .key("user")
+                .userDetailsService(userDetailsService)
+
                 .and()
                 .formLogin()
                 .loginPage("/login.do").permitAll()
@@ -77,7 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder);
+                .passwordEncoder(passwordEncoder)
+        .and()
+        .eraseCredentials(false);
 
     }
 

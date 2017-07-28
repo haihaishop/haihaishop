@@ -10,4 +10,5 @@ public interface ShopManageInterface {
     Store getStoreByUsername(String username);
     void changeStore(Store store);
     Store getStoreByStoreId(Long storeId);
+    void changeStatus(Long storeId);
 }

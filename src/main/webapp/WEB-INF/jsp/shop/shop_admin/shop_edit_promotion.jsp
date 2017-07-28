@@ -71,5 +71,5 @@
             window.location.href=url;
         }
     </script>
-</rapid:override>>
+</rapid:override>
 <%@include file="shop_base.jsp" %>

@@ -153,4 +153,10 @@ public class ShopAdminController {
         return modelAndView;
     }
 
+    @RequestMapping("change_status/{store_id}")
+    public String changeStatus(@PathVariable("store_id")Long storeId){
+        shopService.changeStatus(storeId);
+        return "redirect:/shop_admin/shop";
+    }
+
 }
