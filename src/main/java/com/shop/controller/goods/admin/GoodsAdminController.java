@@ -134,7 +134,7 @@ public class GoodsAdminController {
                                 @RequestParam(value = "cate[]", required = false)Long[] allCateId){
         goodsService.changeGoods(goods, allCateId);
         model.addFlashAttribute("success", "修改成功");
-        return "redirect:/shop_admin/shop";
+        return "redirect:goods_detail/" + goods.getGoods_id();
     }
 
     @RequestMapping("/goods_delete/{goods_id}")
@@ -151,6 +151,10 @@ public class GoodsAdminController {
         ModelAndView mav = new ModelAndView();
         Goods goods = goodsService.getGoodsById(goodsId);
         mav.addObject("goods",goods);
+        if(goods.getPromotion_id() != null){
+            Promotion promotion = promotionService.getPromotionById(goods.getPromotion_id());
+            mav.addObject("promotion", promotion);
+        }
         Store store = shopService.getStoreByUsername(getUserName(request));
         mav.addObject("store", store);
         mav.setViewName("goods/goods_show/goods_detail_admin");

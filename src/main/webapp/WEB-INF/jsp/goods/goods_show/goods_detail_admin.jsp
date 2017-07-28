@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   User: 18240
   Date: 2017/7/23
@@ -29,6 +29,22 @@
                     <h3>价格：${goods.price}</h3>
                     <p style="word-break: break-all">简介：${goods.info}</p>
                     <p>浏览次数：${goods.views_time}</p>
+                    <c:if test="${!empty promotion}">
+                        <c:set var="nowDate" value="<%=new Date()%>" />
+                        <c:if test="${promotion.from_time.time < nowDate.time}">
+                            <c:if test="${promotion.to_time.time > nowDate.time}">
+                                <c:if test="${promotion.type == 1}">
+                                    <p>活动：${promotion.name} ${promotion.discount}折折扣！</p>
+                                </c:if>
+                                <c:if test="${promotion.type == 2}">
+                                    <p>活动：${promotion.name} 满${promotion.full}减${promotion.cut}！</p>
+                                </c:if>
+                                <c:if test="${promotion.type == 3}">
+                                    <p>活动：${promotion.name} 买${promotion.buy}送${promotion.give}</p>
+                                </c:if>
+                            </c:if>
+                        </c:if>
+                    </c:if>
                     <p>已卖数量：${goods.sold_number}</p>
                     <p>库存：${goods.count}</p>
                 </div>
