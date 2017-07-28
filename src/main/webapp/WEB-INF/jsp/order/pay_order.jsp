@@ -27,8 +27,22 @@
             </div>
         </div>
         <form action="/pay_order.do" method="post">
-
-            <div id="address" class="row col-sm-offset-2">
+            <input hidden id="choice" name="choice" type="number">
+            <div class="form-inline">
+                <h4 class="form-group col-md-offset-2">选择地址</h4>
+                <button type="button" onclick="addAddress()" class="form-group col-md-offset-3" id="addAddressButton">新增地址</button>
+            </div>
+            <div class="row" id="choose">
+                <c:forEach items="${addressList}" var="address">
+                    <div id="address" class="row col-sm-offset-3">
+                        <div class="row">
+                            <input onclick="return choose()" type="radio" class="addressChoose" name="addressChoose" value=${address.address_id}>
+                                ${address.province}${address.city}${address.country}${address.detail_address}
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+            <div hidden id="addAddress" class="row col-sm-offset-2">
                 <h4>收货人地址</h4><br>
                 <label class="control-label">请选择</label><br>
                 <div class="form-inline">
@@ -57,8 +71,8 @@
             <div class="row col-sm-offset-2">
                 <h4>支付方式</h4><br>
                 <div class="form-inline">
-                    <button class="form-control">银行卡支付</button>
-                    <button class="form-control">支付宝支付</button>
+                    <button type="button" class="form-control">银行卡支付</button>
+                    <button type="button" class="form-control">支付宝支付</button>
                 </div>
                     <%--<div class="form-group">
                         <label class="control-label" id="pay_way">银行卡</label>
@@ -80,7 +94,8 @@
                         <h4>总价:￥<span id="sum">${total}</span></h4>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="form-control" style="width: 100%;background-color: lightseagreen" value="确认支付">
+                        <input type="submit" class="form-control" style="width: 100%;background-color: lightseagreen"
+                               value="确认支付">
                     </div>
                 </div>
             </div>
@@ -91,6 +106,25 @@
     <script src="/js/distpicker.data.js"></script>
     <script src="/js/distpicker.js"></script>
     <script src="/js/main.js"></script>
+    <script type="text/javascript">
+        function addAddress() {
+            $("#addAddress").prop("hidden",false);
+            var choice = $(".addressChoose")
+            for(var i=0;i<choice.length; i++){
+                choice[i].checked = false
+            }
+            $("#choice").prop("value",null)
+        }
+
+        function choose() {
+            var choice = $(".addressChoose")
+            for(var i=0;i<choice.length; i++){
+                if(choice[i].checked){
+                    $("#choice").prop("value",parseInt(choice[i].value))
+                }
+            }
+        }
+    </script>
 </rapid:override>
 
 <%@include file="../base.jsp" %>
