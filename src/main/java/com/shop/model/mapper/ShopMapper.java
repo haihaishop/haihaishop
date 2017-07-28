@@ -26,4 +26,8 @@ public interface ShopMapper {
     @Select("select * from store where store_id = #{store_id}")
     Store getStoreByStoreId(Long storeId);
 
+    @Update("update store set store_status=#{store_status} where store_id=#{store_id}")
+    void changeStatus(@Param("store_status")boolean storeStatus,
+                      @Param("store_id")Long storeId);
+
 }

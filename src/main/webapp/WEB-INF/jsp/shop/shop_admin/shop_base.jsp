@@ -24,6 +24,12 @@
     <ul class="nav nav-tabs nav-stacked">
         <li class="active"><a href="#">店铺管理</a> </li>
         <li><a href="/shop_admin/detail">修改店铺信息</a></li>
+        <c:if test="${store.store_status == false}">
+        <li><a href="/shop_admin/change_status/${store.store_id}">开放店铺</a> </li>
+        </c:if>
+        <c:if test="${store.store_status == true}">
+            <li><a href="/shop_admin/change_status/${store.store_id}">关闭店铺</a> </li>
+        </c:if>
     </ul>
     <hr>
     <ul class="nav nav-tabs nav-stacked">
@@ -52,8 +58,5 @@
         </rapid:block>
     </div>
 </rapid:override>
-<rapid:override name="scripts">
-
-</rapid:override>>
 <%@include file="../../base.jsp" %>
 

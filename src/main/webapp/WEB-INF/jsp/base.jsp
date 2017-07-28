@@ -25,8 +25,8 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
             <!-- The mobile navbar-toggle button can be safely removed since you do not need it in a non-responsive implementation -->
             <a class="navbar-brand" href="/">海海商城</a>
@@ -61,11 +61,14 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div></div>
+<div>
 <div class="page-header">
 </div>
-<rapid:block name="content">
-</rapid:block>
+    <div class="row">
+        <rapid:block name="content">
+        </rapid:block>
+    </div>
+</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

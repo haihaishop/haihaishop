@@ -66,5 +66,5 @@
 </div>
 </rapid:override>
 <rapid:override name="scripts">
-</rapid:override>>
+</rapid:override>
 <%@include file="shop_base.jsp" %>

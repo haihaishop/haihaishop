@@ -25,7 +25,7 @@ create table comment_table
   goods_id int null,
   username varchar(20) null,
   comment varchar(1000) null,
-  rate tinyint null,
+  rate FLOAT null,
   comment_date datetime null
 )ENGINE = INNODB CHARACTER SET utf8
 ;
@@ -89,9 +89,8 @@ create table order_form
   phone varchar(11) null,
   date date null,
   pay_state bit default b'0' null,
-  shipping_status bit default b'0' null,
   place_order bit default b'0' null,
-  shiping_state int default '0' null
+  shipping_state int default 0 null
 )ENGINE = INNODB CHARACTER SET utf8
 ;
 
@@ -201,4 +200,3 @@ INSERT INTO role (name) VALUE ("ROLE_USER");
 
 INSERT INTO user(username, password, role_id) VALUE ("admin", "$2a$10$i6P0z/zwpipBHmW2DHNZqejuwyh4zbtYfvy8YRJdIBJQEnRMNs0RK", 1);
 
-ALTER TABLE comment_table modify rate FLOAT ;

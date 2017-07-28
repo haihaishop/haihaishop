@@ -147,5 +147,5 @@
 
     </script>
 
-</rapid:override>>
+</rapid:override>
 <%@include file="../../shop/shop_admin/shop_base.jsp" %>
