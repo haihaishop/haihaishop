@@ -32,9 +32,9 @@
   下载完成后打开haihaishop/src/main/resources</br>
   修改以下内容：
   - db.properties
-  * 修改用户名、密码、数据库名称
+  -- 修改用户名、密码、数据库名称
   - redis.properties</br>
-  * 修改用户名、密码
+  -- 修改用户名、密码
   - 打开mysql， 执行tables.sql中的语句，即可完成建表。</br>
 ## 网站地址
 http://106.15.205.112:8080
