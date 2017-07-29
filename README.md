@@ -28,7 +28,7 @@
 -    Tomcat
 
 ## 使用方法：
-  直接下载或者 git clone https://github.com/haihaishop/haihaishop.git</br>
+  直接下载或者 `git clone https://github.com/haihaishop/haihaishop.git`</br>
   下载完成后打开haihaishop/src/main/resources，修改以下内容：
   - db.properties
   - redis.properties</br>
