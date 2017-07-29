@@ -27,14 +27,17 @@
 -    MySQL
 -    Tomcat
 
-## 使用方法：
+## 运行配置：
   直接下载或者 `git clone https://github.com/haihaishop/haihaishop.git`</br>
   下载完成后打开haihaishop/src/main/resources</br>
   修改以下内容：
   - db.properties
+  *修改用户名、密码、数据库名称
+  *打开mysql， 执行tables.sql中的语句，即可完成建表。</br>
   - redis.properties</br>
-  修改上述文件的用户名、密码以及数据库名称。</br>
-  打开mysql， 执行tables.sql中的语句，即可完成建表。</br>
-  enjoy!
+  *修改用户名、密码
+  
 ## 网站地址
-http://106.15.205.112:8080 ，预计开放到2017年12月
+http://106.15.205.112:8080
+## 开源地址
+https://github.com/haihaishop/haihaishop
